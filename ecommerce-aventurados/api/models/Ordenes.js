@@ -1,5 +1,8 @@
 const { Sequelize, DataTypes, Model} = require('sequelize');
-const db = require('../config/db')
+const db = require('../config/db');
+const Estados = require('./Estados');
+const Carritos=require('./Carritos')
+
 
 
 class Ordenes extends Model {}
@@ -14,7 +17,7 @@ Ordenes.init(
         carritoId:{
         type:  DataTypes.INTEGER,
         references: {
-            model: 'Carritos',
+            model: Carritos,
             key:'id',
             }
         },
@@ -28,9 +31,8 @@ Ordenes.init(
         },
         estado:{
             type:  DataTypes.INTEGER,
-            type:  DataTypes.INTEGER,
             references: {
-                model: 'Estado',
+                model: Estados,
                 key:'id',
             } 
         },
@@ -43,7 +45,7 @@ Ordenes.init(
         // Other model options go here
         sequelize: db, // We need to pass the connection instance
        // tableName: 'users', // We need to choose the model name
-        modelName: 'Ordenes',
+        modelName: 'ordenes',
     }
         
 )

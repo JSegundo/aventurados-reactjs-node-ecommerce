@@ -21,7 +21,7 @@ UserRol.init(
         // Other model options go here
         sequelize: db, // We need to pass the connection instance
        // tableName: 'users', // We need to choose the model name
-        modelName: 'userrol',
+        modelName: 'user_rol',
     }
 );
 
