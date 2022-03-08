@@ -22,3 +22,5 @@ Estados.init(
     }
 );
 
+module.exports=Estados;
+

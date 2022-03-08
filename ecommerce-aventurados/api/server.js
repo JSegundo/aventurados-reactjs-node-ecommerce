@@ -2,6 +2,7 @@ const db = require('./config/db')
 const express = require('express')
 const app = express()
 const router = require('./routes')
+const {Users,UserRol,Products,Ordenes,Estados,Categorias,Carritos} = require('./models')
 
 router.use(express.json())
 

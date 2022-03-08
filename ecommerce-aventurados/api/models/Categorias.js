@@ -18,7 +18,7 @@ Categorias.init(
     },
     {
         sequelize:db,
-        modelName:'Categorias',
+        modelName:'categorias',
     }
 );
 

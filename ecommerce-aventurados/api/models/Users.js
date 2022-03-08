@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes, Model} = require('sequelize');
 const db = require('../config/db')
 const bcrypt = require('bcrypt')
+const UserRol=require('./UserRol')
 
 
 class Users extends Model {
@@ -44,7 +45,7 @@ class Users extends Model {
     */   tipoUsuario:{
         type:  DataTypes.INTEGER,
         references: {
-            model: 'UserRol',
+            model: UserRol,
             key:'id',
         }
     }

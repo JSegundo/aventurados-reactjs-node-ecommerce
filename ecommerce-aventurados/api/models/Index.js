@@ -6,4 +6,6 @@ const Estados= require('./Estados')
 const Categorias= require('./Categorias')
 const Carritos=require('./Carritos')
 
-module.exports ={Users,UserRol,Products,Ordenes,Estados,Categorias,Carritos}
+module.exports ={UserRol,Users}
+/*     ,Products,Ordenes,Estados,Categorias,Carritos}
+ */
