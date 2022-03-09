@@ -13,7 +13,7 @@ const {
   Carritos,
 } = require("./models");
 
-router.use(express.json());
+app.use(express.json());
 
 app.use("/api", router);
 
