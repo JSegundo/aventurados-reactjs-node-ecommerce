@@ -1,0 +1,9 @@
+.contenedor {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.boton {
+    padding: 2px;
+}
