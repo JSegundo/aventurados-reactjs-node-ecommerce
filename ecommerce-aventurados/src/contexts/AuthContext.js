@@ -5,6 +5,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  setPersistence,
+  browserLocalPersistence,
 } from "firebase/auth";
 const AuthContext = createContext();
 
@@ -22,7 +24,16 @@ const AuthProvider = ({ children }) => {
   }
 
   function login(email, password) {
-    return signInWithEmailAndPassword(auth, email, password);
+    setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        return signInWithEmailAndPassword(auth, email, password);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(errorCode);
+        console.error(errorMessage);
+      });
   }
 
   function logout() {
