@@ -9,7 +9,8 @@ const bodyParser= require('body-parser');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 
-app.use('/api', router)
+app.use(express.json());
+app.use("/api", router);
 
 
 db.sync({force:false}) //agrego la sincronizacion en true.

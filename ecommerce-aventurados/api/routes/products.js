@@ -58,6 +58,7 @@ router.get("/category/:categoria_id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+// Todavia NO funciona.
 router.get("/search", (req, res) => {
   const { query } = req.query;
   Products.findAll({
