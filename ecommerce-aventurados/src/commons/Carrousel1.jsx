@@ -13,24 +13,24 @@ import { FormHelperText, Box, Grid } from "@material-ui/core";
 const data = [
   {
     id: 1,
-    /* title: 'Huarache',
-    subtitle: 'Gripp', */
+    title: 'Huarache',
+    subtitle: 'Gripp', 
     image:
       // eslint-disable-next-line max-len
       "https://firebasestorage.googleapis.com/v0/b/mui-treasury.appspot.com/o/public%2Fshoes%2Fair-huarache-gripp.png?alt=media",
   },
   {
     id: 2,
-    /* title: 'Air Max',
-    subtitle: '270 P', */
+     title: 'Air Max',
+    subtitle: '270 P', 
     image:
       // eslint-disable-next-line max-len
       "https://firebasestorage.googleapis.com/v0/b/mui-treasury.appspot.com/o/public%2Fshoes%2Fair-max-270.png?alt=media",
   },
   {
     id: 3,
-    /* title: 'Air Max',
-    subtitle: 'Deluxe', */
+     title: 'Air Max',
+    subtitle: 'Deluxe', 
     image:
       // eslint-disable-next-line max-len
       "https://firebasestorage.googleapis.com/v0/b/mui-treasury.appspot.com/o/public%2Fshoes%2Fair-max-deluxe.png?alt=media",

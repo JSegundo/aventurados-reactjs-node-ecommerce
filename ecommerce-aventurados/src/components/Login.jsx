@@ -1,41 +1,47 @@
-import * as React from 'react';
-import '../assets/login.css'
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import * as React from "react"
+import "../assets/login.css"
+import { Link } from "react-router-dom"
+import Avatar from "@mui/material/Avatar"
+import Button from "@mui/material/Button"
+import CssBaseline from "@mui/material/CssBaseline"
+import TextField from "@mui/material/TextField"
+import Box from "@mui/material/Box"
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
+import Typography from "@mui/material/Typography"
+import Container from "@mui/material/Container"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Aventura2
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../contexts/AuthContext.js"
 
-const theme = createTheme();
+const theme = createTheme()
 
 const Login = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  const [user, setUser] = React.useState({
+    email: "",
+    password: "",
+  })
+
+  const { login, currentUser } = useAuth() // retorna el contexto
+  const navigate = useNavigate()
+  const [error, setError] = React.useState("")
+
+  const handleChange = ({ target: { name, value } }) => {
+    setUser({ ...user, [name]: value })
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setError("")
+
+    try {
+      await login(user.email, user.password)
+      navigate("/")
+    }
+     catch (err) {
+      setError(err.message)
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,19 +50,25 @@ const Login = () => {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Log in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
+              onChange={handleChange}
               margin="normal"
               required
               fullWidth
@@ -67,6 +79,7 @@ const Login = () => {
               autoFocus
             />
             <TextField
+              onChange={handleChange}
               margin="normal"
               required
               fullWidth
@@ -76,6 +89,7 @@ const Login = () => {
               id="password"
               autoComplete="current-password"
             />
+            {error && <p>{error}</p>}
             <Button
               type="submit"
               fullWidth
@@ -92,31 +106,32 @@ const Login = () => {
             >
               Inicia con Google...
             </Button>
-            <hr/>
-            <div className='contenedor'>
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 3 }}
-            >
-              Sign In
-            </Button>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 3 }}
+            <hr />
+            <div className="contenedor">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 3 }}
               >
-              Registrate
-            </Button>
-              </div>
+                Log In
+              </Button>
+              <Link to="/register">
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 3 }}
+                >
+                  Registrate
+                </Button>
+              </Link>
+            </div>
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
-  );
+  )
 }
 
 export default Login

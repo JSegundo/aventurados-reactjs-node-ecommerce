@@ -18,6 +18,7 @@ import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LoginIcon from '@mui/icons-material/Login';
 import { Link } from "react-router-dom"
+import { useAuth } from "../contexts/AuthContext.js"
 
 const pages = ["Categorias"]
 const settings = ["Profile", "Account", "Dashboard", "Logout"]
@@ -66,6 +67,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar = () => {
   const logAuth = false
+
+  const { logout ,currentUser } = useAuth() // retorna el contexto
+
+  console.log('es USER', currentUser);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
@@ -167,18 +172,22 @@ const Navbar = () => {
             />
           </Search>
 
-          {logAuth ? (
+          { currentUser.email ? (
             <Box sx={{ flexGrow: 0 }}>
+              <Link to='/shopping'>
               <Tooltip title="Open settings">
                 <IconButton color="primary" aria-label="add to shopping cart">
                   <ShoppingCartSharpIcon />
                 </IconButton>
               </Tooltip>
+                </Link>
+                <Link to='/fav'>
               <Tooltip title="Open settings">
                 <IconButton color="primary" aria-label="add to fav">
                   <FavoriteBorderIcon/>
                 </IconButton>
               </Tooltip>
+                  </Link>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
