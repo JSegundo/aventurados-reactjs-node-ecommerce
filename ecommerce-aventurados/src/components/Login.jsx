@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import "../assets/login.css"
 import { Link } from "react-router-dom"
@@ -14,12 +15,14 @@ import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext.js"
 
+
 const theme = createTheme()
 
 const Login = () => {
   const [user, setUser] = React.useState({
     email: "",
     password: "",
+
   })
 
   const { login, currentUser } = useAuth() // retorna el contexto
@@ -42,6 +45,7 @@ const Login = () => {
       setError(err.message)
     }
   }
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -116,6 +120,7 @@ const Login = () => {
               >
                 Log In
               </Button>
+
               <Link to="/register">
                 <Button
                   type="submit"
@@ -126,12 +131,15 @@ const Login = () => {
                   Registrate
                 </Button>
               </Link>
+
             </div>
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
+
   )
 }
 
 export default Login
+

@@ -1,26 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const Users = require("../models/Users");
+const { Users, Ordenes } = require("../models");
 
-router.get("/", (req, res) => {
-  res.send("hola");
-});
+// router.post("/register", (req, res) => {
+//   res.status(201).send("se creo");
+// });
 
-router.post("/register", (req, res) => {
-  res.status(201).send("se creo");
-});
+// router.put("/", (req, res) => {
+//   res.send("se modifico");
+// });
 
-router.put("/", (req, res) => {
-  res.send("se modifico");
-});
+// router.post("/login", (req, res) => {
+//   res.status(202).send("entro");
+// });
 
-router.post("/login", (req, res) => {
-  res.status(202).send("entro");
-});
-
-router.post("/logout", (req, res) => {
-  res.status(202).send("sali");
-});
+// router.post("/logout", (req, res) => {
+//   res.status(202).send("sali");
+// });
 
 router.get("/me", (req, res) => {
   res.send("perfil user");
@@ -31,6 +27,8 @@ router.get("/me/orders", (req, res) => {
 });
 
 router.delete("/admin/:id", (req, res) => {
+  const { localId } = req.body;
+  Users.findOne({ where: { localId } });
   //user.rol == admin?
   res.status(202).send("user borrado");
 });

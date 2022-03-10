@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
@@ -16,6 +17,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { useAuth } from "../contexts/AuthContext.js"
 import { useNavigate } from "react-router-dom"
 
+
 function Copyright(props) {
   return (
     <Typography
@@ -31,6 +33,7 @@ function Copyright(props) {
       {new Date().getFullYear()}
       {"."}
     </Typography>
+
   )
 }
 
@@ -73,6 +76,7 @@ const Register = () => {
     }
   }
 
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -85,8 +89,10 @@ const Register = () => {
             alignItems: "center",
           }}
         >
+
           <Typography component="h1" variant="h5">
             Registrate para explorar nuestras experiencias
+
           </Typography>
           <Box
             component="form"
@@ -94,6 +100,7 @@ const Register = () => {
             noValidate
             sx={{ mt: 1 }}
           >
+
             <Grid container spacing={1}>
               <Grid item xs={6}>
                 {/* Name */}
@@ -124,6 +131,7 @@ const Register = () => {
                 />
               </Grid>
             </Grid>
+
             {/* Email */}
             <TextField
               onChange={handleChange}
@@ -131,7 +139,9 @@ const Register = () => {
               required
               fullWidth
               id="email"
+
               label="Email"
+
               name="email"
               autoComplete="email"
               autoFocus
@@ -143,7 +153,9 @@ const Register = () => {
               required
               fullWidth
               name="password"
+
               label="Contraseña"
+
               type="password"
               id="password"
               autoComplete="current-password"
@@ -155,11 +167,15 @@ const Register = () => {
               required
               fullWidth
               name="passwordConfirm"
+
               label="Confirmar contraseña"
+
               type="password"
               id="confirm-password"
               autoComplete="current-password"
             />
+
+
 
             {/* COMPONENTE DE ERROR */}
             {error && <p>{error}</p>}
@@ -171,6 +187,7 @@ const Register = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
+
               Registrate
             </Button>
           </Box>
@@ -181,3 +198,4 @@ const Register = () => {
 }
 
 export default Register
+
