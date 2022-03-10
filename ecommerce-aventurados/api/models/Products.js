@@ -12,6 +12,7 @@ Products.init(
     //   autoIncrement: true,
     //   primaryKey: true,
     // },
+    
     categoria_id: {
       type: DataTypes.INTEGER,
       references: {

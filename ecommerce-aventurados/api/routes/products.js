@@ -4,6 +4,7 @@ const { Products } = require("../models");
 const { Op } = require("sequelize");
 
 router.post("/", (req, res) => {
+
   // if (!req.user.admin == true) return res.sendStatus(401);
   Products.create(req.body)
     .then((product) => res.status(201).send(product))
@@ -61,6 +62,7 @@ router.get("/category/:categoria_id", (req, res) => {
 // Todavia NO funciona.
 router.get("/search", (req, res) => {
   const { query } = req.query;
+
   Products.findAll({
     where: {
       nombre: { [Op.startsWith]: query },
@@ -72,6 +74,7 @@ router.get("/search", (req, res) => {
     .catch((err) => {
       console.log("error");
     });
+
 });
 
 module.exports = router;

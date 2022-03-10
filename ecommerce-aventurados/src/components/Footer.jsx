@@ -4,17 +4,22 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import { Grid } from '@mui/material';
 
 function Copyright() {
   return (
+    <Grid container>
+              <Grid item xs={12}>
     <Typography variant="body2" color="text.secondary">
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit">
+        AventuraDos
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
+                </Grid>
+              </Grid>
   );
 }
 

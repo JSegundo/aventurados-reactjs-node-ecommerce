@@ -1,20 +1,22 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { useAuth } from "../contexts/AuthContext.js";
-import { useNavigate } from "react-router-dom";
+import * as React from "react"
+import Avatar from "@mui/material/Avatar"
+import Button from "@mui/material/Button"
+import CssBaseline from "@mui/material/CssBaseline"
+import TextField from "@mui/material/TextField"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import Checkbox from "@mui/material/Checkbox"
+import Link from "@mui/material/Link"
+import Grid from "@mui/material/Grid"
+import Box from "@mui/material/Box"
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
+import Typography from "@mui/material/Typography"
+import Container from "@mui/material/Container"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+
+import { useAuth } from "../contexts/AuthContext.js"
+import { useNavigate } from "react-router-dom"
+
 
 function Copyright(props) {
   return (
@@ -31,45 +33,49 @@ function Copyright(props) {
       {new Date().getFullYear()}
       {"."}
     </Typography>
-  );
+
+  )
 }
 
-const theme = createTheme();
+const theme = createTheme()
 
 const Register = () => {
   const [user, setUser] = React.useState({
+    name: "",
+    lastName: "",
     email: "",
     password: "",
     passwordConfirm: "",
-  });
+  })
 
-  const { signup, currentUser } = useAuth(); // retorna el contexto
-  const navigate = useNavigate();
-  const [error, setError] = React.useState("");
+  const { signup, currentUser } = useAuth() // retorna el contexto
+  const navigate = useNavigate()
+  const [error, setError] = React.useState("")
 
   const handleChange = ({ target: { name, value } }) => {
-    setUser({ ...user, [name]: value });
-  };
+    setUser({ ...user, [name]: value })
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError("");
+    event.preventDefault()
+    setError("")
     if (user.password !== user.passwordConfirm) {
-      setError("Las contraseñas no coinciden!");
-      return;
+      setError("Las contraseñas no coinciden!")
+      return
     }
 
     try {
-      await signup(user.email, user.password);
-      navigate("/");
+      await signup(user.email, user.password)
+      navigate("/")
       // console.log(currentUser);
     } catch (err) {
       if (error.code === "auth/internal-error") {
-        setError("Correo invalido!");
+        setError("Correo invalido!")
       }
-      setError(err.message);
+      setError(err.message)
     }
-  };
+  }
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -83,11 +89,10 @@ const Register = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
+
           <Typography component="h1" variant="h5">
-            Sign in
+            Registrate para explorar nuestras experiencias
+
           </Typography>
           <Box
             component="form"
@@ -95,6 +100,38 @@ const Register = () => {
             noValidate
             sx={{ mt: 1 }}
           >
+
+            <Grid container spacing={1}>
+              <Grid item xs={6}>
+                {/* Name */}
+                <TextField
+                  onChange={handleChange}
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="name"
+                  label="Nombre"
+                  name="name"
+                  autoComplete="name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={6}>
+                {/* Last name */}
+                <TextField
+                  onChange={handleChange}
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Apellido"
+                  name="lastName"
+                  autoComplete="lastName"
+                  autoFocus
+                />
+              </Grid>
+            </Grid>
+
             {/* Email */}
             <TextField
               onChange={handleChange}
@@ -102,7 +139,9 @@ const Register = () => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+
+              label="Email"
+
               name="email"
               autoComplete="email"
               autoFocus
@@ -114,7 +153,9 @@ const Register = () => {
               required
               fullWidth
               name="password"
-              label="Password"
+
+              label="Contraseña"
+
               type="password"
               id="password"
               autoComplete="current-password"
@@ -126,15 +167,15 @@ const Register = () => {
               required
               fullWidth
               name="passwordConfirm"
-              label="Confirm password"
+
+              label="Confirmar contraseña"
+
               type="password"
               id="confirm-password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
+
 
             {/* COMPONENTE DE ERROR */}
             {error && <p>{error}</p>}
@@ -146,26 +187,15 @@ const Register = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+
+              Registrate
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register
+
