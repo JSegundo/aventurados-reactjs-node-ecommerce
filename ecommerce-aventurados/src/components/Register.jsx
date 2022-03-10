@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { useAuth } from "../contexts/AuthContext.js";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -35,22 +36,39 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-const Login = () => {
-  const emailRef = React.useRef();
-  const passwordRef = React.useRef();
-  const passwordConfirmRef = React.useRef();
-  const { signup, currentUser } = useAuth();
+const Register = () => {
+  const [user, setUser] = React.useState({
+    email: "",
+    password: "",
+    passwordConfirm: "",
+  });
 
-  const handleSubmit = (event) => {
+  const { signup, currentUser } = useAuth(); // retorna el contexto
+  const navigate = useNavigate();
+  const [error, setError] = React.useState("");
+
+  const handleChange = ({ target: { name, value } }) => {
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      alert("Las contraseñas no coinciden!");
+    setError("");
+    if (user.password !== user.passwordConfirm) {
+      setError("Las contraseñas no coinciden!");
       return;
     }
 
-    signup(emailRef.current.value, passwordRef.current.value);
-    console.log(currentUser);
+    try {
+      await signup(user.email, user.password);
+      navigate("/");
+      // console.log(currentUser);
+    } catch (err) {
+      if (error.code === "auth/internal-error") {
+        setError("Correo invalido!");
+      }
+      setError(err.message);
+    }
   };
 
   return (
@@ -65,7 +83,6 @@ const Login = () => {
             alignItems: "center",
           }}
         >
-          {currentUser}
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -80,7 +97,7 @@ const Login = () => {
           >
             {/* Email */}
             <TextField
-              inputRef={emailRef}
+              onChange={handleChange}
               margin="normal"
               required
               fullWidth
@@ -92,7 +109,7 @@ const Login = () => {
             />
             {/* primer password */}
             <TextField
-              inputRef={passwordRef}
+              onChange={handleChange}
               margin="normal"
               required
               fullWidth
@@ -104,11 +121,11 @@ const Login = () => {
             />
             {/* confirmar password */}
             <TextField
-              inputRef={passwordConfirmRef}
+              onChange={handleChange}
               margin="normal"
               required
               fullWidth
-              name="confirm-password"
+              name="passwordConfirm"
               label="Confirm password"
               type="password"
               id="confirm-password"
@@ -118,6 +135,11 @@ const Login = () => {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+
+            {/* COMPONENTE DE ERROR */}
+            {error && <p>{error}</p>}
+            {/* COMPONENTE DE ERROR */}
+
             <Button
               type="submit"
               fullWidth
@@ -146,4 +168,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

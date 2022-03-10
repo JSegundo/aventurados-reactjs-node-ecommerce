@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const db = require("../config/db");
 const Categorias = require("./Categorias");
+const Estados = require("./Estados");
 
 class Products extends Model {}
 
@@ -18,6 +19,10 @@ Products.init(
         key: "id",
       },
     },
+    nombre:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     descripcion: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -27,6 +32,13 @@ Products.init(
     },
     precio: {
       type: DataTypes.INTEGER,
+    },
+    estado_id:{
+      type: DataTypes.INTEGER,
+      references: {
+        model: Estados,
+        key: "id",
+      },
     },
   },
   {

@@ -11,17 +11,35 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext.js";
+
 const theme = createTheme();
 
 const Login = () => {
-  const handleSubmit = (event) => {
+  const [user, setUser] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const { login, currentUser } = useAuth(); // retorna el contexto
+  const navigate = useNavigate();
+  const [error, setError] = React.useState("");
+
+  const handleChange = ({ target: { name, value } }) => {
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    setError("");
+
+    try {
+      await login(user.email, user.password);
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -40,7 +58,7 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Log in
           </Typography>
           <Box
             component="form"
@@ -49,6 +67,7 @@ const Login = () => {
             sx={{ mt: 1 }}
           >
             <TextField
+              onChange={handleChange}
               margin="normal"
               required
               fullWidth
@@ -59,6 +78,7 @@ const Login = () => {
               autoFocus
             />
             <TextField
+              onChange={handleChange}
               margin="normal"
               required
               fullWidth
@@ -68,6 +88,7 @@ const Login = () => {
               id="password"
               autoComplete="current-password"
             />
+            {error && <p>{error}</p>}
             <Button
               type="submit"
               fullWidth
@@ -92,7 +113,7 @@ const Login = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 3 }}
               >
-                Sign In
+                Log In
               </Button>
               <Button
                 type="submit"

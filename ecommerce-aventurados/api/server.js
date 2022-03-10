@@ -2,7 +2,6 @@ const db = require("./config/db");
 const express = require("express");
 const app = express();
 const router = require("./routes");
-
 const {
   Users,
   UserRol,
@@ -13,8 +12,9 @@ const {
   Carritos,
 } = require("./models");
 
-app.use(express.json());
+router.use(express.json());
 
+app.use(express.json());
 app.use("/api", router);
 
 db.sync({ force: false }) //agrego la sincronizacion en true.

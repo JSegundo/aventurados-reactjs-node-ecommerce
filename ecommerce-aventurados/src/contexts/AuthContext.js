@@ -1,7 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
-
+// import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 const AuthContext = createContext();
 
 export function useAuth() {
@@ -10,10 +14,25 @@ export function useAuth() {
 }
 
 const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({});
+  const [loading, setLoading] = useState(true);
 
   function signup(email, password) {
-    return createUserWithEmailAndPassword(email, password); // función de firebase para crear usuario.
+    return createUserWithEmailAndPassword(auth, email, password); // función de firebase para crear usuario.
+  }
+
+  function login(email, password) {
+    return signInWithEmailAndPassword(auth, email, password);
+  }
+
+  function logout() {
+    return signOut(auth)
+      .then(() => {
+        console.log("Loged out succesfully");
+      })
+      .catch((error) => {
+        console.error("An error ocurred while log out attemp", error);
+      });
   }
 
   useEffect(() => {
@@ -21,7 +40,9 @@ const AuthProvider = ({ children }) => {
     // recibe el usuario, y lo seteamos a nuestro state con setCurrentUser.
     // lo usamos dentro de useEffect xq queremos que se ejectute SOLO cuando el usuario es creado.
     const unsuscribe = auth.onAuthStateChanged((user) => {
+      console.log("user", user);
       setCurrentUser(user);
+      setLoading(false);
     });
     return unsuscribe;
 
@@ -31,10 +52,16 @@ const AuthProvider = ({ children }) => {
   const value = {
     currentUser,
     signup,
+    login,
+    logout,
   };
   // "value" nos va a proveer de toda la información que vamos a necesitar
   // para realizar la autenticación.
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 };
 export default AuthProvider;

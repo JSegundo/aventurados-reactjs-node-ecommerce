@@ -1,8 +1,7 @@
 // Import the functions you need from the SDKs you need
 
 // import "firebase/compat/auth";
-// import { getAuth } from "firebase/auth";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
