@@ -6,12 +6,12 @@ const Estados = require("./Estados");
 class Products extends Model {}
 
 Products.init(
-  {
+  {/* 
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-    },
+    }, */
     categoria_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -35,6 +35,7 @@ Products.init(
     },
     estado_id:{
       type: DataTypes.INTEGER,
+      defaultValue:0,
       references: {
         model: Estados,
         key: "id",
