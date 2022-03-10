@@ -7,11 +7,11 @@ class Products extends Model {}
 
 Products.init(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
+    // id: {
+    //   type: DataTypes.INTEGER,
+    //   autoIncrement: true,
+    //   primaryKey: true,
+    // },
     categoria_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -19,7 +19,7 @@ Products.init(
         key: "id",
       },
     },
-    nombre:{
+    nombre: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -33,8 +33,9 @@ Products.init(
     precio: {
       type: DataTypes.INTEGER,
     },
-    estado_id:{
+    estado_id: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
       references: {
         model: Estados,
         key: "id",

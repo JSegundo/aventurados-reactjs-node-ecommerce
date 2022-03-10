@@ -1,28 +1,49 @@
 import * as React from "react";
-import "../assets/login.css";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.js";
+import { useNavigate } from "react-router-dom";
+
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="https://mui.com/">
+        Aventura2
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 const theme = createTheme();
 
-const Login = () => {
+const Register = () => {
   const [user, setUser] = React.useState({
     email: "",
     password: "",
+    passwordConfirm: "",
   });
 
-  const { login, currentUser } = useAuth(); // retorna el contexto
+  const { signup, currentUser } = useAuth(); // retorna el contexto
   const navigate = useNavigate();
   const [error, setError] = React.useState("");
 
@@ -33,11 +54,19 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
+    if (user.password !== user.passwordConfirm) {
+      setError("Las contraseñas no coinciden!");
+      return;
+    }
 
     try {
-      await login(user.email, user.password);
+      await signup(user.email, user.password);
       navigate("/");
+      // console.log(currentUser);
     } catch (err) {
+      if (error.code === "auth/internal-error") {
+        setError("Correo invalido!");
+      }
       setError(err.message);
     }
   };
@@ -58,7 +87,7 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Log in
+            Sign in
           </Typography>
           <Box
             component="form"
@@ -66,6 +95,7 @@ const Login = () => {
             noValidate
             sx={{ mt: 1 }}
           >
+            {/* Email */}
             <TextField
               onChange={handleChange}
               margin="normal"
@@ -77,6 +107,7 @@ const Login = () => {
               autoComplete="email"
               autoFocus
             />
+            {/* primer password */}
             <TextField
               onChange={handleChange}
               margin="normal"
@@ -88,47 +119,53 @@ const Login = () => {
               id="password"
               autoComplete="current-password"
             />
+            {/* confirmar password */}
+            <TextField
+              onChange={handleChange}
+              margin="normal"
+              required
+              fullWidth
+              name="passwordConfirm"
+              label="Confirm password"
+              type="password"
+              id="confirm-password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+
+            {/* COMPONENTE DE ERROR */}
             {error && <p>{error}</p>}
+            {/* COMPONENTE DE ERROR */}
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Inicia con Face..
+              Sign In
             </Button>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: -1, mb: 2 }}
-            >
-              Inicia con Google...
-            </Button>
-            <hr />
-            <div className="contenedor">
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 3 }}
-              >
-                Log In
-              </Button>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 3 }}
-              >
-                Registrate
-              </Button>
-            </div>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
 };
 
-export default Login;
+export default Register;
