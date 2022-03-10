@@ -35,6 +35,9 @@ class Users extends Model {
       salt:{
         type:DataTypes.STRING,
       },
+      admin:{
+        type:DataTypes.BOOLEAN || false
+      },
    /*    adress:{
           type:  DataTypes.INTEGER,
           references: {
@@ -42,13 +45,13 @@ class Users extends Model {
             key: 'id',
           }
       },
-    */   tipoUsuario:{
+    */  /*  tipoUsuario:{
         type:  DataTypes.INTEGER,
         references: {
             model: UserRol,
             key:'id',
-        }
-    }
+        } */
+    //}
 
     },
     {
