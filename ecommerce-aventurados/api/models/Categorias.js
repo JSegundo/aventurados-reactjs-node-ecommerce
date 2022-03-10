@@ -10,7 +10,7 @@ Categorias.init(
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
-          },
+          }, 
         Descripcion:{
             type: DataTypes.STRING,
             allowNull: false,

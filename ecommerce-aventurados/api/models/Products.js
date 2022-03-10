@@ -7,11 +7,11 @@ class Products extends Model {}
 
 Products.init(
   {
-    id: {
+    /* id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-    },
+    }, */
     categoria_id: {
       type: DataTypes.INTEGER,
       references: {
