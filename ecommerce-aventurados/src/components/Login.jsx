@@ -1,60 +1,47 @@
-import * as React from "react"
-import "../assets/login.css"
-import { Link } from "react-router-dom"
-import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"
-import CssBaseline from "@mui/material/CssBaseline"
-import TextField from "@mui/material/TextField"
-import Box from "@mui/material/Box"
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
-import Typography from "@mui/material/Typography"
-import Container from "@mui/material/Container"
-import { createTheme, ThemeProvider } from "@mui/material/styles"
+import * as React from "react";
+import "../assets/login.css";
+import { Link } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { useNavigate } from "react-router-dom"
-import { useAuth } from "../contexts/AuthContext.js"
-import { Grid } from "@mui/material"
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext.js";
+import { Grid } from "@mui/material";
 
-const theme = createTheme()
+const theme = createTheme();
 
 const Login = () => {
   const [user, setUser] = React.useState({
     email: "",
     password: "",
-  })
+  });
 
-  const { login, currentUser } = useAuth() // retorna el contexto
-  const navigate = useNavigate()
-  const [error, setError] = React.useState("")
+  const { login, currentUser } = useAuth(); // retorna el contexto
+  const navigate = useNavigate();
+  const [error, setError] = React.useState("");
 
   const handleChange = ({ target: { name, value } }) => {
-    setUser({ ...user, [name]: value })
-  }
+    setUser({ ...user, [name]: value });
+  };
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
-    setError("")
+    event.preventDefault();
+    setError("");
 
     try {
-      await login(user.email, user.password)
-      if(currentUser) {
-        setError('')
-        navigate("/")
-      }
-      else setError('Email o contraseña incorrecto');
+      await login(user.email, user.password);
+      navigate("/");
     } catch (err) {
-      setError(err.message)
-      ;
+      setError(err.message);
     }
-  }
-  // const handleSubmit = (event) => {
-  //   event.preventDefault()
-  //    setError("")
-
-  //    const log = login(user.email, user.password)
-  //     .then(()=>navigate("/"))
-  //     .catch(err => setError('papas'))
-  // }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -120,11 +107,7 @@ const Login = () => {
               Inicia con Google...
             </Button>
             <hr />
-            <Grid
-              container
-              xs={12}
-              spacing={1}
-            >
+            <Grid container spacing={1}>
               <Grid item xs={6}>
                 <Button
                   type="submit"
@@ -152,7 +135,7 @@ const Login = () => {
         </Box>
       </Container>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
