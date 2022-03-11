@@ -2,9 +2,12 @@ const express = require("express");
 const router = express.Router();
 const { Users, Ordenes } = require("../models");
 
-// router.post("/register", (req, res) => {
-//   res.status(201).send("se creo");
-// });
+router.post("/register", (req, res) => {
+  const { name, lastName, email} = req.body.user
+  const { localId } = req.body
+  console.log('REQ BODY ==>', req.body )
+  res.status(201).send("se creo");
+});
 
 // router.put("/", (req, res) => {
 //   res.send("se modifico");
