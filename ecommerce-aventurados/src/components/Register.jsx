@@ -65,11 +65,11 @@ const Register = () => {
     try {
       await signup(user.email, user.password);
       axios
-      .post('/api/user/register', ({user, localId: currentUser.uid}))
-      .then( user => {
-        console.log(user)
-        navigate("/");
-      })
+        .post("/api/user/register", { user, localId: currentUser.uid })
+        .then((user) => {
+          console.log(user);
+          navigate("/");
+        });
       // console.log(currentUser);
     } catch (err) {
       if (error.code === "auth/internal-error") {

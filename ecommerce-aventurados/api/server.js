@@ -13,11 +13,17 @@ app.use(express.json());
 app.use("/api", router);
 
 
-db.sync({force:false}) //agrego la sincronizacion en true.
+db.sync({force:true}) //agrego la sincronizacion en true.
 .then(function () {
   console.log("DB Conected")
     app.listen(3001, () => console.log("Servidor escuchando en el puerto 3001"));
 })
 
 
+<<<<<<< HEAD
 //sudo -u postgres psql -d dbaventura -a -f /api/aventurados-seed.sql
+=======
+
+
+//sudo -u postgres psql -d dbaventura -a -f /api/aventurados-seed.sql
+>>>>>>> 9071a7a7f9e98ea7aa71ff6163dd9f29a075b69b
