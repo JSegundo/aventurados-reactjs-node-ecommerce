@@ -15,9 +15,9 @@ import SearchIcon from "@mui/icons-material/Search"
 import InputBase from "@mui/material/InputBase"
 import { styled, alpha } from "@mui/material/styles"
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp"
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import LoginIcon from '@mui/icons-material/Login';
-import { Link } from "react-router-dom"
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
+import LoginIcon from "@mui/icons-material/Login"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext.js"
 
 const pages = ["Categorias"]
@@ -66,11 +66,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 const Navbar = () => {
-  const logAuth = false
+  const navigate = useNavigate()
 
-  const { logout ,currentUser } = useAuth() // retorna el contexto
-
-  console.log('es USER', currentUser);
+  const { logout, currentUser } = useAuth() // retorna el contexto
 
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
@@ -90,21 +88,25 @@ const Navbar = () => {
     setAnchorElUser(null)
   }
 
+  const handleLogOut = () => {
+    logout()
+    navigate('/login')
+  }
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-            <Link to='/'>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+          <Link to="/">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
             >
-            AventuraDos
-          </Typography>
-              </Link>
-
+              AventuraDos
+            </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -172,22 +174,22 @@ const Navbar = () => {
             />
           </Search>
 
-          { currentUser.email ? (
+          {currentUser?.email ? (
             <Box sx={{ flexGrow: 0 }}>
-              <Link to='/shopping'>
-              <Tooltip title="Open settings">
-                <IconButton color="primary" aria-label="add to shopping cart">
-                  <ShoppingCartSharpIcon />
-                </IconButton>
-              </Tooltip>
-                </Link>
-                <Link to='/fav'>
-              <Tooltip title="Open settings">
-                <IconButton color="primary" aria-label="add to fav">
-                  <FavoriteBorderIcon/>
-                </IconButton>
-              </Tooltip>
-                  </Link>
+              <Link to="/shopping">
+                <Tooltip title="Open settings">
+                  <IconButton color="primary" aria-label="add to shopping cart">
+                    <ShoppingCartSharpIcon />
+                  </IconButton>
+                </Tooltip>
+              </Link>
+              <Link to="/fav">
+                <Tooltip title="Open settings">
+                  <IconButton color="primary" aria-label="add to fav">
+                    <FavoriteBorderIcon />
+                  </IconButton>
+                </Tooltip>
+              </Link>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -209,17 +211,23 @@ const Navbar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
+                <MenuItem onClick={handleLogOut}>
+                <Typography textAlign="center">Salir</Typography>
+                  </MenuItem>
+
+                {/* {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
-                ))}
+                ))} */}
               </Menu>
             </Box>
-          ) : ( 
-              <Link to='/login'>
-            <Button variant="text" endIcon={<LoginIcon />}>Ingresar</Button>
-              </Link>
+          ) : (
+            <Link to="/login">
+              <Button variant="text" endIcon={<LoginIcon />}>
+                Ingresar
+              </Button>
+            </Link>
           )}
         </Toolbar>
       </Container>

@@ -1,4 +1,3 @@
-
 import * as React from "react"
 import "../assets/login.css"
 import { Link } from "react-router-dom"
@@ -14,7 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles"
 
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext.js"
-
+import { Grid } from "@mui/material"
 
 const theme = createTheme()
 
@@ -22,7 +21,6 @@ const Login = () => {
   const [user, setUser] = React.useState({
     email: "",
     password: "",
-
   })
 
   const { login, currentUser } = useAuth() // retorna el contexto
@@ -39,13 +37,24 @@ const Login = () => {
 
     try {
       await login(user.email, user.password)
-      navigate("/")
-    }
-     catch (err) {
+      if(currentUser) {
+        setError('')
+        navigate("/")
+      }
+      else setError('Email o contraseña incorrecto');
+    } catch (err) {
       setError(err.message)
+      ;
     }
   }
+  // const handleSubmit = (event) => {
+  //   event.preventDefault()
+  //    setError("")
 
+  //    const log = login(user.email, user.password)
+  //     .then(()=>navigate("/"))
+  //     .catch(err => setError('papas'))
+  // }
 
   return (
     <ThemeProvider theme={theme}>
@@ -63,7 +72,7 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Log in
+            Ingresar
           </Typography>
           <Box
             component="form"
@@ -77,7 +86,7 @@ const Login = () => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Email"
               name="email"
               autoComplete="email"
               autoFocus
@@ -88,7 +97,7 @@ const Login = () => {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Contraseña"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -111,35 +120,39 @@ const Login = () => {
               Inicia con Google...
             </Button>
             <hr />
-            <div className="contenedor">
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 3 }}
-              >
-                Log In
-              </Button>
-
-              <Link to="/register">
+            <Grid
+              container
+              xs={12}
+              spacing={1}
+            >
+              <Grid item xs={6}>
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 3 }}
                 >
-                  Registrate
+                  Entra
                 </Button>
-              </Link>
-
-            </div>
+              </Grid>
+              <Grid item xs={6}>
+                <Link to="/register">
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 3 }}
+                  >
+                    Registrate
+                  </Button>
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
-
   )
 }
 
 export default Login
-
