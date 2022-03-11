@@ -19,9 +19,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import LoginIcon from "@mui/icons-material/Login"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext.js"
+import { Grid } from "@mui/material"
 
 const pages = ["Categorias"]
-const settings = ["Profile", "Account", "Dashboard", "Logout"]
+// const settings = ["Profile", "Account", "Dashboard", "Logout"]
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   display: "flex",
@@ -137,11 +138,11 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <Grid container>
+                <Grid item>
+                  <Button></Button>
+                  </Grid>
+              </Grid>
             </Menu>
           </Box>
           <Typography
