@@ -14,6 +14,10 @@ Categorias.init(
         Descripcion:{
             type: DataTypes.STRING,
             allowNull: false,
+        },
+       Imagen:{
+            type: DataTypes.STRING,
+            allowNull: false,
         }
     },
     {
