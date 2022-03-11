@@ -19,9 +19,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import LoginIcon from "@mui/icons-material/Login"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext.js"
+import { Grid } from "@mui/material"
 
 const pages = ["Categorias"]
-const settings = ["Profile", "Account", "Dashboard", "Logout"]
+// const settings = ["Profile", "Account", "Dashboard", "Logout"]
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   display: "flex",
@@ -39,7 +40,7 @@ const Search = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: "auto",
   },
-}))
+}));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -49,7 +50,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-}))
+}));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
@@ -63,46 +64,46 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       width: "20ch",
     },
   },
-}))
+}));
 
 const Navbar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { logout, currentUser } = useAuth() // retorna el contexto
+  const { logout, currentUser } = useAuth(); // retorna el contexto
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget)
-  }
+    setAnchorElNav(event.currentTarget);
+  };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget)
-  }
+    setAnchorElUser(event.currentTarget);
+  };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
+    setAnchorElNav(null);
+  };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
+    setAnchorElUser(null);
+  };
 
-  const handleLogOut = () => {
-    logout()
-    navigate('/login')
-  }
+  const handleLogOut = async () => {
+    await logout();
+    navigate("/login");
+  };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to="/">
+          <Link style={{textDecoration: 'none', color: '#3391ff'}} to="/">
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+              sx={{ mr: 2, display: { xs: "none", md: "flex" }, textDecoration: 'none' }}
             >
               AventuraDos
             </Typography>
@@ -137,11 +138,11 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              {/* <Grid container>
+                <Grid item>
+                  <Button></Button>
+                  </Grid>
+              </Grid> */}
             </Menu>
           </Box>
           <Typography
@@ -213,8 +214,8 @@ const Navbar = () => {
                 onClose={handleCloseUserMenu}
               >
                 <MenuItem onClick={handleLogOut}>
-                <Typography textAlign="center">Salir</Typography>
-                  </MenuItem>
+                  <Typography textAlign="center">Salir</Typography>
+                </MenuItem>
 
                 {/* {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
@@ -233,7 +234,7 @@ const Navbar = () => {
         </Toolbar>
       </Container>
     </AppBar>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

@@ -9,17 +9,20 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
+import { Link } from 'react-router-dom';
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
   root: {
     [breakpoints.up('md')]: {
       justifyContent: 'center',
+     
     },
   },
 }));
 
 const useStyles = makeStyles(() => ({
   actionArea: {
+    
     borderRadius: 16,
     transition: '0.2s',
     '&:hover': {
@@ -84,44 +87,56 @@ const CustomCard = ({ classes, image, title, subtitle }) => {
   const styles4 = useStyles({ color: '#34241e' });
   return (
     <>
-      <Grid classes={gridStyles} container spacing={4} wrap={'nowrap'}>
+      <Grid sx={{overflowX: 'scroll'}} classes={gridStyles} container spacing={4} wrap={'nowrap'}>
         <Grid item>
+          <Link to='/paintboll'>
           <CustomCard
             classes={styles}
-            title={'Dota 2'}
+            title={'Paint Ball'}
             subtitle={'Be a Legend!'}
             image={
-              'https://steamcdn-a.akamaihd.net/apps/dota2/images/blog/play/dota_heroes.png'
+              //'https://steamcdn-a.akamaihd.net/apps/dota2/images/blog/play/dota_heroes.png'
+              'https://www.aventurasengalicia.com/upload/excursiones/21031104133.jpg?crc=4091525304'
             }
-          />
+            />
+            </Link>
         </Grid>
         <Grid item>
+        <Link to='/spa'>
           <CustomCard
             classes={styles2}
-            title={'Fortnite'}
-            subtitle={'Time to choose side!'}
+            title={'Dia de Spa'}
+            subtitle={'Relajate!'}
             image={
-              'https://progameguides.com/wp-content/uploads/2019/10/fortnite-outfit-scratch.jpg'
+              //'https://progameguides.com/wp-content/uploads/2019/10/fortnite-outfit-scratch.jpg'
+              'https://www.nupciasmagazine.com/wp-content/uploads/2019/02/portada-2.jpg'
             }
-          />
-        </Grid>
+            />
+            </Link>
+        </Grid >
         <Grid item>
+          <Link to='/ciclismo'>
           <CustomCard
             classes={styles3}
-            title={'Overwatch'}
+            title={'Ciclismo'}
             subtitle={'What are you waiting?'}
-            image={'https://images5.alphacoders.com/690/thumb-1920-690653.png'}
-          />
+            image={//'https://images5.alphacoders.com/690/thumb-1920-690653.png'
+              'https://forriders.es/wp-content/uploads/2019/11/mountain-bike.jpg'}
+              />
+              </Link>
         </Grid>
         <Grid item>
+          <Link to='/campestre'>
           <CustomCard
             classes={styles4}
-            title={'PUBG'}
+            title={'Campestre'}
             subtitle={'Are you ready?'}
             image={
-              'https://www.itp.net/public/styles/full_img_sml/public/images/2019/05/27/44485-pubg_base1.jpg?itok=EF911Xan'
+              //'https://www.itp.net/public/styles/full_img_sml/public/images/2019/05/27/44485-pubg_base1.jpg?itok=EF911Xan'
+              'https://www.ecuestre.es/upload/images/article/5c920e080ee6945001349906/5c920ead0de6949f0b34964a-que-titulacion-se-requiere-para-organizar-rutas-a-caballo.jpg'
             }
-          />
+            />
+            </Link>
         </Grid>
       </Grid>
     </>

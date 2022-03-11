@@ -13,28 +13,49 @@ import { FormHelperText, Box, Grid } from "@material-ui/core";
 const data = [
   {
     id: 1,
-    title: 'Huarache',
-    subtitle: 'Gripp', 
+    /* title: 'Huarache',
+    subtitle: 'Gripp', */
     image:
       // eslint-disable-next-line max-len
-      "https://firebasestorage.googleapis.com/v0/b/mui-treasury.appspot.com/o/public%2Fshoes%2Fair-huarache-gripp.png?alt=media",
-  },
+      //"https://firebasestorage.googleapis.com/v0/b/mui-treasury.appspot.com/o/public%2Fshoes%2Fair-huarache-gripp.png?alt=media",
+      'https://dam.cocinafacil.com.mx/wp-content/uploads/2020/11/cena.jpg'
+    },
   {
     id: 2,
-     title: 'Air Max',
-    subtitle: '270 P', 
+    /* title: 'Air Max',
+    subtitle: '270 P', */
     image:
       // eslint-disable-next-line max-len
-      "https://firebasestorage.googleapis.com/v0/b/mui-treasury.appspot.com/o/public%2Fshoes%2Fair-max-270.png?alt=media",
-  },
+      //"https://firebasestorage.googleapis.com/v0/b/mui-treasury.appspot.com/o/public%2Fshoes%2Fair-max-270.png?alt=media",
+        'https://img.blogs.es/anexom/wp-content/uploads/2020/01/photo-1519904981063-b0cf448d479e.jpeg'
+    },
   {
     id: 3,
-     title: 'Air Max',
-    subtitle: 'Deluxe', 
+    /* title: 'Air Max',
+    subtitle: 'Deluxe', */
     image:
       // eslint-disable-next-line max-len
-      "https://firebasestorage.googleapis.com/v0/b/mui-treasury.appspot.com/o/public%2Fshoes%2Fair-max-deluxe.png?alt=media",
-  },
+     // "https://firebasestorage.googleapis.com/v0/b/mui-treasury.appspot.com/o/public%2Fshoes%2Fair-max-deluxe.png?alt=media",
+    'https://cdn.atrapalo.com/common/photo/event/4/7/9/4722/370006/vertic_880_0.jpg'
+    },
+    {
+      id: 4,
+      /* title: 'Air Max',
+      subtitle: 'Deluxe', */
+      image:
+        // eslint-disable-next-line max-len
+       // "https://firebasestorage.googleapis.com/v0/b/mui-treasury.appspot.com/o/public%2Fshoes%2Fair-max-deluxe.png?alt=media",
+      'https://welcometoibiza.com/wp-content/uploads/Ibiza-Gran-Hotel-Open-Spa-1.jpg'
+      },
+      {
+        id: 5,
+        /* title: 'Air Max',
+        subtitle: 'Deluxe', */
+        image:
+          // eslint-disable-next-line max-len
+         // "https://firebasestorage.googleapis.com/v0/b/mui-treasury.appspot.com/o/public%2Fshoes%2Fair-max-deluxe.png?alt=media",
+        'https://www.es-paintball.com/Imagenes/mejores-tacticas-estrategias-jugar-a-paintball.jpg'
+        },
 ];
 
 const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
@@ -48,12 +69,13 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
     overflow: "hidden",
     // relative is a must if you want to create overlapping layers in children
     position: "relative",
-    paddingTop: spacing(8),
+    paddingTop: spacing(5),
+   
     [breakpoints.up("sm")]: {
       paddingTop: spacing(10),
     },
     [breakpoints.up("md")]: {
-      paddingTop: spacing(14),
+      paddingTop: spacing(2),
     },
   },
   imageContainer: {
@@ -85,14 +107,14 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
   },
   arrowLeft: {
     left: 0,
-    [breakpoints.up("lg")]: {
-      left: -64,
+    [breakpoints.up("sm")]: {
+      left: 64,
     },
   },
   arrowRight: {
     right: 0,
-    [breakpoints.up("lg")]: {
-      right: -64,
+    [breakpoints.up("sm")]: {
+      right: 2,
     },
   },
   text: {
@@ -111,7 +133,7 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
       padding: "0 24px",
     },
   },
-  title: {
+   title: {
     top: 20,
     left: "20%",
     height: "40%",
@@ -126,7 +148,7 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
       top: 52,
       fontSize: 72,
     },
-  },
+  }, 
   subtitle: {
     top: 60,
     left: "0%",
@@ -143,7 +165,7 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
       top: 128,
       fontSize: 104,
     },
-  },
+  }, 
   indicatorContainer: {
     textAlign: "center",
   },
@@ -162,6 +184,7 @@ const Carrousel1 = () => {
   // eslint-disable-next-line react/prop-types
   const renderElements = ({ index, onChangeIndex }) => (
     <>
+      
       <Button
         className={cx(classes.arrow, classes.arrowLeft)}
         classes={arrowStyles}
@@ -178,6 +201,7 @@ const Carrousel1 = () => {
       >
         <KeyboardArrowRight />
       </Button>
+    
       <div className={classes.indicatorContainer}>
         {data.map(({ id }, i) => (
           <DotIndicator
