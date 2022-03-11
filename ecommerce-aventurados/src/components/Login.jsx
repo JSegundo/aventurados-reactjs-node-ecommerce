@@ -107,7 +107,7 @@ const Login = () => {
               Inicia con Google...
             </Button>
             <hr />
-            <Grid container xs={12} spacing={1}>
+            <Grid container spacing={1}>
               <Grid item xs={6}>
                 <Button
                   type="submit"

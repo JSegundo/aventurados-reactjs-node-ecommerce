@@ -1,27 +1,28 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
-import { styled, alpha } from "@mui/material/styles";
-import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import LoginIcon from "@mui/icons-material/Login";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext.js";
+import * as React from "react"
+import AppBar from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
+import Toolbar from "@mui/material/Toolbar"
+import IconButton from "@mui/material/IconButton"
+import Typography from "@mui/material/Typography"
+import Menu from "@mui/material/Menu"
+import MenuIcon from "@mui/icons-material/Menu"
+import Container from "@mui/material/Container"
+import Avatar from "@mui/material/Avatar"
+import Button from "@mui/material/Button"
+import Tooltip from "@mui/material/Tooltip"
+import MenuItem from "@mui/material/MenuItem"
+import SearchIcon from "@mui/icons-material/Search"
+import InputBase from "@mui/material/InputBase"
+import { styled, alpha } from "@mui/material/styles"
+import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp"
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
+import LoginIcon from "@mui/icons-material/Login"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../contexts/AuthContext.js"
+import { Grid } from "@mui/material"
 
-const pages = ["Categorias"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Categorias"]
+// const settings = ["Profile", "Account", "Dashboard", "Logout"]
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   display: "flex",
@@ -97,12 +98,12 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to="/">
+          <Link style={{textDecoration: 'none', color: '#3391ff'}} to="/">
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+              sx={{ mr: 2, display: { xs: "none", md: "flex" }, textDecoration: 'none' }}
             >
               AventuraDos
             </Typography>
@@ -137,11 +138,11 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              {/* <Grid container>
+                <Grid item>
+                  <Button></Button>
+                  </Grid>
+              </Grid> */}
             </Menu>
           </Box>
           <Typography
