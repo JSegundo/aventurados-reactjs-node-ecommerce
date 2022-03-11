@@ -11,15 +11,15 @@ class Users extends Model {
 
 Users.init(
   {
-    // id: {
-    //   type: DataTypes.INTEGER,
-    //   autoIncrement: true,
-    //   primaryKey: true,
-    // },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -28,33 +28,16 @@ Users.init(
         isEmail: true,
       },
     },
-    password: {
+    localId: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    salt: {
-      type: DataTypes.STRING,
-    },
     admin: {
-      type: DataTypes.BOOLEAN || false,
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
-    // tipoUsuario:{
-    //     adress:{
-    //       type:  DataTypes.INTEGER,
-    //       references: {
-    //         model: 'adress',
-    //         key: 'id',
-    //       }
-    //   },
-
-    //     type:  DataTypes.INTEGER,
-    //     references: {
-    //         model: UserRol,
-    //         key:'id',
-    //     } ,
-    //}
-
   },
+
   {
     // Other model options go here
     sequelize: db, // We need to pass the connection instance
