@@ -11,59 +11,19 @@ class Users extends Model {
 
 Users.init(
   {
-<<<<<<< HEAD
-    // id: {
-    //   type: DataTypes.INTEGER,
-    //   autoIncrement: true,
-    //   primaryKey: true,
-    // },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true,
-      },
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    salt: {
-      type: DataTypes.STRING,
-    },
-    admin: {
-      type: DataTypes.BOOLEAN || false,
-    },
-    // tipoUsuario:{
-    //     adress:{
-    //       type:  DataTypes.INTEGER,
-    //       references: {
-    //         model: 'adress',
-    //         key: 'id',
-    //       }
-    //   },
-
-    //     type:  DataTypes.INTEGER,
-    //     references: {
-    //         model: UserRol,
-    //         key:'id',
-    //     } ,
-    //}
-=======
-    id: {
+    /* id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-
+ */
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    lastName:{
+      type:DataTypes.STRING,
+      allowNull:false,
     },
 
     email: {
@@ -74,31 +34,38 @@ Users.init(
         isEmail: true,
       },
     },
-
-    password: {
+    localId:{
+      type:DataTypes.STRING,
+      allowNull:false
+    },
+    admin:{
+      type:DataTypes.BOOLEAN,
+      defaultValue: false
+      
+    }
+/*     password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-
-    salt: {
+ */
+/*     salt: {
       type: DataTypes.STRING,
     },
-    /*    adress:{
+ */    /*    adress:{
           type:  DataTypes.INTEGER,
           references: {
             model: 'adress',
             key: 'id',
           }
       },
-    */ tipoUsuario: {
+    */ /* tipoUsuario: {
       type: DataTypes.INTEGER,
       references: {
         model: UserRol,
         key: "id",
-      },
+      }, */
     },
->>>>>>> bbb15812df3080faafe169533ba8f3e510cbede2
-  },
+//  },
   {
     // Other model options go here
     sequelize: db, // We need to pass the connection instance

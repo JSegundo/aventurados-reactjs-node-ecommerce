@@ -12,11 +12,13 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use('/api', router)
 
 
-db.sync({force:false}) //agrego la sincronizacion en true.
+db.sync({force:true}) //agrego la sincronizacion en true.
 .then(function () {
   console.log("DB Conected")
     app.listen(3001, () => console.log("Servidor escuchando en el puerto 3001"));
 })
+
+
 
 
 //sudo -u postgres psql -d dbaventura -a -f /api/aventurados-seed.sql
