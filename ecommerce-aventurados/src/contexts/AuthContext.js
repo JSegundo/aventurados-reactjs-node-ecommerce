@@ -22,17 +22,9 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password); // función de firebase para crear usuario.
   }
 
-  function login(email, password) {
-    setPersistence(auth, browserLocalPersistence)
-      .then(() => {
-        return signInWithEmailAndPassword(auth, email, password);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error(errorCode);
-        console.error(errorMessage);
-      });
+  async function login(email, password) {
+    await setPersistence(auth, browserLocalPersistence);
+    return signInWithEmailAndPassword(auth, email, password);
   }
 
   function logout() {

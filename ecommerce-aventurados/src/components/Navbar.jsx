@@ -17,7 +17,7 @@ import { styled, alpha } from "@mui/material/styles";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LoginIcon from "@mui/icons-material/Login";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.js";
 
 const pages = ["Categorias"];
@@ -66,11 +66,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const logAuth = false;
+  const navigate = useNavigate();
 
   const { logout, currentUser } = useAuth(); // retorna el contexto
-
-  console.log("es USER", currentUser);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -88,6 +86,11 @@ const Navbar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogOut = async () => {
+    await logout();
+    navigate("/login");
   };
 
   return (
@@ -208,11 +211,15 @@ const Navbar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
+                <MenuItem onClick={handleLogOut}>
+                  <Typography textAlign="center">Salir</Typography>
+                </MenuItem>
+
+                {/* {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
-                ))}
+                ))} */}
               </Menu>
             </Box>
           ) : (
