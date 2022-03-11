@@ -1,27 +1,27 @@
-import * as React from "react"
-import AppBar from "@mui/material/AppBar"
-import Box from "@mui/material/Box"
-import Toolbar from "@mui/material/Toolbar"
-import IconButton from "@mui/material/IconButton"
-import Typography from "@mui/material/Typography"
-import Menu from "@mui/material/Menu"
-import MenuIcon from "@mui/icons-material/Menu"
-import Container from "@mui/material/Container"
-import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"
-import Tooltip from "@mui/material/Tooltip"
-import MenuItem from "@mui/material/MenuItem"
-import SearchIcon from "@mui/icons-material/Search"
-import InputBase from "@mui/material/InputBase"
-import { styled, alpha } from "@mui/material/styles"
-import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp"
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import LoginIcon from '@mui/icons-material/Login';
-import { Link } from "react-router-dom"
-import { useAuth } from "../contexts/AuthContext.js"
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+import { styled, alpha } from "@mui/material/styles";
+import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import LoginIcon from "@mui/icons-material/Login";
+import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext.js";
 
-const pages = ["Categorias"]
-const settings = ["Profile", "Account", "Dashboard", "Logout"]
+const pages = ["Categorias"];
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   display: "flex",
@@ -39,7 +39,7 @@ const Search = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: "auto",
   },
-}))
+}));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -49,7 +49,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-}))
+}));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
@@ -63,48 +63,47 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       width: "20ch",
     },
   },
-}))
+}));
 
 const Navbar = () => {
-  const logAuth = false
+  const logAuth = false;
 
-  const { logout ,currentUser } = useAuth() // retorna el contexto
+  const { logout, currentUser } = useAuth(); // retorna el contexto
 
-  console.log('es USER', currentUser);
+  console.log("es USER", currentUser);
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget)
-  }
+    setAnchorElNav(event.currentTarget);
+  };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget)
-  }
+    setAnchorElUser(event.currentTarget);
+  };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
+    setAnchorElNav(null);
+  };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
+    setAnchorElUser(null);
+  };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-            <Link to='/'>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+          <Link to="/">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
             >
-            AventuraDos
-          </Typography>
-              </Link>
-
+              AventuraDos
+            </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -172,22 +171,22 @@ const Navbar = () => {
             />
           </Search>
 
-          { currentUser.email ? (
+          {currentUser?.email ? (
             <Box sx={{ flexGrow: 0 }}>
-              <Link to='/shopping'>
-              <Tooltip title="Open settings">
-                <IconButton color="primary" aria-label="add to shopping cart">
-                  <ShoppingCartSharpIcon />
-                </IconButton>
-              </Tooltip>
-                </Link>
-                <Link to='/fav'>
-              <Tooltip title="Open settings">
-                <IconButton color="primary" aria-label="add to fav">
-                  <FavoriteBorderIcon/>
-                </IconButton>
-              </Tooltip>
-                  </Link>
+              <Link to="/shopping">
+                <Tooltip title="Open settings">
+                  <IconButton color="primary" aria-label="add to shopping cart">
+                    <ShoppingCartSharpIcon />
+                  </IconButton>
+                </Tooltip>
+              </Link>
+              <Link to="/fav">
+                <Tooltip title="Open settings">
+                  <IconButton color="primary" aria-label="add to fav">
+                    <FavoriteBorderIcon />
+                  </IconButton>
+                </Tooltip>
+              </Link>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -216,15 +215,17 @@ const Navbar = () => {
                 ))}
               </Menu>
             </Box>
-          ) : ( 
-              <Link to='/login'>
-            <Button variant="text" endIcon={<LoginIcon />}>Ingresar</Button>
-              </Link>
+          ) : (
+            <Link to="/login">
+              <Button variant="text" endIcon={<LoginIcon />}>
+                Ingresar
+              </Button>
+            </Link>
           )}
         </Toolbar>
       </Container>
     </AppBar>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
