@@ -174,7 +174,8 @@ const Navbar = () => {
             />
           </Search>
 
-          {currentUser?.email ? (
+
+          { currentUser?.email ? (
             <Box sx={{ flexGrow: 0 }}>
               <Link to="/shopping">
                 <Tooltip title="Open settings">
