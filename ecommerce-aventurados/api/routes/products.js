@@ -4,6 +4,7 @@ const { Products } = require("../models");
 const { Op } = require("sequelize");
 
 router.post("/", (req, res) => {
+<<<<<<< HEAD
   // if (!req.user.admin == true) return res.sendStatus(401);
   Products.create(req.body)
     .then((product) => res.status(201).send(product))
@@ -34,6 +35,42 @@ router.delete("/:id", (req, res) => {
   );
   res.send("se elimino un producto");
 });
+=======
+  // if (!req.user.rol == "admin") return res.sendStatus(401);
+  Products.create(req.body)
+    .then((product) => {
+      res.status(201).send("product");
+    })
+    .catch((err) => console.error(err));
+});
+
+router.put("/:id", (req, res) => {
+  // if (!req.user.rol == "admin") return res.sendStatus(401);
+  Products.findByPk(req.params.id).then((product) => {
+    product
+      .update(req.body)
+      .then((updated) => {
+        // console.log(updated.dataValues);
+        res.status(202).send(updated.dataValues);
+      })
+      .catch((err) => console.error(err));
+  });
+});
+
+// router.delete("/:id", (req, res) => {
+//   // if (!req.user.rol == "admin") return res.sendStatus(401);
+// Products.findByPk(req.params.id).then((product) => {
+//   product
+//     .update(req.body)
+//     .then((updated) => {
+//       // console.log(updated.dataValues);
+//       res.status(202).send(updated.dataValues);
+//     })
+//     .catch((err) => console.error(err));
+// });
+// });
+//no elimina, cambia un estado. Se modifica cuando este modificado el MODEL
+>>>>>>> bbb15812df3080faafe169533ba8f3e510cbede2
 
 router.get("/", (req, res) => {
   Products.findAll({
@@ -58,8 +95,10 @@ router.get("/category/:categoria_id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+// Todavia NO funciona.
 router.get("/search", (req, res) => {
   const { query } = req.query;
+<<<<<<< HEAD
   Products.findAll({
     where: {
       nombre: { [Op.startsWith]: query },
@@ -71,6 +110,15 @@ router.get("/search", (req, res) => {
     .catch((err) => {
       console.log("error");
     });
+=======
+  console.log("queryyyyyyyyyyyyy", query);
+  Products.findAll({
+    where: { description: { [Op.startsWith]: `${query}` } },
+  }).then((products) => {
+    console.log(products);
+    res.send(products);
+  });
+>>>>>>> bbb15812df3080faafe169533ba8f3e510cbede2
 });
 
 module.exports = router;

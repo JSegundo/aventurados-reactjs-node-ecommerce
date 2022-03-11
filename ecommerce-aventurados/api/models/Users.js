@@ -11,6 +11,7 @@ class Users extends Model {
 
 Users.init(
   {
+<<<<<<< HEAD
     // id: {
     //   type: DataTypes.INTEGER,
     //   autoIncrement: true,
@@ -53,6 +54,50 @@ Users.init(
     //         key:'id',
     //     } ,
     //}
+=======
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    salt: {
+      type: DataTypes.STRING,
+    },
+    /*    adress:{
+          type:  DataTypes.INTEGER,
+          references: {
+            model: 'adress',
+            key: 'id',
+          }
+      },
+    */ tipoUsuario: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: UserRol,
+        key: "id",
+      },
+    },
+>>>>>>> bbb15812df3080faafe169533ba8f3e510cbede2
   },
   {
     // Other model options go here
