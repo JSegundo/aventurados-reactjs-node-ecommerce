@@ -1,29 +1,33 @@
-const db = require('./config/db')
-const express = require('express')
-const app = express()
-const router = require('./routes')
-const {Users,UserRol,Products,Ordenes,Estados,Categorias,Carritos} = require('./models')
-const bodyParser= require('body-parser');
+const db = require("./config/db");
+const express = require("express");
+const app = express();
+const router = require("./routes");
+const {
+  Users,
+  UserRol,
+  Products,
+  Ordenes,
+  Estados,
+  Categorias,
+  Carritos,
+} = require("./models");
+const bodyParser = require("body-parser");
+const volleyball = require('volleyball')
+const cors = require('cors')
 
+app.use(cors())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:false}))
-
-app.use(express.json());
+app.use(volleyball)
 app.use("/api", router);
 
+db.sync({ force: false }) //agrego la sincronizacion en true.
+  .then(function () {
+    console.log("DB Conected");
+    app.listen(3001, () =>
+      console.log("Servidor escuchando en el puerto 3001")
+    );
+  });
 
-db.sync({force:true}) //agrego la sincronizacion en true.
-.then(function () {
-  console.log("DB Conected")
-    app.listen(3001, () => console.log("Servidor escuchando en el puerto 3001"));
-})
-
-
-<<<<<<< HEAD
-//sudo -u postgres psql -d dbaventura -a -f /api/aventurados-seed.sql
-=======
-
-
-//sudo -u postgres psql -d dbaventura -a -f /api/aventurados-seed.sql
->>>>>>> 9071a7a7f9e98ea7aa71ff6163dd9f29a075b69b
+//sudo -u postgres psql -d dbaventura -a -f /home/hpadmin/Desktop/E-Commerce/aventurados/ecommerce-aventurados/api/aventurados-seed.sql

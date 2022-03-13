@@ -1,13 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const { Products } = require("../models");
+const { Products, Users } = require("../models");
 const { Op } = require("sequelize");
 
 router.post("/", (req, res) => {
-
-  // if (!req.user.admin == true) return res.sendStatus(401);
-  Products.create(req.body)
-    .then((product) => res.status(201).send(product))
+  const { localId } = req.body;
+  Users.findOne({ where: { localId } })
+    .then((user) => {
+      if (!user.admin) return res.sendStatus(401);
+      Products.create(req.body.product).then((product) =>
+        res.status(201).send(product)
+      );
+    })
     .catch((err) => console.log(err));
 });
 
@@ -74,7 +78,6 @@ router.get("/search", (req, res) => {
     .catch((err) => {
       console.log("error");
     });
-
 });
 
 module.exports = router;

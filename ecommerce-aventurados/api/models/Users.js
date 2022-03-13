@@ -11,19 +11,13 @@ class Users extends Model {
 
 Users.init(
   {
-    /* id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
- */
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastName:{
-      type:DataTypes.STRING,
-      allowNull:false,
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
 
     email: {
@@ -34,58 +28,15 @@ Users.init(
         isEmail: true,
       },
     },
-    localId:{
-      type:DataTypes.STRING,
-      allowNull:false
-    },
-    admin:{
-      type:DataTypes.BOOLEAN,
-      defaultValue: false
-      
-    }
-/*     password: {
+    localId: {
       type: DataTypes.STRING,
       allowNull: false,
     },
- */
-/*     salt: {
-      type: DataTypes.STRING,
+    admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
- */    /*    adress:{
-          type:  DataTypes.INTEGER,
-          references: {
-            model: 'adress',
-            key: 'id',
-          }
-      },
-    */ /* tipoUsuario: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: UserRol,
-        key: "id",
-      }, */
-    },
-<<<<<<< HEAD
-    // tipoUsuario:{
-    //     adress:{
-    //       type:  DataTypes.INTEGER,
-    //       references: {
-    //         model: 'adress',
-    //         key: 'id',
-    //       }
-    //   },
-
-    //     type:  DataTypes.INTEGER,
-    //     references: {
-    //         model: UserRol,
-    //         key:'id',
-    //     } ,
-    //}
-
   },
-=======
-//  },
->>>>>>> 9071a7a7f9e98ea7aa71ff6163dd9f29a075b69b
   {
     // Other model options go here
     sequelize: db, // We need to pass the connection instance
