@@ -1,27 +1,27 @@
-import * as React from "react"
-import AppBar from "@mui/material/AppBar"
-import Box from "@mui/material/Box"
-import Toolbar from "@mui/material/Toolbar"
-import IconButton from "@mui/material/IconButton"
-import Typography from "@mui/material/Typography"
-import Menu from "@mui/material/Menu"
-import MenuIcon from "@mui/icons-material/Menu"
-import Container from "@mui/material/Container"
-import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"
-import Tooltip from "@mui/material/Tooltip"
-import MenuItem from "@mui/material/MenuItem"
-import SearchIcon from "@mui/icons-material/Search"
-import InputBase from "@mui/material/InputBase"
-import { styled, alpha } from "@mui/material/styles"
-import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp"
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
-import LoginIcon from "@mui/icons-material/Login"
-import { Link, useNavigate } from "react-router-dom"
-import { useAuth } from "../contexts/AuthContext.js"
-import { Grid } from "@mui/material"
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+import { styled, alpha } from "@mui/material/styles";
+import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import LoginIcon from "@mui/icons-material/Login";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext.js";
+import { Grid } from "@mui/material";
 
-const pages = ["Categorias"]
+const pages = ["Categorias"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"]
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -98,12 +98,16 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link style={{textDecoration: 'none', color: '#3391ff'}} to="/">
+          <Link style={{ textDecoration: "none", color: "#3391ff" }} to="/">
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ mr: 2, display: { xs: "none", md: "flex" }, textDecoration: 'none' }}
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                textDecoration: "none",
+              }}
             >
               AventuraDos
             </Typography>
@@ -175,8 +179,7 @@ const Navbar = () => {
             />
           </Search>
 
-
-          { currentUser?.email ? (
+          {currentUser?.email ? (
             <Box sx={{ flexGrow: 0 }}>
               <Link to="/shopping">
                 <Tooltip title="Open settings">
@@ -212,6 +215,7 @@ const Navbar = () => {
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
+                s
               >
                 <MenuItem onClick={handleLogOut}>
                   <Typography textAlign="center">Salir</Typography>

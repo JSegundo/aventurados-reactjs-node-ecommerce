@@ -1,17 +1,20 @@
 const Users = require("./Users");
 const UserRol = require("./UserRol");
 const Products = require("./Products");
-const Ordenes = require("./Ordenes");
-const Estados = require("./Estados");
-const Categorias = require("./Categorias");
-const Carritos = require("./Carritos");
+const Orders = require("./Orders");
+const States = require("./States");
+const Categories = require("./Categories");
+const Carts = require("./Carts");
 
 module.exports = {
   UserRol,
   Users,
   Products,
-  Ordenes,
-  Estados,
-  Categorias,
-  Carritos,
+  Orders,
+  States,
+  Categories,
+  Carts,
 };
+
+Products.belongsTo(States)
+Products.belongsTo(Categories)
