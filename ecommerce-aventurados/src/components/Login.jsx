@@ -23,7 +23,7 @@ const Login = () => {
     password: "",
   });
 
-  const { login, currentUser } = useAuth(); // retorna el contexto
+  const { login, currentUser, googleLogin, facebookLogin } = useAuth(); // retorna el contexto
   const navigate = useNavigate();
   const [error, setError] = React.useState("");
 
@@ -34,9 +34,26 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
-
     try {
       await login(user.email, user.password);
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await googleLogin();
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    try {
+      await facebookLogin();
       navigate("/");
     } catch (err) {
       setError(err.message);
@@ -91,6 +108,7 @@ const Login = () => {
             />
             {error && <p>{error}</p>}
             <Button
+              onClick={handleFacebookLogin}
               type="submit"
               fullWidth
               variant="contained"
@@ -99,6 +117,7 @@ const Login = () => {
               Inicia con Face..
             </Button>
             <Button
+              onClick={handleGoogleLogin}
               type="submit"
               fullWidth
               variant="contained"

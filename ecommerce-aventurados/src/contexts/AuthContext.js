@@ -6,6 +6,9 @@ import {
   signOut,
   setPersistence,
   browserLocalPersistence,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 const AuthContext = createContext();
 
@@ -37,6 +40,20 @@ const AuthProvider = ({ children }) => {
       });
   }
 
+  function googleLogin() {
+    const googleProvider = new GoogleAuthProvider();
+    return signInWithPopup(auth, googleProvider)
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
+  }
+
+  function facebookLogin() {
+    const facebookProvider = new FacebookAuthProvider();
+    signInWithPopup(auth, facebookProvider)
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
+  }
+
   useEffect(() => {
     //"onAuthStateChanged": esta función "escucha" cuando se creó un usuario,
     // recibe el usuario, y lo seteamos a nuestro state con setCurrentUser.
@@ -56,6 +73,8 @@ const AuthProvider = ({ children }) => {
     signup,
     login,
     logout,
+    googleLogin,
+    facebookLogin,
   };
   // "value" nos va a proveer de toda la información que vamos a necesitar
   // para realizar la autenticación.
