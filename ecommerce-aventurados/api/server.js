@@ -2,25 +2,21 @@ const db = require("./config/db");
 const express = require("express");
 const app = express();
 const router = require("./routes");
-const {
-  Users,
-  UserRol,
-  Products,
-  Ordenes,
-  Estados,
-  Categorias,
-  Carritos,
-} = require("./models");
-const bodyParser = require("body-parser");
-const volleyball = require('volleyball')
-const cors = require('cors')
+const volleyball = require("volleyball");
+const cors = require("cors");
 
-app.use(cors())
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(volleyball)
+app.use(volleyball);
 app.use("/api", router);
+
+//middleware error (error handler)
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 db.sync({ force: false }) //agrego la sincronizacion en true.
   .then(function () {

@@ -19,9 +19,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LoginIcon from "@mui/icons-material/Login";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.js";
+import { Grid } from "@mui/material";
 
 const pages = ["Categorias"];
-//const settings = ["Profile", "Account", "Dashboard", "Logout"];
+// const settings = ["Profile", "Account", "Dashboard", "Logout"]
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   display: "flex",
@@ -97,12 +98,16 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to="/">
+          <Link style={{ textDecoration: "none", color: "#3391ff" }} to="/">
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                textDecoration: "none",
+              }}
             >
               AventuraDos
             </Typography>
@@ -137,11 +142,11 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              {/* <Grid container>
+                <Grid item>
+                  <Button></Button>
+                  </Grid>
+              </Grid> */}
             </Menu>
           </Box>
           <Typography
@@ -174,7 +179,7 @@ const Navbar = () => {
             />
           </Search>
 
-          { currentUser?.email ? (
+          {currentUser?.email ? (
             <Box sx={{ flexGrow: 0 }}>
               <Link to="/shopping">
                 <Tooltip title="Open settings">
@@ -210,6 +215,7 @@ const Navbar = () => {
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
+                s
               >
                 <MenuItem onClick={handleLogOut}>
                   <Typography textAlign="center">Salir</Typography>

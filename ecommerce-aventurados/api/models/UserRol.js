@@ -7,11 +7,6 @@ class UserRol extends Model {}
 
 UserRol.init(
     {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-          },
         rol:{
             type:DataTypes.STRING,
             allowNull: false,

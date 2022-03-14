@@ -1,18 +1,13 @@
-const { Sequelize, DataTypes, Model } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const Users = require("./Users");
 const db = require("../config/db");
-const Estados = require("./Estados");
+const States = require("./States");
 const Products = require("./Products");
 
-class Carritos extends Model {}
+class Carts extends Model {}
 
-Carritos.init(
+Carts.init(
   {
-    // id: {
-    //     type: DataTypes.INTEGER,
-    //     autoIncrement: true,
-    //     primaryKey: true
-    //   },
     userId: {
       type: DataTypes.INTEGER,
       references: {
@@ -27,18 +22,18 @@ Carritos.init(
         key: "id",
       },
     },
-    cantidad: {
+    amount: {
       type: DataTypes.INTEGER,
     },
-    estado: {
+    state: {
       type: DataTypes.INTEGER,
-      defaultValue: 1, 
+      defaultValue: 1,
       references: {
-        model: Estados,
+        model: States,
         key: "id",
       },
     },
-    transaccion: {
+    transaction: {
       type: DataTypes.INTEGER,
       //allowNull: false,
     },
@@ -47,8 +42,8 @@ Carritos.init(
     // Other model options go here
     sequelize: db, // We need to pass the connection instance
     // tableName: 'users', // We need to choose the model name
-    modelName: "carritos",
+    modelName: "carts",
   }
 );
 
-module.exports = Carritos;
+module.exports = Carts;

@@ -1,14 +1,14 @@
 import * as React from "react";
-//import Avatar from "@mui/material/Avatar";
+import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-//import FormControlLabel from "@mui/material/FormControlLabel";
-//import Checkbox from "@mui/material/Checkbox";
-//import Link from "@mui/material/Link";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-//import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -17,23 +17,23 @@ import axios from "axios";
 import { useAuth } from "../contexts/AuthContext.js";
 import { useNavigate } from "react-router-dom";
 
-// function Copyright(props) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://mui.com/">
-//         Aventura2
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="https://mui.com/">
+        Aventura2
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 const theme = createTheme();
 
@@ -74,13 +74,16 @@ const Register = () => {
   };
 
   React.useEffect(() => {
-    if(!currentUser) return 
+    if (!currentUser) return;
     axios
-      .post("http://localhost:3001/api/user/register", { user: user, localId: currentUser.uid })
+      .post("http://localhost:3001/api/user/register", {
+        user: user,
+        localId: currentUser.uid,
+      })
       .then((user) => {
         console.log(user.data);
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   }, [currentUser]);
 
   return (
