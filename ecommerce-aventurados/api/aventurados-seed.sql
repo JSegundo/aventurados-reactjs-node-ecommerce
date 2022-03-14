@@ -16,4 +16,6 @@ insert into products values(default,'juegos en equipo','paint ball','https://www
 insert into products values(default,'Dia de spa','Relajate con un dia de spa','https://www.nupciasmagazine.com/wp-content/uploads/2019/02/portada-2.jpg',5000,now(),now(),1,3);
 insert into products values(default,'Ciclismo','El ciclismo de montaña es un deporte de aventura','https://forriders.es/wp-content/uploads/2019/11/mountain-bike.jpg',5000,now(),now(),1,4);
 
+
 insert into users values(default,'admin','admin@gmail.com','admin123','salt',true,now(),now());
+

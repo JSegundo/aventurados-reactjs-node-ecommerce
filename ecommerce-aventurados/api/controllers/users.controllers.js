@@ -3,7 +3,6 @@ const { Op } = require("sequelize");
 
 const users_controllers = {
   register: async (req, res, next) => {
-    console.log(req.body);
     const { name, lastName, email } = req.body.user;
     const { localId } = req.body;
     try {
@@ -62,12 +61,18 @@ const users_controllers = {
       const users = await Users.findAll({
         where: { localId: { [Op.ne]: localId } },
       });
-      console.log(users);
       return res.send(users);
     } catch (err) {
       next(err);
     }
   },
+  //   getUserLogin: async (req, res ,next) => {
+  //       const { name, lastName, email} = req.body.user
+  //       const { localId } = req.body
+  //       try{
+  //           const [users] = await Users.findOrCreate({where: {localId}})
+  //       }
+  //   }
 };
 
 module.exports = users_controllers;
