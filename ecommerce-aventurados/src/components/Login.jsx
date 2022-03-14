@@ -108,6 +108,7 @@ const Login = () => {
             />
             {error && <p>{error}</p>}
             <Button
+              disabled={true}
               onClick={handleFacebookLogin}
               type="submit"
               fullWidth

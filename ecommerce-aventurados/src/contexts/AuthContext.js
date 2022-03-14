@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
 
   function facebookLogin() {
     const facebookProvider = new FacebookAuthProvider();
-    signInWithPopup(auth, facebookProvider)
+    return signInWithPopup(auth, facebookProvider)
       .then((res) => console.log(res))
       .catch((err) => console.error(err));
   }

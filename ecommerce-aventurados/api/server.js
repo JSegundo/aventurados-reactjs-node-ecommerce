@@ -27,4 +27,4 @@ db.sync({ force: true }) //agrego la sincronizacion en true.
     );
   });
 
-//sudo -u postgres psql -d dbaventura -a -f /api/aventurados-seed.sql
+//sudo -u postgres psql -d dbaventura -a -f path a aventurados-seed.sql
