@@ -18,3 +18,4 @@ module.exports = {
 
 Products.belongsTo(States)
 Products.belongsTo(Categories)
+Categories.belongsTo(States)

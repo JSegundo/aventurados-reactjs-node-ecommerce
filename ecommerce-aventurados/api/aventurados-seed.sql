@@ -1,14 +1,15 @@
-insert into categories values (default,'Aventura','https://cdn.atrapalo.com/common/photo/event/4/7/9/4722/370006/vertic_880_0.jpg',now(),now());
-insert into categories values (default,'Cena Gourmet','https://dam.cocinafacil.com.mx/wp-content/uploads/2020/11/cena.jpg',now(),now());
-insert into categories values (default,'Relax','https://welcometoibiza.com/wp-content/uploads/Ibiza-Gran-Hotel-Open-Spa-1.jpg',now(),now());
-insert into categories values (default,'En Equipo','https://www.es-paintball.com/Imagenes/mejores-tacticas-estrategias-jugar-a-paintball.jpg',now(),now());
-insert into categories values (default,'Viaje','https://img.blogs.es/anexom/wp-content/uploads/2020/01/photo-1519904981063-b0cf448d479e.jpeg',now(),now());
-
 insert into states values (default,'Creado',now(),now());
 insert into states values (default,'En Proceso',now(),now());
-insert into states values (default,'dos',now(),now());
-insert into states values (default,'tres',now(),now());
+insert into states values (default,'Finalizado',now(),now());
+insert into states values (default,'Valido',now(),now());
 insert into states values (default,'Borrado',now(),now());
+
+insert into categories values (default,'Aventura','https://cdn.atrapalo.com/common/photo/event/4/7/9/4722/370006/vertic_880_0.jpg',now(),now(), 1);
+insert into categories values (default,'Cena Gourmet','https://dam.cocinafacil.com.mx/wp-content/uploads/2020/11/cena.jpg',now(),now(), 1);
+insert into categories values (default,'Relax','https://welcometoibiza.com/wp-content/uploads/Ibiza-Gran-Hotel-Open-Spa-1.jpg',now(),now(), 1);
+insert into categories values (default,'En Equipo','https://www.es-paintball.com/Imagenes/mejores-tacticas-estrategias-jugar-a-paintball.jpg',now(),now(), 1);
+insert into categories values (default,'Viaje','https://img.blogs.es/anexom/wp-content/uploads/2020/01/photo-1519904981063-b0cf448d479e.jpeg',now(),now(), 1);
+
 
 insert into products values(default,'Salto en paracaidas','desde un avion, con instructor te tiras','ihttps://ba-h.com.ar/wp-content/uploads/2018/04/turismo-salto-paracaidas-buenos-aires_2.jpgmagen',5000,now(),now(),1,1);
 insert into products values(default,'Cena en restaurante','Cena con vista al mar','https://i.pinimg.com/originals/d6/fd/39/d6fd39431cab88e342157b2e19b3f2fb.jpg',5000,now(),now(),1, 2);
