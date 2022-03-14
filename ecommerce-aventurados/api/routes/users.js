@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { Users, Ordenes, Carritos } = require("../models");
 
 const users_controllers = require("../controllers/users.controllers");
 const { register, getUser, getOrders, deleteUser, addNewAdmin, getAllUsers } =
