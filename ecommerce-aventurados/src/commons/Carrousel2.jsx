@@ -90,7 +90,7 @@ const CustomCard = ({ classes, image, title, subtitle }) => {
       <Grid sx={{overflowX: 'scroll'}} classes={gridStyles} container spacing={4} wrap={'nowrap'}>
         <Grid item>
           <Link to='/paintboll'>
-          <CustomCard
+          <CustomCard 
             classes={styles}
             title={'Paint Ball'}
             subtitle={'Be a Legend!'}
