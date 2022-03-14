@@ -26,4 +26,4 @@ db.sync({ force: false }) //agrego la sincronizacion en true.
     );
   });
 
-//sudo -u postgres psql -d dbaventura -a -f /home/hpadmin/Desktop/E-Commerce/aventurados/ecommerce-aventurados/api/aventurados-seed.sql
+//sudo -u postgres psql -d dbaventura -a -f /home/segundo/Documents/CODE/BOOTCAMP/chekpoints/aventurados/ecommerce-aventurados/api/aventurados-seed.sql
