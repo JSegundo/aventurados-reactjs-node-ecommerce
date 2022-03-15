@@ -55,8 +55,10 @@ const users_controllers = {
       next(err);
     }
   },
+
   getAllUsers: async (req, res, next) => {
-    const { localId } = req.body;
+    const { localId } = req.params;
+    // console.log("localId", localId);
     try {
       const users = await Users.findAll({
         where: { localId: { [Op.ne]: localId } },

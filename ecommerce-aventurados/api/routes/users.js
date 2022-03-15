@@ -15,6 +15,6 @@ router.delete("/admin/:id", deleteUser);
 
 router.put("/admin/:id", addNewAdmin);
 
-router.get("/admin/users", getAllUsers);
+router.get("/admin/users/:localId", getAllUsers);
 
 module.exports = router;

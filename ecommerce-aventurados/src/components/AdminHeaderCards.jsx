@@ -1,5 +1,12 @@
 import React from "react";
-import { Card, CardContent, Typography, CardActions } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  CardActions,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((props) => ({
@@ -24,13 +31,13 @@ const AdminHeaderCards = (props) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardContent>
+    <Button className={classes.root}>
+      <Box display={"flex"}>
         {props.icono}
         <Typography className={classes.titulo}>{props.titulo}</Typography>
         <Typography className={classes.texto}>{props.texto}</Typography>
-      </CardContent>
-    </Card>
+      </Box>
+    </Button>
   );
 };
 

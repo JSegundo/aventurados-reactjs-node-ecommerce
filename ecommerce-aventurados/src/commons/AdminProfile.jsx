@@ -9,12 +9,13 @@ import BentoSharpIcon from "@mui/icons-material/BentoSharp";
 import AdminHeaderCards from "../components/AdminHeaderCards";
 
 import AdminAllUsers from "../components/AdminAllUsers";
+import AdminAllProducts from "../components/AdminAllProducts";
 // import AdminContent from "../components/AdminContent";
 
 const useStyles = makeStyles(() => ({
   root: {
-    flexGrow: 1,
-    width: "90%",
+    // flexGrow: 1,
+    width: "80%",
     margin: "0 auto",
   },
 
@@ -29,9 +30,7 @@ const useStyles = makeStyles(() => ({
 const AdminProfile = () => {
   const classes = useStyles();
 
-  // const [clicked,setClicked] = useState({
-
-  // });
+  const [clicked, setClicked] = useState("products");
 
   return (
     <div className={classes.root}>
@@ -41,6 +40,7 @@ const AdminProfile = () => {
       {/* navigation */}
       <Grid container spacing={4}>
         <Grid
+          onClick={() => setClicked("users")}
           className={classes.gridStyle}
           item
           xs={12}
@@ -84,6 +84,7 @@ const AdminProfile = () => {
           />
         </Grid>
         <Grid
+          onClick={() => setClicked("products")}
           className={classes.gridStyle}
           item
           xs={12}
@@ -100,7 +101,10 @@ const AdminProfile = () => {
       </Grid>
       {/* navigation */}
 
-      <Box></Box>
+      <Box>
+        {clicked === "users" && <AdminAllUsers />}
+        {clicked === "products" && <AdminAllProducts />}
+      </Box>
     </div>
   );
 };
