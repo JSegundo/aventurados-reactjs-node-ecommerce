@@ -8,30 +8,8 @@ class Carts extends Model {}
 
 Carts.init(
   {
-    userId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: Users,
-        key: "id",
-      },
-    },
-    productId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: Products,
-        key: "id",
-      },
-    },
     amount: {
       type: DataTypes.INTEGER,
-    },
-    state: {
-      type: DataTypes.INTEGER,
-      defaultValue: 1,
-      references: {
-        model: States,
-        key: "id",
-      },
     },
     transaction: {
       type: DataTypes.INTEGER,

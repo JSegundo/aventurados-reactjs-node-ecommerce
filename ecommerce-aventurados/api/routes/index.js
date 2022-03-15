@@ -2,14 +2,18 @@ const express = require("express");
 const router = express.Router();
 const users = require("./users");
 const products = require("./products");
-const carrito = require("./carrito");
+//const carrito = require("./carrito");
 const categories = require("./categories");
 const favorites = require("./favorites");
+
+const carts = require('./carts');
+
 const orders = require("./orders");
+
 
 router.use("/user", users);
 router.use("/products", products);
-router.use("/cart", carrito);
+router.use("/carts", carts);
 router.use("/categories", categories);
 router.use("/favorites", favorites);
 router.use("/orders", orders);
