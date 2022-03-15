@@ -2,12 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 const products_controllers = require("../controllers/products.controllers");
-const { getAll, getOne, addProduct, deleteOne, editProduct, search } =
+const { getAll, getOne, addProduct, deleteOne, editProduct, search, getBestSeller } =
   products_controllers;
 
 router.get("/search", search);
 
 router.get("/", getAll);
+
+router.get("/best", getBestSeller);
 
 router.get("/:id", getOne);
 

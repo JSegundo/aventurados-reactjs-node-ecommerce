@@ -20,9 +20,11 @@ import LoginIcon from "@mui/icons-material/Login";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.js";
 import { Grid } from "@mui/material";
+import Fade from '@mui/material/Fade';
+import axios from "axios";
 
-const pages = ["Categorias"];
-// const settings = ["Profile", "Account", "Dashboard", "Logout"]
+const categories = ["Gourmet", "Aventura", "Viaje", "En Equipo", "Relax"];
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   display: "flex",
@@ -73,7 +75,17 @@ const Navbar = () => {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -94,16 +106,30 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .get("http://localhost:3001/api/products/search")
+      .then((res) => console.log(res));
+  };
+
   return (
-    <AppBar position="static">
+    <AppBar
+      sx={{
+        marginBottom: "1vh",
+        bgcolor: "#FFF",
+      }}
+      position="static"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link style={{ textDecoration: "none", color: "#3391ff" }} to="/">
+          <Link style={{ textDecoration: "none" }} to="/">
             <Typography
               variant="h6"
               noWrap
               component="div"
               sx={{
+                color: "black",
                 mr: 2,
                 display: { xs: "none", md: "flex" },
                 textDecoration: "none",
@@ -141,56 +167,82 @@ const Navbar = () => {
               sx={{
                 display: { xs: "block", md: "none" },
               }}
-            >
-              {/* <Grid container>
-                <Grid item>
-                  <Button></Button>
-                  </Grid>
-              </Grid> */}
-            </Menu>
+            ></Menu>
           </Box>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            sx={{
+              color: "black",
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+            }}
           >
             A2
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+          <Box sx={{flexGrow:1}}>
+            <Button
+              sx={{color: 'black'}}
+              id="fade-button"
+              aria-controls={open ? "fade-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              Categorias
+            </Button>
+            <Menu
+              id="fade-menu"
+              MenuListProps={{
+                "aria-labelledby": "fade-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Fade}
+            >
+              {categories.map((cat, i) => (
+                <Link  style={{textDecoration:'none', color:'black'}} to={`/${cat}`}>
+                <MenuItem onClick={handleClose}>{cat}</MenuItem>
+                </Link>
+              ))}
+            </Menu>
           </Box>
-
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Palabra clave"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <form onSubmit={handleSubmit}>
+            <Search
+              sx={{
+                bgcolor: "#DAFDBA",
+                border: "1px solid black",
+                borderRadius: "20px",
+              }}
+            >
+              <SearchIconWrapper>
+                <SearchIcon sx={{ color: "black" }} />
+              </SearchIconWrapper>
+              <StyledInputBase
+                sx={{ color: "black" }}
+                placeholder="Buscar:  "
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          </form>
 
           {currentUser?.email ? (
             <Box sx={{ flexGrow: 0 }}>
               <Link to="/shopping">
-                <Tooltip title="Open settings">
-                  <IconButton color="primary" aria-label="add to shopping cart">
+                <Tooltip title="Open cart">
+                  <IconButton
+                    sx={{ color: "black" }}
+                    aria-label="add to shopping cart"
+                  >
                     <ShoppingCartSharpIcon />
                   </IconButton>
                 </Tooltip>
               </Link>
               <Link to="/fav">
-                <Tooltip title="Open settings">
-                  <IconButton color="primary" aria-label="add to fav">
+                <Tooltip title="Open favourites">
+                  <IconButton sx={{ color: "black" }} aria-label="add to fav">
                     <FavoriteBorderIcon />
                   </IconButton>
                 </Tooltip>
@@ -220,17 +272,15 @@ const Navbar = () => {
                 <MenuItem onClick={handleLogOut}>
                   <Typography textAlign="center">Salir</Typography>
                 </MenuItem>
-
-                {/* {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))} */}
               </Menu>
             </Box>
           ) : (
-            <Link to="/login">
-              <Button variant="text" endIcon={<LoginIcon />}>
+            <Link style={{ textDecoration: "none" }} to="/login">
+              <Button
+                sx={{ color: "black" }}
+                variant="text"
+                endIcon={<LoginIcon sx={{ color: "black" }} />}
+              >
                 Ingresar
               </Button>
             </Link>
