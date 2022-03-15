@@ -5,7 +5,7 @@ const products = require("./products");
 //const carrito = require("./carrito");
 const categories = require("./categories");
 const favorites = require("./favorites");
-const carts = require('./carts')
+const carts = require('./carts');
 
 
 router.use("/user", users);
