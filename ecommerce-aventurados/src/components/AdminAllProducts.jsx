@@ -24,7 +24,7 @@ const AdminAllProducts = () => {
   return (
     <>
       <div>
-        <h2>todos los products</h2>
+        <h2>Products</h2>
         <ul>
           {allProducts.map((product, i) => (
             <li key={i}>

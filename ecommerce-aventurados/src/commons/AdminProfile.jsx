@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Grid, responsiveFontSizes, Typography, Box } from "@material-ui/core";
+import {
+  Grid,
+  responsiveFontSizes,
+  Typography,
+  Box,
+  Container,
+  AppBar,
+  Tabs,
+  Tab,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import GroupIcon from "@mui/icons-material/Group";
 import SellSharpIcon from "@mui/icons-material/SellSharp";
@@ -14,7 +23,7 @@ import AdminAllProducts from "../components/AdminAllProducts";
 
 const useStyles = makeStyles(() => ({
   root: {
-    // flexGrow: 1,
+    flexGrow: 1,
     width: "80%",
     margin: "0 auto",
   },
@@ -101,10 +110,10 @@ const AdminProfile = () => {
       </Grid>
       {/* navigation */}
 
-      <Box>
+      <Container>
         {clicked === "users" && <AdminAllUsers />}
         {clicked === "products" && <AdminAllProducts />}
-      </Box>
+      </Container>
     </div>
   );
 };
