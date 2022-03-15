@@ -18,6 +18,9 @@ module.exports = {
   Favorites,
 };
 
+//CATEGORIES
+Categories.belongsTo(States)
+
 // ORDERS
 Orders.belongsTo(Carts);
 
@@ -27,3 +30,4 @@ Favorites.belongsTo(Users);
 // PRODUCTOS
 Products.belongsTo(States);
 Products.belongsTo(Categories);
+
