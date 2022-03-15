@@ -7,7 +7,23 @@ const products_controllers = {
       const products = await Products.findAll({
         include: [{ model: States }, { model: Categories }],
         where: {
-          stateId: { [Op.ne]: 4 }, //el valor 4 es borrado. usamos estados para no borrar y perder las referencias.
+          stateId: { [Op.ne]: 5 }, //el valor 5 es borrado. usamos estados para no borrar y perder las referencias.
+        },
+      });
+      return res.send(products);
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  getBestSeller: async (req, res, next) => {
+    try {
+      const products = await Products.findAll({
+        include: [{ model: States }, { model: Categories }],
+        order: [["rating", "DESC"]],
+        limit: 4,
+        where: {
+          stateId: { [Op.ne]: 5 }, //el valor 4 es borrado. usamos estados para no borrar y perder las referencias.
         },
       });
       return res.send(products);
@@ -36,7 +52,7 @@ const products_controllers = {
   deleteOne: async (req, res, next) => {
     try {
       const [r, product] = await Products.update(
-        { stateId: 4 },
+        { stateId: 5 },
         { where: { id: req.params.id }, returning: true }
       );
       return res.send(202).send(product[0]);
@@ -59,8 +75,8 @@ const products_controllers = {
     try {
       const { name } = req.query;
       const products = await Products.findAll({
-        include: [{ model: States }, { model: Categories }],
-        where: { name: { [Op.startsWith]: name }, stateId: { [Op.ne]: 4 } },
+        include: [{ model: Categories }],
+        where: { name: { [Op.startsWith]: name }, stateId: { [Op.ne]: 5 } },
       });
       return res.send(products[0]);
     } catch (err) {
