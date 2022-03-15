@@ -6,6 +6,7 @@ const States = require("./States");
 const Categories = require("./Categories");
 const Carts = require("./Carts");
 const Favorites = require("./Favorites");
+const Reviews = require("./Reviews");
 
 module.exports = {
   UserRol,
@@ -16,6 +17,7 @@ module.exports = {
   Categories,
   Carts,
   Favorites,
+  Reviews,
 };
 
 Favorites.belongsTo(Products);
@@ -27,5 +29,14 @@ Products.belongsTo(Categories);
 Carts.belongsTo(Users);
 Carts.belongsTo(Products);
 Carts.belongsTo(States);
+
+Reviews.belongsTo(Products);
+Reviews.belongsTo(Orders);
+
+Orders.belongsTo(Carts);
+
+
+
+
 
 

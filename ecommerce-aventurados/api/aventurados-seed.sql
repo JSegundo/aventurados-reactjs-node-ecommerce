@@ -19,3 +19,7 @@ insert into products values(default,'Ciclismo','El ciclismo de montaña es un de
 
 insert into users values(default,'admin','admin@gmail.com','admin123','salt',true,now(),now());
 
+insert into carts values(1,4,123,now(),now(),1,3,1);
+insert into carts values(1,4,123,now(),now(),1,3,1);
+insert into reviews values (1,'hola review',now(),now(),3,1);
+

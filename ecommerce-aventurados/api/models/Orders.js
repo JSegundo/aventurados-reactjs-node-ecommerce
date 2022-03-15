@@ -7,14 +7,14 @@ class Orders extends Model {}
 
 Orders.init(
   {
-    cartId: {
+ /*   cartId: {
       type: DataTypes.INTEGER,
       references: {
         model: Carts,
         key: "id",
       },
     },
-    voucher: {
+ */   voucher: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
