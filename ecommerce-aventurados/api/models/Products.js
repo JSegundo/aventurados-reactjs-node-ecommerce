@@ -19,6 +19,9 @@ Products.init(
     price: {
       type: DataTypes.INTEGER,
     },
+    rating: {
+      type: DataTypes.INTEGER,
+    },
   },
   {
     sequelize: db, // We need to pass the connection instance
