@@ -1,27 +1,27 @@
 
 const { Carts, Products, Users,Categories } = require("../models");
 const { Op } = require("sequelize");
+const { EditNotificationsTwoTone } = require("@mui/icons-material");
 
 
 const carts_controllers = {
-    //para mostarr el carrito del usuario.
-    //findone localid === localid
+    
 
-
-    addProduct: async (req, res, next) => {
+    addProduct: async (req, res, next) => { //probado
         //req.body.stateId = 1; //set default state ('create')
-
+        const {userId,productId,amount,transaction}= req.body
+        console.log(req.body)
         try {  
-          const newCart = await Carts.create({userId: req.user.id, productId, cantidad});
+          const newCart = await Carts.create(req.body,{ include: [{ model: Products},{model: Users }],});
           return res.status(202).send(newCart);
         } catch (err) {
             next(err);
           }
     },
 
-    deleteProduct: async (req,res,next) =>{ //borra un producto del carrito.
+    deleteProduct: async (req,res,next) =>{ //lo borra, pero larga un error.
         try{
-            const delCart = await Carts.destroy( { 
+            const [r,delCart] = await Carts.destroy( { 
                 where: { id: req.body.id } 
             }
               );
@@ -31,25 +31,24 @@ const carts_controllers = {
         }
     },
 
-    editCantidad: async (req, res, next) => {
+    editCantidad: async (req, res, next) => { //probada knd
         try {
-
-          const editCant = await Carts.update(req.body.cantidad, {
+          const [r,editCant] = await Carts.update(req.body, {
             where: { id: req.body.id },
             returning: true,
           });
-          return res.status(202).send(editCant);
+         // console.log(editCant)
+          return res.status(202).send(editCant[0]);
         } catch (err) {
           next(err);
         }
     },
-    getAllProducts: async (req,res,next)=>{
+    getAllProducts: async (req,res,next)=>{ //probada knd
         try{
             const userProd = await Carts.findAll({
-                include: [{ model: Products }, { model: Categories }],
-                where: {
-                    userId: { [Op.eq]: req.body.userId }, 
-                },
+                include: [{ model: Products }],
+                where: {userId: req.body.userId }, 
+                //},
               });
               return res.send(userProd);
         } catch (err) {

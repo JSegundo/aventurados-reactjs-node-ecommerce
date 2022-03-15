@@ -23,3 +23,9 @@ Favorites.belongsTo(Users);
 
 Products.belongsTo(States);
 Products.belongsTo(Categories);
+
+Carts.belongsTo(Users);
+Carts.belongsTo(Products);
+Carts.belongsTo(States);
+
+

@@ -3,15 +3,15 @@ const router = express.Router();
 //const { Carts, Products, Ordenes } = require("../models");
 
 const carts_controllers = require("../controllers/carts.controllers");
-const { getAllProducts, addProduct, deleteProduct, deleteOne, editCantidad } = carts_controllers;
+const { getAllProducts, addProduct, deleteProduct, editCantidad } = carts_controllers;
 
-router.get("/", getAllProducts);
+router.get("/all", getAllProducts);
 
-router.post("/", addProduct);
+router.post("/add", addProduct);
 
-router.delete("/",deleteProduct);
+router.delete("/del",deleteProduct);
 
-router.put("/", editCantidad);
+router.put("/amount", editCantidad);
 
 
 
