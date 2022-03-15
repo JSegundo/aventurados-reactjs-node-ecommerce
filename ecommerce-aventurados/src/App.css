@@ -1,7 +1,4 @@
-/* .container {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin-left: 10px;
-} */
+.carr1 {
+  max-height: 60vh;
+}
+

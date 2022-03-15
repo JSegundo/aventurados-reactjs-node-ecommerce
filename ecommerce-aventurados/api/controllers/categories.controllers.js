@@ -13,9 +13,40 @@ const categories_controllers = {
   findByCategory: async (req, res, next) => {
     try {
       const products = await Products.findAll({
-        where: { categoryId: req.params.id, stateId: { [Op.ne]: 4 } },
+        where: { categoryId: req.params.id, stateId: { [Op.ne]: 5 } },
       });
       return res.send(products);
+    } catch (err) {
+      next(err);
+    }
+  },
+  addCategory: async (req, res, next) => {
+    req.body.stateId = 1
+    try {
+      const category = await Categories.create(req.body);
+      return res.status(202).send(category);
+    } catch (err) {
+      next(err);
+    }
+  },
+  deleteOne: async (req, res, next) => {
+    try {
+      const [r, category] = await Categories.update(
+        { stateId: 5 },
+        { where: { id: req.params.id }, returning: true }
+      );
+      return res.send(202).send(category[0]);
+    } catch (err) {
+      next(err);
+    }
+  },
+  editCategory: async (req, res, next) => {
+    try {
+      const [r, category] = await Categories.update(req.body, {
+        where: { id: req.params.id },
+        returning: true,
+      });
+      return res.status(202).send(category[0]);
     } catch (err) {
       next(err);
     }

@@ -10,6 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.js";
@@ -59,6 +60,19 @@ const Login = () => {
       setError(err.message);
     }
   };
+
+  React.useEffect(() => {
+    if (!currentUser) return;
+    axios
+      .post("http://localhost:3001/api/user/login", {
+        name: currentUser.displayName.split(" ")[0],
+        lastName: currentUser.displayName.split(" ")[1],
+        email: currentUser.email,
+        localId: currentUser.uid,
+      })
+      .then((user) => console.log(user))
+      .cath((err) => console.log(err));
+  }, [currentUser]);
 
   return (
     <ThemeProvider theme={theme}>
