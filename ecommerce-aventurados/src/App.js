@@ -17,7 +17,7 @@ import Spa from './commons/Spa'
 import SingleView from "./components/SingleView";
 
 function App() {
-
+  
   return (
     <>
       <AuthProvider>
@@ -31,7 +31,7 @@ function App() {
           <Route path="/campestre" element={<Campestre />} />
           <Route path="/ciclismo" element={<Ciclismo />} />
 
-          
+          <Route path="/:category" element={<Ciclismo />} />
 
           <Route
             path="/shopping"

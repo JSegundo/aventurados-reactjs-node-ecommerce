@@ -4,6 +4,7 @@ import Card from "../commons/Card";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import axios from "axios";
+import "../App.css";
 
 const Home = () => {
   const [bestSeller, setBestSeller] = useState([]);
@@ -17,15 +18,26 @@ const Home = () => {
 
   return (
     <div>
-      <Carrousel1 />
-      <Typography
-        variant="h4"
-        component="div"
+      <div className="slide">
+        <Carrousel1 />
+      </div>
+      <div className="container">
+        <div className="back-img">
+          <Typography
+            variant="h4"
+            component="div"
+            sx={{ display: "flex", justifyContent: "center", margin: "0.5em", color: 'white' }}
+          >
+            Mas Vendidos
+          </Typography>
+        </div>
+      </div>
+      <Grid
+        container
+        spacing={5}
+        wrap="wrap"
         sx={{ display: "flex", justifyContent: "center", marginTop: "1em" }}
       >
-        Mas Vendidos
-      </Typography>
-      <Grid container spacing={5} wrap='wrap' sx={{display:'flex', justifyContent: 'center', marginTop: "1em" }}>
         {bestSeller.map((producto, i) => (
           <Grid item>
             <Card data={producto} />
