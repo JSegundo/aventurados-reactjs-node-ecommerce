@@ -12,9 +12,11 @@ import Carrito from "./components/Carrito";
 import Fav from "./components/Fav";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
 import Campestre from "./commons/Campestre";
-import Ciclismo from './commons/Ciclismo'
-import Spa from './commons/Spa'
-import Paintboll from './commons/Paintboll'
+import Ciclismo from "./commons/Ciclismo";
+import Spa from "./commons/Spa";
+import Paintboll from "./commons/Paintboll";
+
+import AdminProfile from "./commons/AdminProfile";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="/campestre" element={<Campestre />} />
           <Route path="/ciclismo" element={<Ciclismo />} />
 
+          <Route path="/admin" element={<AdminProfile />} />
+
           <Route
             path="/shopping"
             element={
@@ -38,12 +42,14 @@ function App() {
               </ProtectedRoutes>
             }
           />
-          <Route path="/fav" 
-          element={
-            <ProtectedRoutes>
-              <Fav />
-            </ProtectedRoutes>
-          } />
+          <Route
+            path="/fav"
+            element={
+              <ProtectedRoutes>
+                <Fav />
+              </ProtectedRoutes>
+            }
+          />
         </Routes>
         <Footer />
       </AuthProvider>
