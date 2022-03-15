@@ -1,14 +1,15 @@
+insert into categories values (default,'Aventura','https://cdn.atrapalo.com/common/photo/event/4/7/9/4722/370006/vertic_880_0.jpg',now(),now());
+insert into categories values (default,'Gourmet','https://dam.cocinafacil.com.mx/wp-content/uploads/2020/11/cena.jpg',now(),now());
+insert into categories values (default,'Relax','https://welcometoibiza.com/wp-content/uploads/Ibiza-Gran-Hotel-Open-Spa-1.jpg',now(),now());
+insert into categories values (default,'En Equipo','https://www.es-paintball.com/Imagenes/mejores-tacticas-estrategias-jugar-a-paintball.jpg',now(),now());
+insert into categories values (default,'Viaje','https://img.blogs.es/anexom/wp-content/uploads/2020/01/photo-1519904981063-b0cf448d479e.jpeg',now(),now());
+
 insert into states values (default,'Creado',now(),now());
 insert into states values (default,'En Proceso',now(),now());
 insert into states values (default,'Finalizado',now(),now());
 insert into states values (default,'Valido',now(),now());
 insert into states values (default,'Borrado',now(),now());
 
-insert into categories values (default,'Aventura','https://cdn.atrapalo.com/common/photo/event/4/7/9/4722/370006/vertic_880_0.jpg',now(),now(), 1);
-insert into categories values (default,'Gourmet','https://dam.cocinafacil.com.mx/wp-content/uploads/2020/11/cena.jpg',now(),now(), 1);
-insert into categories values (default,'Relax','https://welcometoibiza.com/wp-content/uploads/Ibiza-Gran-Hotel-Open-Spa-1.jpg',now(),now(), 1);
-insert into categories values (default,'En Equipo','https://www.es-paintball.com/Imagenes/mejores-tacticas-estrategias-jugar-a-paintball.jpg',now(),now(), 1);
-insert into categories values (default,'Viaje','https://img.blogs.es/anexom/wp-content/uploads/2020/01/photo-1519904981063-b0cf448d479e.jpeg',now(),now(), 1);
 
 insert into products values(default,'Cena frente al mar','Cena con vista al mar en alguno de los mejores restaurantes de buenos aires','https://i.pinimg.com/originals/d6/fd/39/d6fd39431cab88e342157b2e19b3f2fb.jpg',5000,5,now(),now(),1, 2);
 insert into products values(default,'Recorrido bodegones','Recorre y degusta los platos de los mejores bodegones de la ciudad','https://vinosybuenvivir.com//wp-content/uploads/2018/08/cafe-margot-2.jpg',5000,4,now(),now(),1,2);

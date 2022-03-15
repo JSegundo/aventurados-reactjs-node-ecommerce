@@ -1,20 +1,39 @@
-import { Box } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import Carrousel1 from "../commons/Carrousel1";
+import Card from "../commons/Card";
+import Grid from "@mui/material/Grid";
+import { Typography } from "@mui/material";
+import axios from "axios";
 
 const Fav = () => {
-  return (
-    <Box
-    component="img"
-    sx={{
-      height: '100vh',
-      width: '100vw',
-      // maxHeight: { xs: 233, md: 167 },
-      // maxWidth: { xs: 350, md: 250 },
-    }}
-    alt="Fav vacio"
-    src="https://estaticos-cdn.elperiodico.com/clip/98916304-e033-4d66-bb48-cb438327b9e2_alta-libre-aspect-ratio_default_0.jpg"
-  />
-  )
-}
+  const [favoritos, setFavoritos] = useState([]);
 
-export default Fav
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/products/best")
+      .then((res) => res.data)
+      .then((res) => setFavoritos(res));
+  }, []);
+
+  return (
+    <div>
+    
+      <Typography
+        variant="h4"
+        component="div"
+        sx={{ display: "flex", justifyContent: "center", marginTop: "1em" }}
+      >
+        Favoritos
+      </Typography>
+      <Grid container spacing={5} wrap='wrap' sx={{display:'flex', justifyContent: 'center', marginTop: "1em" }}>
+        {favoritos.map((producto, i) => (
+          <Grid item>
+            <Card data={producto} />
+          </Grid>
+        ))}
+      </Grid>
+    </div>
+  );
+};
+
+export default Fav;
