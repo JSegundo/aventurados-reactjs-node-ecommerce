@@ -15,6 +15,22 @@ const products_controllers = {
       next(err);
     }
   },
+
+  getBestSeller: async (req, res, next) => {
+    try {
+      const products = await Products.findAll({
+        include: [{ model: States }, { model: Categories }],
+        order: [["rating", "DESC"]],
+        limit: 4,
+        where: {
+          stateId: { [Op.ne]: 5 }, //el valor 4 es borrado. usamos estados para no borrar y perder las referencias.
+        },
+      });
+      return res.send(products);
+    } catch (err) {
+      next(err);
+    }
+  },
   getOne: async (req, res, next) => {
     const { id } = req.params;
     try {
