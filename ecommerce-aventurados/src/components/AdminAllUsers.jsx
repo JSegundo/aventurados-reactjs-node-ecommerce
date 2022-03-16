@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext.js";
 import List from "@mui/material/List";
@@ -51,21 +51,7 @@ const AdminAllUsers = () => {
 
   return (
     <>
-      {/* <div>
-        <h2>todos los usuarios</h2>
-        <ul>
-          {allUsers.map((userObj, i) => (
-            <li key={i} >
-              <p>
-                Nombre: {userObj.name} {userObj.lastName}
-              </p>
-              <p>Email: {userObj.email}</p>
-            </li>
-          ))}
-        </ul>
-
-      </div> */}
-      <List
+      {/* <List
         dense
         sx={{ width: "100%", maxWidth: 980, bgcolor: "background.paper" }}
       >
@@ -93,7 +79,52 @@ const AdminAllUsers = () => {
             </ListItem>
           );
         })}
-      </List>
+      </List> */}
+      <Table size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>Username</TableCell>
+            <TableCell align="center">Email</TableCell>
+            <TableCell align="center">Nombre</TableCell>
+            <TableCell align="center">Apellido</TableCell>
+            <TableCell align="center">Admin</TableCell>
+            <TableCell align="center">Delete</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {allUsers?.map((user) => (
+            <>
+              <TableRow key={user.id}>
+                <TableCell>
+                  {<Typography component="text">{user.name}</Typography>}
+                </TableCell>
+                <TableCell align="center">{`${user.email}`}</TableCell>
+                <TableCell align="center">{`${user.name}`}</TableCell>
+                <TableCell align="center">{`${user.lastName}`}</TableCell>
+                {user.admin ? (
+                  <TableCell align="center">
+                    <IconButton color="inherit">
+                      <Grade onClick={() => handleRevoke(useReducer)} />
+                    </IconButton>
+                  </TableCell>
+                ) : (
+                  <TableCell align="center">
+                    <IconButton color="inherit">
+                      <GradeOutlined onClick={() => handleAddNewAdmin(user)} />
+                    </IconButton>
+                  </TableCell>
+                )}
+
+                <TableCell align="center">
+                  <IconButton edge="end" color="inherit">
+                    <Delete onClick={() => handleDeleteAdmin(user)} />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            </>
+          ))}
+        </TableBody>
+      </Table>
     </>
   );
 };
