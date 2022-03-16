@@ -10,6 +10,7 @@ const {
   addNewAdmin,
   getAllUsers,
   removeAdmin,
+  findUserOrCreate,
 } = users_controllers;
 
 router.post("/register", register); //con problemas del lado del front
@@ -25,5 +26,7 @@ router.put("/admin/:id", addNewAdmin);
 router.put("/adminDelete/:id", removeAdmin);
 
 router.get("/admin/users/:localId", getAllUsers);
+
+router.post("/login", findUserOrCreate);
 
 module.exports = router;

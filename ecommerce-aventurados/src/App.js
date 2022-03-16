@@ -15,9 +15,7 @@ import { ProtectedAdminRoutes } from "./components/ProtectedAdminRoutes";
 import Campestre from "./commons/Campestre";
 import Ciclismo from "./commons/Ciclismo";
 import Spa from "./commons/Spa";
-import Paintboll from "./commons/Paintboll";
-
-import AdminProfile from "./commons/AdminProfile";
+import SingleView from "./components/SingleView";
 
 function App() {
   return (
@@ -28,10 +26,12 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/paintboll" element={<Paintboll />} />
+          <Route path="/single" element={<SingleView />} />
           <Route path="/spa" element={<Spa />} />
           <Route path="/campestre" element={<Campestre />} />
           <Route path="/ciclismo" element={<Ciclismo />} />
+
+          <Route path="/:category" element={<Ciclismo />} />
 
           <Route
             path="/admin"

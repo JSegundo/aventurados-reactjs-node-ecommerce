@@ -1,7 +1,21 @@
-/* .container {
+.carr1 {
+  max-height: 60vh;
+}
+
+.back-img {
+  background-image: url("https://i.pinimg.com/564x/c1/af/0b/c1af0b63fe18e32a5e648cd9d178a03a.jpg");
+  padding: 1.5em;
+  width: 100%;
+
+}
+
+.container {
   display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin-left: 10px;
-} */
+  justify-content: center;
+  box-shadow: 0.1em 0.1em 0.8em grey;
+  border-radius: 20px;
+}
+
+.slide {
+  margin-bottom: 2em;
+}

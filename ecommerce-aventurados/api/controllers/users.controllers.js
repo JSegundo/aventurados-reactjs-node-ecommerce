@@ -26,7 +26,7 @@ const users_controllers = {
     const { localId } = req.body;
     try {
       const user = await Users.findOne({ where: { localId } });
-      const orders = Carts.findAll({ where: { userId: user.id, stateId: 2 } }); // falta terminar por relacion de tablas
+      const orders = Carts.findAll({ where: { userId: user.id, stateId: 3 } }); // falta terminar por relacion de tablas
     } catch (err) {
       next(err);
     }
@@ -108,13 +108,18 @@ const users_controllers = {
       next(err);
     }
   },
-  //   getUserLogin: async (req, res ,next) => {
-  //       const { name, lastName, email} = req.body.user
-  //       const { localId } = req.body
-  //       try{
-  //           const [users] = await Users.findOrCreate({where: {localId}})
-  //       }
-  //   }
+  findUserOrCreate: async (req, res, next) => {
+    const { name, lastName, email, localId } = req.body;
+    try {
+      const [user, created] = await Users.findOrCreate({
+        where: { localId, name, lastName, email },
+      });
+      if (created) return res.status(202).send(user);
+      return res.send(user);
+    } catch (err) {
+      next(err);
+    }
+  },
 };
 
 module.exports = users_controllers;
