@@ -13,7 +13,8 @@ const users_controllers = {
     }
   },
   getUser: async (req, res, next) => {
-    const { localId } = req.body;
+    const { localId } = req.params;
+    // console.log("localId: ", localId);
     try {
       const user = await Users.findOne({ where: { localId } });
       return res.send(user);
@@ -48,15 +49,56 @@ const users_controllers = {
     try {
       const [r, user] = await Users.update(
         { admin: true },
-        { where: { localId: id }, returning: true }
+        { where: { id }, returning: true }
       );
       return res.status(202).send(user[0]);
     } catch (err) {
       next(err);
     }
   },
+  // addNewAdmin: async (req, res, next) => {
+  //   const { id } = req.params; //Usuario new admin
+  //   const { localId } = req.body; //id del admin
+  //   try {
+  //     const [r, user] = await Users.update(
+  //       { admin: true },
+  //       { where: { localId: id }, returning: true }
+  //     );
+  //     return res.status(202).send(user[0]);
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // },
+  removeAdmin: async (req, res, next) => {
+    const { id } = req.params; //Usuario new admin
+    const { localId } = req.body; //id del admin
+    try {
+      const [r, user] = await Users.update(
+        { admin: false },
+        { where: { id }, returning: true }
+      );
+      return res.status(202).send(user[0]);
+    } catch (err) {
+      next(err);
+    }
+  },
+  // removeAdmin: async (req, res, next) => {
+  //   const { id } = req.params; //Usuario new admin
+  //   const { localId } = req.body; //id del admin
+  //   try {
+  //     const [r, user] = await Users.update(
+  //       { admin: false },
+  //       { where: { localId: id }, returning: true }
+  //     );
+  //     return res.status(202).send(user[0]);
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // },
+
   getAllUsers: async (req, res, next) => {
-    const { localId } = req.body;
+    const { localId } = req.params;
+    // console.log("localId", localId);
     try {
       const users = await Users.findAll({
         where: { localId: { [Op.ne]: localId } },

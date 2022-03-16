@@ -11,13 +11,13 @@ import AuthProvider from "./contexts/AuthContext";
 import Carrito from "./components/Carrito";
 import Fav from "./components/Fav";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
+import { ProtectedAdminRoutes } from "./components/ProtectedAdminRoutes";
 import Campestre from "./commons/Campestre";
-import Ciclismo from './commons/Ciclismo'
-import Spa from './commons/Spa'
+import Ciclismo from "./commons/Ciclismo";
+import Spa from "./commons/Spa";
 import SingleView from "./components/SingleView";
 
 function App() {
-  
   return (
     <>
       <AuthProvider>
@@ -34,6 +34,15 @@ function App() {
           <Route path="/:category" element={<Ciclismo />} />
 
           <Route
+            path="/admin"
+            element={
+              <ProtectedAdminRoutes>
+                <AdminProfile />
+              </ProtectedAdminRoutes>
+            }
+          />
+
+          <Route
             path="/shopping"
             element={
               <ProtectedRoutes>
@@ -41,12 +50,14 @@ function App() {
               </ProtectedRoutes>
             }
           />
-          <Route path="/fav" 
-          element={
-            <ProtectedRoutes>
-              <Fav />
-            </ProtectedRoutes>
-          } />
+          <Route
+            path="/fav"
+            element={
+              <ProtectedRoutes>
+                <Fav />
+              </ProtectedRoutes>
+            }
+          />
         </Routes>
         <Footer />
       </AuthProvider>

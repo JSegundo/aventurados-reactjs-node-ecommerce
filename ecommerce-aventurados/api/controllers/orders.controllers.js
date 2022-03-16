@@ -6,7 +6,7 @@ const users_controllers = {
     try {
       const orders = await Orders.findAll({
         where: { userId: id },
-        order: [["userId", desc]],
+        order: [["userId", "DESC"]],
       });
       return res.send(orders);
     } catch (err) {
