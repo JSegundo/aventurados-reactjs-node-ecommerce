@@ -79,7 +79,7 @@ const Card2 = ({ data }) => {
             variant="h6"
             component="div"
           >
-            {data.price}
+            ${data.price}
           </Typography>
           {favorites[0] ? <FavoriteIcon /> : <FavoriteBorderIcon />}
         </Grid>
