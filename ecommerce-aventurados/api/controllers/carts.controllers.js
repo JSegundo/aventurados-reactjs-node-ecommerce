@@ -9,10 +9,10 @@ const carts_controllers = {
 
     addProduct: async (req, res, next) => { //probado
         //req.body.stateId = 1; //set default state ('create')
-        const {userId,productId,amount,transaction}= req.body
+        // const {userId,productId,amount,transaction}= req.body
         console.log(req.body)
         try {  
-          const newCart = await Carts.create(req.body,{ include: [{ model: Products},{model: Users }],});
+          const newCart = await Carts.create(req.body);
           return res.status(202).send(newCart);
         } catch (err) {
             next(err);
