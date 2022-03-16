@@ -1,4 +1,4 @@
-import { Grid, Box, Button } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { React, useState, useEffect } from "react";
 import CardCarrito from "../commons/CardCarrito";
 import ResumenCompra from "../commons/ResumenCompra";
@@ -16,36 +16,38 @@ const Carrito2 = ({ data }) => {
   }, []);
 
   return (
-    <Grid container paddingLeft={10} paddingRight={5} >
-      <Grid item direction="column" sx={{ width: "50%" }}>
-        {changuito.map((producto, i) => (
-          <Grid item paddingBottom={5}>
-            <CardCarrito data={producto} />
+    <>
+      <Typography
+        sx={{ padding: 5, fontSize: 50 }}
+        align='center'
+        variant="h5"
+        color="black"
+        gutterBottom
+      >
+        Tu Carrito
+      </Typography>
+      <Grid container columnSpacing={2}>
+        <Grid item direction="column" xs={6}>
+          <Grid container rowSpacing={5} justifyContent="center">
+            {changuito.map((producto, i) => (
+              <Grid item>
+                <CardCarrito data={producto} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
+        </Grid>
+        <Grid item direction="column" xs={6}>
+          <Grid container rowSpacing={5} justifyContent="center">
+            <Grid item xs={11}>
+              <ResumenCompra productosCart={changuito} />
+            </Grid>
+            <Grid item xs={8}>
+              <PaymentForm />
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
-      <Grid item display="flex" flexDirection="column" sx={{ width: "50%" }}>
-        <ResumenCompra productosCart={changuito} />
-        <PaymentForm />
-        <br />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Button
-            sx={{
-              width: "30%",
-              bgcolor: "#ff94c2",
-            }}
-            variant="contained"
-          >
-            Pagar
-          </Button>
-        </Box>
-      </Grid>
-    </Grid>
+    </>
   );
 };
 
