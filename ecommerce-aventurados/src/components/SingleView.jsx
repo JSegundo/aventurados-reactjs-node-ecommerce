@@ -1,12 +1,30 @@
 import { useSelect } from "@mui/base"
-import { Button, Grid, ImageListItem } from "@mui/material"
+import {
+  Button,
+  Grid,
+  ImageListItem,
+  Rating,
+  Stack,
+  Typography,
+} from "@mui/material"
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Box } from "@mui/system"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
-
-
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 const SingleView = () => {
+  const data = useSelector((state) => state.dataCard)
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!data.id) {
+      navigate("/")
+    }
+  }, [data])
 
   return (
     <Grid
@@ -20,28 +38,11 @@ const SingleView = () => {
         <Grid content>
           <Grid item xs={12}>
             <ImageListItem>
-              <img src="https://www.aventurasengalicia.com/upload/excursiones/21031104133.jpg?crc=4091525304" />
+              <img src={`${data.image}`} />
             </ImageListItem>
           </Grid>
           <Grid item xs={12}>
             <Grid container paddingTop={2}>
-              <Grid item xs={12}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <Box>
-                    <Button variant="contained">fav</Button>
-                  </Box>
-                  <Box>
-                    <Button variant="contained" color="secondary">
-                      comprar
-                    </Button>
-                  </Box>
-                </Box>
-              </Grid>
               <Grid item xs={6}>
                 <Box
                   sx={{
@@ -63,18 +64,37 @@ const SingleView = () => {
                 justifyContent: "center",
               }}
             >
-              <h1>Experiencia en equipo</h1>
+              <h1>{data.name}</h1>
             </Box>
           </Grid>
-          <Grid item xs={12} paddingBottom={4}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-              }}
+          <Grid
+            item
+            xs={12}
+            paddingBottom={1}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <Stack  paddingBottom={3}>
+              <Rating
+                name="half-rating-read"
+                defaultValue={data.rating}
+                precision={0.5}
+                readOnly
+                size="large"
+              />
+            </Stack>
+
+            <Typography
+              sx={{ flexGrow: 1 }}
+              gutterBottom
+              variant="h4"
+              component="div"
             >
-              Raiting: 5
-            </Box>
+              ${data.price}
+            </Typography>
           </Grid>
           <Grid item xs={12}>
             <Grid container>
@@ -84,14 +104,7 @@ const SingleView = () => {
                     display: "flex",
                     justifyContent: "space-around",
                   }}
-                >
-                  <Box>
-                    cantidad de usuarios
-                  </Box>
-                  <Box>
-                    precio
-                  </Box>
-                </Box>
+                ></Box>
               </Grid>
             </Grid>
           </Grid>
@@ -103,21 +116,27 @@ const SingleView = () => {
                 justifyContent: "center",
               }}
             >
-              <p>
-                El Paintball es una actividad que combina el ejercicio físico,
-                con la estrategia, habilidad, inteligencia y la compenetración
-                con el resto de componentes del juego. Consiste en un juego de
-                colaboración-oposición, dónde el objetivo principal es la
-                eliminación del equipo contrario o bien la consecución de un
-                objetivo secundario que se nos plantee. En una actividad se
-                plantean diferentes situaciones jugadas, utilizando un campo
-                equipado con trincheras y otros escondites, donde los jugadores
-                de ambos equipos tratarán de eliminar a sus oponentes. Para ello
-                se utiliza comouna especie de pistola o marcadora que dispara
-                bolas de pintura. ¡Adversario tocado, adversario eliminado!
-              </p>
+              <h3>
+                {data.description}
+              </h3>
             </Box>
           </Grid>
+          <Grid item xs={12} paddingTop={2}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                  }}
+                >
+                  <Box>
+                  <Button sx= {{bgcolor: '#DBF227', color:'black', borderRadius: '20px'}} endIcon={<FavoriteBorderIcon sx= {{color:'black'}} />} variant="contained">favoritos</Button>
+
+                  </Box>
+                  <Box>
+                  <Button sx= {{bgcolor: '#DBF227', color:'black', borderRadius: '20px'}} endIcon={<ShoppingCartIcon sx= {{color:'black'}} />} variant="contained">Comprar</Button>
+                  </Box>
+                </Box>
+              </Grid>
           <br></br>
         </Grid>
       </Grid>
