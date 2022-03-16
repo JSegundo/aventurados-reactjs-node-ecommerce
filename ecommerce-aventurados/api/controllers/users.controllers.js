@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 
 const users_controllers = {
   register: async (req, res, next) => {
+    console.log("BODYYYYY: ", req.body);
     const { name, lastName, email } = req.body.user;
     const { localId } = req.body;
     try {
@@ -32,12 +33,13 @@ const users_controllers = {
     }
   },
   deleteUser: async (req, res, next) => {
-    const { id } = req.params; //Usuario a borrar
-    const { localId } = req.body; //id del admin
+    const { id, localId } = req.params; //Usuario a borrar
+    // const { localId } = req.body; //id del admin
+    console.log(id);
     try {
       const user = await Users.findOne({ where: { localId: id } });
       const userDeleted = user;
-      await user.destroy();
+      await Users.destroy({ where: { localId: id } });
       return res.send(userDeleted);
     } catch (err) {
       next(err);

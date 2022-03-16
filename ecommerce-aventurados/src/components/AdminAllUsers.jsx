@@ -39,7 +39,15 @@ const AdminAllUsers = () => {
 
   const handleDeleteAdmin = async ({ id }) => {
     try {
-      await axios.put(`http://localhost:3001/api/user/adminDelete/${id}`);
+      await axios.put(`http://localhost:3001/api/user/adminRemove/${id}`);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDeleteUser = async ({ id }) => {
+    try {
+      await axios.delete(`http://localhost:3001/api/user/admin/${id}`);
     } catch (err) {
       console.error(err);
     }
@@ -83,11 +91,23 @@ const AdminAllUsers = () => {
                 <ListItemText id={labelId} primary={`${user.name}`} />
                 <ListItemText primary={`admin: ${user.admin}`} />
                 <ListItemText primary={`${user.email}`} />
-                <Button onClick={() => handleAddNewAdmin(user)}>
+                <Button
+                  variant="contained"
+                  onClick={() => handleAddNewAdmin(user)}
+                >
                   add admin
                 </Button>
-                <Button onClick={() => handleDeleteAdmin(user)}>
+                <Button
+                  variant="contained"
+                  onClick={() => handleDeleteAdmin(user)}
+                >
                   remove admin
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => handleDeleteUser(user)}
+                >
+                  delete user
                 </Button>
               </ListItem>
             </ListItem>

@@ -23,7 +23,7 @@ router.delete("/admin/:id", deleteUser);
 
 router.put("/admin/:id", addNewAdmin);
 
-router.put("/adminDelete/:id", removeAdmin);
+router.put("/adminRemove/:id", removeAdmin);
 
 router.get("/admin/users/:localId", getAllUsers);
 

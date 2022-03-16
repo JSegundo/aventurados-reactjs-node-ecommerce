@@ -64,6 +64,16 @@ const Register = () => {
 
     try {
       await signup(user.email, user.password);
+
+      axios
+        .post("http://localhost:3001/api/user/register", {
+          user: user,
+          localId: currentUser.uid,
+        })
+        .then((user) => {
+          console.log(user.data);
+        })
+        .catch((err) => console.log(err));
       navigate("/");
     } catch (err) {
       if (error.code === "auth/internal-error") {
