@@ -16,6 +16,7 @@ import Campestre from "./commons/Campestre";
 import Ciclismo from "./commons/Ciclismo";
 import Spa from "./commons/Spa";
 import SingleView from "./components/SingleView";
+import AdminProfile from './commons/AdminProfile'
 
 function App() {
   return (
