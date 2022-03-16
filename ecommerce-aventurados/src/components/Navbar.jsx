@@ -1,29 +1,29 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
-import { styled, alpha } from "@mui/material/styles";
-import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import LoginIcon from "@mui/icons-material/Login";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext.js";
-import { Grid } from "@mui/material";
-import Fade from "@mui/material/Fade";
-import axios from "axios";
+import * as React from "react"
+import AppBar from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
+import Toolbar from "@mui/material/Toolbar"
+import IconButton from "@mui/material/IconButton"
+import Typography from "@mui/material/Typography"
+import Menu from "@mui/material/Menu"
+import MenuIcon from "@mui/icons-material/Menu"
+import Container from "@mui/material/Container"
+import Avatar from "@mui/material/Avatar"
+import Button from "@mui/material/Button"
+import Tooltip from "@mui/material/Tooltip"
+import MenuItem from "@mui/material/MenuItem"
+import SearchIcon from "@mui/icons-material/Search"
+import InputBase from "@mui/material/InputBase"
+import { styled, alpha } from "@mui/material/styles"
+import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp"
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
+import LoginIcon from "@mui/icons-material/Login"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../contexts/AuthContext.js"
+import { Grid } from "@mui/material"
+import Fade from "@mui/material/Fade"
+import axios from "axios"
 
-const categories = ["Gourmet", "Aventura", "Viaje", "En Equipo", "Relax"];
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -42,7 +42,7 @@ const Search = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: "auto",
   },
-}));
+}))
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -52,7 +52,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-}));
+}))
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
@@ -66,60 +66,65 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       width: "20ch",
     },
   },
-}));
+}))
 
 const Navbar = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const { logout, currentUser } = useAuth(); // retorna el contexto
+  const { logout, currentUser } = useAuth() // retorna el contexto
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = React.useState(null)
+  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [anchorEl, setAnchorEl] = React.useState(null)
   const [query, setQuery] = React.useState("")
+  const [category, setCategory] = React.useState([])
 
-  const open = Boolean(anchorEl);
+  const open = Boolean(anchorEl)
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+    setAnchorElNav(event.currentTarget)
+  }
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+    setAnchorElUser(event.currentTarget)
+  }
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+    setAnchorElNav(null)
+  }
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+    setAnchorElUser(null)
+  }
 
   const handleLogOut = async () => {
-    await logout();
-    navigate("/login");
-  };
+    await logout()
+    navigate("/login")
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    
-  };
+    e.preventDefault()
+  }
 
   const onChange = (e) => {
     e.preventDefault()
     setQuery(e.target.value)
     axios
       .get(`http://localhost:3001/api/products/search?name=${query}`)
-      .then((res) => console.log(res));
+      .then((res) => console.log(res))
   }
 
+  React.useEffect( () => {
+    axios.get('http://localhost:3001/api/categories')
+    .then( res => setCategory(res.data))
+    .then( () => console.log('CATEGORYS =====> ', category))
+  }, [])
 
   return (
     <AppBar
@@ -210,14 +215,18 @@ const Navbar = () => {
               onClose={handleClose}
               TransitionComponent={Fade}
             >
-              {categories.map((cat, i) => (
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  to={`/${cat}`}
-                >
-                  <MenuItem onClick={handleClose}>{cat}</MenuItem>
-                </Link>
-              ))}
+              {category[0] ? (
+                category.map((cat, i) => (
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={`/category/${cat.name}/${cat.id}`}
+                  >
+                    <MenuItem onClick={handleClose}>{cat.name}</MenuItem>
+                  </Link>
+                ))
+              ) : (
+                <h1>Hola</h1>
+              )}
             </Menu>
           </Box>
           <form onSubmit={handleSubmit}>
@@ -235,7 +244,7 @@ const Navbar = () => {
                 sx={{ color: "black" }}
                 placeholder="Buscar:  "
                 inputProps={{ "aria-label": "search" }}
-                type='text'
+                type="text"
                 onChange={onChange}
               />
             </Search>
@@ -301,7 +310,7 @@ const Navbar = () => {
         </Toolbar>
       </Container>
     </AppBar>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
