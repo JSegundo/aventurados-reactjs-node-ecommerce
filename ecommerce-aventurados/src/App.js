@@ -8,7 +8,6 @@ import Login from "./components/Login"
 import Home from "./components/Home"
 import AuthProvider, { useAuth } from "./contexts/AuthContext"
 
-import Carrito from "./components/Carrito";
 import Carrito2 from "./components/Carrito2";
 import Fav from "./components/Fav";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
