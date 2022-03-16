@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Carrousel1 from "../commons/Carrousel1";
 import Card from "../commons/Card";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import axios from "axios";
 import { useSelector } from "react-redux";
+
 
 const Fav = () => {
   // const [favoritos, setFavoritos] = useState([]);
@@ -15,7 +15,6 @@ const Fav = () => {
 
   return (
     <div>
-    
       <Typography
         variant="h4"
         component="div"
