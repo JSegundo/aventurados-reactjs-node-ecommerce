@@ -23,7 +23,7 @@ const SingleView = () => {
 
   const dataFavorite = useSelector((state) => state.dataFavorites);
 
-  const favorites = dataFavorite?.filter(
+  const favorites = dataFavorite.filter(
     (favorite) => favorite.product.id == data.id
   );
 
@@ -148,7 +148,7 @@ const SingleView = () => {
               }}
             >
               <Box>
-                {favorites ? (
+                {favorites[0] ? (
                   <Button
                     onClick={handleRemoveFavorite}
                     sx={{

@@ -21,6 +21,10 @@ const Card2 = ({ data }) => {
   const dispatch = useDispatch();
   const dataFavorite = useSelector((state) => state.dataFavorites);
 
+  const favorites = dataFavorite.filter(
+    (favorite) => favorite.product.id == data.id
+  );
+
   const handleClick = () => {
     dispatch(setCard(data));
     // console.log(data)
@@ -77,7 +81,7 @@ const Card2 = ({ data }) => {
           >
             ${data.price}
           </Typography>
-          {favorites ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          {favorites[0] ? <FavoriteIcon /> : <FavoriteBorderIcon />}
         </Grid>
       </CardContent>
     </Card>
