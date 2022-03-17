@@ -228,6 +228,9 @@ const Navbar = () => {
                 <h1>Hola</h1>
               )}
             </Menu>
+            <Link style={{ textDecoration: "none" }} to="/AllProducts">
+              <Button sx={{ color: "black" }}>Productos</Button>
+            </Link>
           </Box>
           <form onSubmit={handleSubmit}>
             <Search

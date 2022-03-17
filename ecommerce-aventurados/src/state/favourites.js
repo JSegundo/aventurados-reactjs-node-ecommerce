@@ -22,7 +22,7 @@ const favoriteReducer = createReducer([], {
     [setFavorite]: (state, action) => action.payload,
     [getFavorite.fulfilled]: (state, action) => action.payload,
     [addFavorite.fulfilled]: (state, action) => [...state, action.payload],
-    [removeFavorite.fulfilled]: (state, action) => state.filter(fav => fav.id !== action.payload),
+    [removeFavorite.fulfilled]: (state, action) => state.filter(fav => fav.id !== action.payload.id),
 })
 
 export default favoriteReducer

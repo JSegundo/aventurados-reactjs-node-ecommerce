@@ -19,6 +19,8 @@ import { addFavorite, getFavorite, removeFavorite } from "../state/favourites";
 
 const SingleView = () => {
   const data = useSelector((state) => state.dataCard);
+
+
   const user = useSelector((state) => state.dataUser);
 
   const dataFavorite = useSelector((state) => state.dataFavorites);
