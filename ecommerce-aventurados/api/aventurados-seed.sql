@@ -31,6 +31,6 @@ insert into products values(default,'Cataratas del Iguazu','7 dias y 6 noches en
 insert into users values(default,'admin','admin','admin@gmail.com','U57wwxdhxWQXgp9VjDZ7WH2nEdi1',true,now(),now());
 
 insert into carts values(1,4,123,now(),now(),1,3,1);
-insert into carts values(1,4,123,now(),now(),1,3,1);
+insert into orders values (1,33445566,22,1,123,now(),now(),1);
 insert into reviews values (1,'hola review',now(),now(),3,1);
 

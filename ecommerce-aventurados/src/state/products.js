@@ -43,6 +43,7 @@ const initialState = [];
 
 const productsReducer = createReducer(initialState, {
   [getAllProducts.fulfilled]: (state, action) => action.payload,
+  [deleteProduct.fulfilled]: (state, action) => action.payload,
 });
 
 export default productsReducer;

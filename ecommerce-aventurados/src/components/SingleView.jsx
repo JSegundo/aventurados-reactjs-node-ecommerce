@@ -1,4 +1,4 @@
-import { useSelect } from "@mui/base"
+import { useSelect } from "@mui/base";
 import {
   Button,
   Grid,
@@ -6,46 +6,46 @@ import {
   Rating,
   Stack,
   Typography,
-} from "@mui/material"
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
-import { Box } from "@mui/system"
-import axios from "axios"
-import React, { useEffect, useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import { addFavorite, getFavorite, removeFavorite } from "../state/favourites"
+} from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Box } from "@mui/system";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addFavorite, getFavorite, removeFavorite } from "../state/favourites";
 
 const SingleView = () => {
-  const data = useSelector((state) => state.dataCard)
-  const user = useSelector((state) => state.dataUser)
+  const data = useSelector((state) => state.dataCard);
+  const user = useSelector((state) => state.dataUser);
 
-  const dataFavorite = useSelector((state) => state.dataFavorites)
-  
-  const favorites = dataFavorite.filter(
+  const dataFavorite = useSelector((state) => state.dataFavorites);
+
+  const favorites = dataFavorite?.filter(
     (favorite) => favorite.product.id == data.id
-  )
+  );
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleFavorite = () => {
-    dispatch(addFavorite({ userId: user.id, productId: data.id }))
-    navigate(`/single/${data.id}`)
-  }
+    dispatch(addFavorite({ userId: user.id, productId: data.id }));
+    navigate(`/single/${data.id}`);
+  };
 
   const handleRemoveFavorite = () => {
-    dispatch(removeFavorite({ userId: user.id, productId: data.id }))
-    navigate(`/single/${data.id}`)
-  }
+    dispatch(removeFavorite({ userId: user.id, productId: data.id }));
+    navigate(`/single/${data.id}`);
+  };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!data.id) {
-      navigate("/")
+      navigate("/");
     }
-  }, [data])
+  }, [data]);
 
   return (
     <Grid
@@ -148,7 +148,8 @@ const SingleView = () => {
               }}
             >
               <Box>
-                { favorites[0] ? ( <Button
+                {favorites ? (
+                  <Button
                     onClick={handleRemoveFavorite}
                     sx={{
                       bgcolor: "#DBF227",
@@ -159,8 +160,9 @@ const SingleView = () => {
                     variant="contained"
                   >
                     quitar
-                  </Button>) :
-                  (<Button
+                  </Button>
+                ) : (
+                  <Button
                     onClick={handleFavorite}
                     sx={{
                       bgcolor: "#DBF227",
@@ -171,8 +173,8 @@ const SingleView = () => {
                     variant="contained"
                   >
                     favoritos
-                  </Button>)
-                }
+                  </Button>
+                )}
               </Box>
               <Box>
                 <Button
@@ -193,7 +195,7 @@ const SingleView = () => {
         </Grid>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default SingleView
+export default SingleView;
