@@ -20,9 +20,6 @@ import {
   revokeAdmin,
   deleteUser,
 } from "../state/userlist.js";
-
-import React, { useEffect, useReducer, useState } from "react";
-import axios from "axios";
 import { useAuth } from "../contexts/AuthContext.js";
 
 const useStyles = makeStyles(() => ({
