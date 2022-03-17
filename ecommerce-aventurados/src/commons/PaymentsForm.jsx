@@ -10,25 +10,31 @@ import { Grid, Card, Typography } from "@mui/material";
 
 const PaymentForm = () => {
   const [values, setValues] = React.useState({
-    amount: "",
+    name: "",
+    email: "",
+    creditNumber: "",
   });
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  console.log("VALUES ===>", values);
+
   return (
-    <Card sx={{ boxShadow: "0.1em 0.1em 0.8em grey", borderRadius: 5, padding:3 }}>
-        <Typography
-          sx={{ justifyContent: 'center', fontSize: 30 }}
-          variant="h5"
-          color="black"
-          gutterBottom
-        >
-          Finalizar Compra
-        </Typography>
-      <Box sx={{ display: "flex", flexWrap: "wrap",}}>
-        <div>
+    <Card
+      sx={{ boxShadow: "0.1em 0.1em 0.8em grey", borderRadius: 5, padding: 3 }}
+    >
+      <Typography
+        sx={{ justifyContent: "center", fontSize: 30 }}
+        variant="h5"
+        color="black"
+        gutterBottom
+      >
+        Finalizar Compra
+      </Typography>
+      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+        <form onSubmit={}>
           <FormControl fullWidth sx={{ m: 1 }}>
             <InputLabel htmlFor="outlined-adornment-amount">
               Nombre del titular{" "}
@@ -36,8 +42,17 @@ const PaymentForm = () => {
             <OutlinedInput
               id="outlined-adornment-amount"
               value={values.amount}
-              onChange={handleChange("amount")}
-              label="Amount"
+              onChange={handleChange("name")}
+              label="Name"
+            />
+          </FormControl>
+          <FormControl fullWidth sx={{ m: 1 }}>
+            <InputLabel htmlFor="outlined-adornment-amount">Email </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-amount"
+              value={values.amount}
+              onChange={handleChange("email")}
+              label="Email"
             />
           </FormControl>
           <FormControl fullWidth sx={{ m: 1 }}>
@@ -47,11 +62,11 @@ const PaymentForm = () => {
             <OutlinedInput
               id="outlined-adornment-amount"
               value={values.amount}
-              onChange={handleChange("amount")}
+              onChange={handleChange("creditNumber")}
               label="Amount"
             />
           </FormControl>
-        </div>
+        </form>
         <div>
           <TextField
             label="Fecha de vencimiento"

@@ -71,17 +71,6 @@ const CardCarrito = ({ data }) => {
             <DeleteIcon sx={{ color: "black" }} />
           </Fab>
           </Grid>
-          <FormControl fullWidth sx={{ m: 1 }}>
-            <InputLabel htmlFor="outlined-adornment-amount">
-              Email
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-amount"
-              value={values.amount}
-              onChange={handleChange("amount")}
-              label="Amount"
-            />
-          </FormControl>
         </Grid>
       </CardContent>
     </Card>
