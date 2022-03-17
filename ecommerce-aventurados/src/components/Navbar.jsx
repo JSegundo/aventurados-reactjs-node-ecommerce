@@ -76,7 +76,7 @@ const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [query, setQuery] = React.useState("")
+  const [query, setQuery] = React.useState("");
 
   const open = Boolean(anchorEl);
 
@@ -109,17 +109,15 @@ const Navbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
   };
 
   const onChange = (e) => {
-    e.preventDefault()
-    setQuery(e.target.value)
+    e.preventDefault();
+    setQuery(e.target.value);
     axios
       .get(`http://localhost:3001/api/products/search?name=${query}`)
       .then((res) => console.log(res));
-  }
-
+  };
 
   return (
     <AppBar
@@ -214,6 +212,7 @@ const Navbar = () => {
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
                   to={`/${cat}`}
+                  key={i}
                 >
                   <MenuItem onClick={handleClose}>{cat}</MenuItem>
                 </Link>
@@ -235,7 +234,7 @@ const Navbar = () => {
                 sx={{ color: "black" }}
                 placeholder="Buscar:  "
                 inputProps={{ "aria-label": "search" }}
-                type='text'
+                type="text"
                 onChange={onChange}
               />
             </Search>

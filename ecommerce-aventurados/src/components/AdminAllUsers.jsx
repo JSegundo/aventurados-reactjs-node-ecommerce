@@ -1,99 +1,110 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+
+import {
+  Typography,
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+  IconButton,
+  TableHead,
+} from "@material-ui/core";
+// icons
+import { Grade, GradeOutlined, Delete } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core";
+
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getAllUsers,
+  promoteAdmin,
+  revokeAdmin,
+  deleteUser,
+} from "../state/userlist.js";
+
+import React, { useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext.js";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Checkbox from "@mui/material/Checkbox";
-import Avatar from "@mui/material/Avatar";
-import { Button, Box } from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  containerContent: {
+    margin: "50px 0 0 0",
+    // // border: "6px solid black",
+  },
+}));
+
+//
 
 const AdminAllUsers = () => {
-  const { currentUser } = useAuth();
+  const classes = useStyles();
 
-  const [allUsers, setAllUsers] = useState([]);
+  const dispatch = useDispatch();
+  const { currentUser } = useAuth();
+  const allUsers = useSelector((state) => state.userlist);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const users = await axios.get(
-          `http://localhost:3001/api/user/admin/users/${currentUser.uid}`
-        );
-        setAllUsers(users.data);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(getAllUsers(currentUser.uid));
+  }, []); // no se que dependencia pasarle
 
-  const handleAddNewAdmin = async ({ id }) => {
-    try {
-      await axios.put(`http://localhost:3001/api/user/admin/${id}`);
-    } catch (err) {
-      console.error(err);
-    }
+  const handlePromoteAdmin = ({ id }) => {
+    console.log(id);
+    dispatch(promoteAdmin(id, currentUser.uid));
   };
 
-  const handleDeleteAdmin = async ({ id }) => {
-    try {
-      await axios.put(`http://localhost:3001/api/user/adminDelete/${id}`);
-    } catch (err) {
-      console.error(err);
-    }
+  const handleRevokeAdmin = ({ id }) => {
+    dispatch(revokeAdmin(id));
   };
 
-  // robado
-
-  //robado
+  const handleDeleteUser = ({ id }) => {
+    dispatch(deleteUser(id));
+  };
 
   return (
     <>
-      {/* <div>
-        <h2>todos los usuarios</h2>
-        <ul>
-          {allUsers.map((userObj, i) => (
-            <li key={i} >
-              <p>
-                Nombre: {userObj.name} {userObj.lastName}
-              </p>
-              <p>Email: {userObj.email}</p>
-            </li>
-          ))}
-        </ul>
+      <Table size="big" className={classes.containerContent}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Username</TableCell>
+            <TableCell align="center">Email</TableCell>
+            <TableCell align="center">Nombre</TableCell>
+            <TableCell align="center">Apellido</TableCell>
+            <TableCell align="center">Admin</TableCell>
+            <TableCell align="center">Delete</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {allUsers?.map((user) => (
+            <>
+              <TableRow key={user.id}>
+                <TableCell>
+                  {<Typography component="text">{user.name}</Typography>}
+                </TableCell>
+                <TableCell align="center">{`${user.email}`}</TableCell>
+                <TableCell align="center">{`${user.name}`}</TableCell>
+                <TableCell align="center">{`${user.lastName}`}</TableCell>
+                {user.admin ? (
+                  <TableCell align="center">
+                    <IconButton color="inherit">
+                      <Grade onClick={() => handleRevokeAdmin(user)} />
+                    </IconButton>
+                  </TableCell>
+                ) : (
+                  <TableCell align="center">
+                    <IconButton color="inherit">
+                      <GradeOutlined onClick={() => handlePromoteAdmin(user)} />
+                    </IconButton>
+                  </TableCell>
+                )}
 
-      </div> */}
-      <List
-        dense
-        sx={{ width: "100%", maxWidth: 980, bgcolor: "background.paper" }}
-      >
-        {allUsers.map((user, i) => {
-          const labelId = `checkbox-list-secondary-label-${i}`;
-          return (
-            <ListItem key={user.id}>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar
-                    alt={`Avatar n°${i + 1}`}
-                    src={`/static/images/avatar/${i + 1}.jpg`}
-                  />
-                </ListItemAvatar>
-                <ListItemText id={labelId} primary={`${user.name}`} />
-                <ListItemText primary={`admin: ${user.admin}`} />
-                <ListItemText primary={`${user.email}`} />
-                <Button onClick={() => handleAddNewAdmin(user)}>
-                  add admin
-                </Button>
-                <Button onClick={() => handleDeleteAdmin(user)}>
-                  remove admin
-                </Button>
-              </ListItem>
-            </ListItem>
-          );
-        })}
-      </List>
+                <TableCell align="center">
+                  <IconButton edge="end" color="inherit">
+                    <Delete onClick={() => handleDeleteUser(user)} />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            </>
+          ))}
+        </TableBody>
+      </Table>
     </>
   );
 };

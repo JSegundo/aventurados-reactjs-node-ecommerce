@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import AuthProvider from "./contexts/AuthContext";
 
+import AdminProfile from "./commons/AdminProfile";
 import Carrito from "./components/Carrito";
 import Fav from "./components/Fav";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
@@ -18,6 +19,7 @@ import Spa from "./commons/Spa";
 import SingleView from "./components/SingleView";
 import AdminProfile from './commons/AdminProfile'
 
+import AdminEditProduct from "./commons/AdminEditProduct";
 function App() {
   return (
     <>
@@ -34,6 +36,21 @@ function App() {
 
           <Route path="/:category" element={<Ciclismo />} />
 
+          {/* ADMIN */}
+
+          <Route
+            path="/admin/edit/products/:id"
+            element={<AdminEditProduct />}
+          />
+          {/* 
+          <Route
+            path="/admin/edit/products/:id"
+            render={({ match }) => {
+              <ProtectedAdminRoutes>
+                <AdminEditProduct id={match.params.id} />
+              </ProtectedAdminRoutes>;
+            }}
+          /> */}
           <Route
             path="/admin"
             element={
@@ -42,6 +59,7 @@ function App() {
               </ProtectedAdminRoutes>
             }
           />
+          {/* ADMIN */}
 
           <Route
             path="/shopping"
