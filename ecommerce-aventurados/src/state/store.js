@@ -8,6 +8,7 @@ import categoriesReducer from "./categories";
 import userlistReducer from "./userlist";
 import productsReducer from "./products";
 import selectedProductReducer from "./selectedProduct";
+import userReducer from './user'
 
 const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
@@ -15,7 +16,7 @@ const store = configureStore({
     dataCard: cardReducer,
     dataFavourites: favouriteReducer,
     dataCarrito: carritoReducer,
-    dataCategories: categoriesReducer,
+    dataUser: userReducer,
     userlist: userlistReducer,
     products: productsReducer,
     selectedProduct: selectedProductReducer,

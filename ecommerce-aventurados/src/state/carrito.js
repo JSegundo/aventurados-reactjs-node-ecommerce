@@ -19,6 +19,7 @@ export const deleteCarrito = createAction('DELETE_CARRITO',(cardId, userId, amou
 const carritoReducer = createReducer([], {
     [getCarrito.fulfilled]: (state, action) => action.payload,
     [addCarrito.fulfilled]: (state, action) => action.payload,
+    [deleteCarrito.fulfilled]: (state, action) => action.payload,
 })
 
 export default carritoReducer

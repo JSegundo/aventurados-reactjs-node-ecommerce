@@ -7,16 +7,37 @@ import {
   Stack,
   Typography,
 } from "@mui/material"
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import { Box } from "@mui/system"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { addFavorite, getFavorite, removeFavorite } from "../state/favourites"
 
 const SingleView = () => {
   const data = useSelector((state) => state.dataCard)
+  const user = useSelector((state) => state.dataUser)
+
+  const dataFavorite = useSelector((state) => state.dataFavorites)
+  
+  const favorites = dataFavorite.filter(
+    (favorite) => favorite.product.id == data.id
+  )
+
+  const dispatch = useDispatch()
+
+  const handleFavorite = () => {
+    dispatch(addFavorite({ userId: user.id, productId: data.id }))
+    navigate(`/single/${data.id}`)
+  }
+
+  const handleRemoveFavorite = () => {
+    dispatch(removeFavorite({ userId: user.id, productId: data.id }))
+    navigate(`/single/${data.id}`)
+  }
 
   const navigate = useNavigate()
 
@@ -77,7 +98,7 @@ const SingleView = () => {
               justifyContent: "center",
             }}
           >
-            <Stack  paddingBottom={3}>
+            <Stack paddingBottom={3}>
               <Rating
                 name="half-rating-read"
                 defaultValue={data.rating}
@@ -116,27 +137,58 @@ const SingleView = () => {
                 justifyContent: "center",
               }}
             >
-              <h3>
-                {data.description}
-              </h3>
+              <h3>{data.description}</h3>
             </Box>
           </Grid>
           <Grid item xs={12} paddingTop={2}>
-                <Box
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-around",
+              }}
+            >
+              <Box>
+                { favorites[0] ? ( <Button
+                    onClick={handleRemoveFavorite}
+                    sx={{
+                      bgcolor: "#DBF227",
+                      color: "black",
+                      borderRadius: "20px",
+                    }}
+                    endIcon={<FavoriteIcon sx={{ color: "black" }} />}
+                    variant="contained"
+                  >
+                    quitar
+                  </Button>) :
+                  (<Button
+                    onClick={handleFavorite}
+                    sx={{
+                      bgcolor: "#DBF227",
+                      color: "black",
+                      borderRadius: "20px",
+                    }}
+                    endIcon={<FavoriteBorderIcon sx={{ color: "black" }} />}
+                    variant="contained"
+                  >
+                    favoritos
+                  </Button>)
+                }
+              </Box>
+              <Box>
+                <Button
                   sx={{
-                    display: "flex",
-                    justifyContent: "space-around",
+                    bgcolor: "#DBF227",
+                    color: "black",
+                    borderRadius: "20px",
                   }}
+                  endIcon={<ShoppingCartIcon sx={{ color: "black" }} />}
+                  variant="contained"
                 >
-                  <Box>
-                  <Button sx= {{bgcolor: '#DBF227', color:'black', borderRadius: '20px'}} endIcon={<FavoriteBorderIcon sx= {{color:'black'}} />} variant="contained">favoritos</Button>
-
-                  </Box>
-                  <Box>
-                  <Button sx= {{bgcolor: '#DBF227', color:'black', borderRadius: '20px'}} endIcon={<ShoppingCartIcon sx= {{color:'black'}} />} variant="contained">Comprar</Button>
-                  </Box>
-                </Box>
-              </Grid>
+                  Comprar
+                </Button>
+              </Box>
+            </Box>
+          </Grid>
           <br></br>
         </Grid>
       </Grid>

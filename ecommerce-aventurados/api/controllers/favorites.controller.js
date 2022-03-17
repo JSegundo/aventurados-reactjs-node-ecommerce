@@ -2,7 +2,7 @@ const { Favorites, Users, Products } = require("../models");
 
 const favorites_controllers = {
   getAll: async (req, res, next) => {
-    const { userId } = req.body;
+    const { userId } = req.params;
     try {
       const favorites = await Favorites.findAll({
         where: { userId, vigente: true },
@@ -15,7 +15,7 @@ const favorites_controllers = {
   },
 
   addFavorite: async (req, res, next) => {
-    const { userId, productId } = req.body;
+    const { userId, productId } = req.params;
     try {
       const newFavorite = await Favorites.create({ userId, productId });
       return res.status(202).send(newFavorite);
@@ -25,12 +25,14 @@ const favorites_controllers = {
   },
 
   deleteOne: async (req, res, next) => {
+    const { userId, productId } = req.params;
     try {
-      const [r, favorite] = await Favorites.update(
-        { vigente: false },
-        { where: { id: req.params.id }, returning: true }
+      const favorite = await Favorites.findOne(
+        { where: { userId, productId } }
       );
-      return res.send(202).send(favorite[0]);
+      const deleteFavorite = favorite
+      favorite.destroy()
+      return res.send(202).send(deleteFavorite);
     } catch (err) {
       next(err);
     }
