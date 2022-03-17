@@ -19,6 +19,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LoginIcon from "@mui/icons-material/Login";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.js";
+import { Grid } from "@mui/material";
 import Fade from "@mui/material/Fade";
 import axios from "axios";
 
@@ -75,6 +76,7 @@ const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [query, setQuery] = React.useState("");
 
   const open = Boolean(anchorEl);
 
@@ -107,8 +109,13 @@ const Navbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const onChange = (e) => {
+    e.preventDefault();
+    setQuery(e.target.value);
     axios
-      .get("http://localhost:3001/api/products/search")
+      .get(`http://localhost:3001/api/products/search?name=${query}`)
       .then((res) => console.log(res));
   };
 
@@ -227,6 +234,8 @@ const Navbar = () => {
                 sx={{ color: "black" }}
                 placeholder="Buscar:  "
                 inputProps={{ "aria-label": "search" }}
+                type="text"
+                onChange={onChange}
               />
             </Search>
           </form>

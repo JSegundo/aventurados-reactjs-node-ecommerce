@@ -19,6 +19,7 @@ import AdminHeaderCards from "../components/AdminHeaderCards";
 
 import AdminAllUsers from "../components/AdminAllUsers";
 import AdminAllProducts from "../components/AdminAllProducts";
+import AdminAllCategories from '../components/AdminAllCategories';
 // import AdminContent from "../components/AdminContent";
 
 const useStyles = makeStyles(() => ({
@@ -88,6 +89,7 @@ const AdminProfile = () => {
           />
         </Grid>
         <Grid
+          onClick={()=>setClicked("categories")}
           className={classes.gridStyle}
           item
           xs={12}
@@ -97,6 +99,7 @@ const AdminProfile = () => {
           xl={3}
         >
           <AdminHeaderCards
+            
             icono={<CategorySharpIcon className={classes.iconos} />}
             titulo={"Categorys"}
           />
@@ -122,6 +125,7 @@ const AdminProfile = () => {
       <Container className="containerContent">
         {clicked === "users" && <AdminAllUsers />}
         {clicked === "products" && <AdminAllProducts />}
+        {clicked === "categories" && <AdminAllCategories />}
       </Container>
     </div>
   );
