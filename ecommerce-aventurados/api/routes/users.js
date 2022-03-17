@@ -24,7 +24,7 @@ router.get("/me/orders", getOrders);
 
 router.delete("/admin/:id", deleteUser);
 
-router.put("/admin/:id", addNewAdmin);
+router.put("/adminPromote/:id", addNewAdmin);
 
 router.put("/adminRemove/:id", removeAdmin);
 

@@ -219,6 +219,7 @@ const Navbar = () => {
                   <Link
                     style={{ textDecoration: "none", color: "black" }}
                     to={`/category/${cat.name}/${cat.id}`}
+                    key={i}
                   >
                     <MenuItem onClick={handleClose}>{cat.name}</MenuItem>
                   </Link>
@@ -290,10 +291,13 @@ const Navbar = () => {
                 onClose={handleCloseUserMenu}
                 s
               >
-                <Link style={{textDecoration: 'none', color:'black'}} to='/miperfil'>
-                <MenuItem>
-                  <Typography textAlign="center">Mi Perfil</Typography>
-                </MenuItem>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/miperfil"
+                >
+                  <MenuItem>
+                    <Typography textAlign="center">Mi Perfil</Typography>
+                  </MenuItem>
                 </Link>
                 <MenuItem onClick={handleLogOut}>
                   <Typography textAlign="center">Salir</Typography>

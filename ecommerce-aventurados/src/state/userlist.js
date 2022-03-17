@@ -13,35 +13,40 @@ export const getAllUsers = createAsyncThunk(
 
 export const promoteAdmin = createAsyncThunk(
   "PROMOTE_ADMIN",
-  (userId, currentuserId, thunkAPI) => {
-    axios.put(`http://localhost:3001/api/user/admin/${userId}`);
+  ({ id, currentuserId }) => {
     return axios
-      .get(`http://localhost:3001/api/user/admin/users/${currentuserId}`)
-      .then((res) => res.data.sort((a, b) => a.id - b.id));
+      .put(`http://localhost:3001/api/user/adminPromote/${id}`)
+      .then(() =>
+        axios.get(`http://localhost:3001/api/user/admin/users/${currentuserId}`)
+      )
+      .then((res) => res.data.sort((a, b) => a.id - b.id))
+      .catch((err) => console.error(err));
   }
 );
 
 export const revokeAdmin = createAsyncThunk(
   "REVOKE_ADMIN",
-  (userId, currentuserId, thunkAPI) => {
-    axios.put(`http://localhost:3001/api/user/adminRemove/${userId}`);
+  ({ id, currentuserId }) => {
     return axios
-      .get(`http://localhost:3001/api/user/admin/users/${currentuserId}`)
-      .then((res) => res.data.sort((a, b) => a.id - b.id));
+      .put(`http://localhost:3001/api/user/adminRemove/${id}`)
+      .then(() =>
+        axios.get(`http://localhost:3001/api/user/admin/users/${currentuserId}`)
+      )
+      .then((res) => res.data.sort((a, b) => a.id - b.id))
+      .catch((err) => console.error(err));
   }
 );
 
 export const deleteUser = createAsyncThunk(
   "DELETE_USER",
-  (userId, thunkAPI) => {
-    const { userslist } = thunkAPI.getState();
-    axios
-      .delete(`http://localhost:3001/api/user/admin/${userId}`)
-      .then((res) => res.data);
-    const newList = userslist.filter((user) => {
-      return user.id !== userId;
-    });
-    return newList;
+  ({ id, currentuserId }) => {
+    return axios
+      .delete(`http://localhost:3001/api/user/admin/${id}`)
+      .then(() =>
+        axios.get(`http://localhost:3001/api/user/admin/users/${currentuserId}`)
+      )
+      .then((res) => res.data.sort((a, b) => a.id - b.id))
+      .catch((err) => console.error(err));
   }
 );
 
