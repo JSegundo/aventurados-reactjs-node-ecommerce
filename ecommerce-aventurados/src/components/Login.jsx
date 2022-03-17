@@ -35,11 +35,22 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
+    console.log(user);
+    axios
+      .get(`http://localhost:3001/api/user/login/firebase/${user.email}`)
+      .then(({ data }) => {
+        console.log(data);
+        if (!data.email) return <p>errOOOOOOOOR</p>;
+        handleLoginFirebase();
+      });
+  };
+
+  const handleLoginFirebase = async () => {
     try {
       await login(user.email, user.password);
       navigate("/");
     } catch (err) {
-      setError(err.message);
+      console.error(err);
     }
   };
 
@@ -63,6 +74,7 @@ const Login = () => {
 
   React.useEffect(() => {
     if (!currentUser) return;
+    if (!currentUser.displayName) return;
     axios
       .post("http://localhost:3001/api/user/login", {
         name: currentUser.displayName.split(" ")[0],

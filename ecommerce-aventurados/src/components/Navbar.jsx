@@ -109,12 +109,12 @@ const Navbar = () => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   const onChange = (e) => {
-    e.preventDefault()
-    setQuery(e.target.value)
+    e.preventDefault();
+    setQuery(e.target.value);
     axios
       .get(`http://localhost:3001/api/products/search?name=${query}`)
       .then((res) => console.log(res))
@@ -227,6 +227,7 @@ const Navbar = () => {
               ) : (
                 <h1>Hola</h1>
               )}
+
             </Menu>
           </Box>
           <form onSubmit={handleSubmit}>

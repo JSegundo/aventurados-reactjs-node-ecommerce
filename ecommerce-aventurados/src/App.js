@@ -8,6 +8,7 @@ import Login from "./components/Login"
 import Home from "./components/Home"
 import AuthProvider, { useAuth } from "./contexts/AuthContext"
 
+
 import Carrito from "./components/Carrito"
 import Fav from "./components/Fav"
 import { ProtectedRoutes } from "./components/ProtectedRoutes"
@@ -22,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getFavorite } from "./state/favourites"
 import { setUser } from "./state/user"
 
+import AdminEditProduct from "./commons/AdminEditProduct";
 function App() {
   const { currentUser } = useAuth()
 
@@ -57,14 +59,23 @@ function App() {
         <Route path="/ciclismo" element={<Ciclismo />} />
         <Route path="/category/:cat/:id" element={<CategoriesView />} />
 
-        <Route
-          path="/admin"
-          element={
-            <ProtectedAdminRoutes>
-              <AdminProfile />
-            </ProtectedAdminRoutes>
-          }
-        />
+
+          {/* ADMIN */}
+
+          <Route
+            path="/admin/edit/products/:id"
+            element={<AdminEditProduct />}
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedAdminRoutes>
+                <AdminProfile />
+              </ProtectedAdminRoutes>
+            }
+          />
+          {/* ADMIN */}
+
 
         <Route
           path="/shopping"

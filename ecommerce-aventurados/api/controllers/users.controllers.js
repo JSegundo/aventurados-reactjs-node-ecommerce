@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 
 const users_controllers = {
   register: async (req, res, next) => {
+    console.log("BODYYYYY: ", req.body);
     const { name, lastName, email } = req.body.user;
     const { localId } = req.body;
     try {
@@ -22,6 +23,16 @@ const users_controllers = {
       next(err);
     }
   },
+  getUserByEmail: async (req, res, next) => {
+    const { email } = req.params;
+    console.log(email);
+    try {
+      const user = await Users.findOne({ where: { email } });
+      return res.send(user);
+    } catch (err) {
+      next(err);
+    }
+  },
   getOrders: async (req, res, next) => {
     const { localId } = req.body;
     try {
@@ -32,10 +43,11 @@ const users_controllers = {
     }
   },
   deleteUser: async (req, res, next) => {
-    const { id } = req.params; //Usuario a borrar
-    const { localId } = req.body; //id del admin
+    const { id, localId } = req.params; //Usuario a borrar
+    // const { localId } = req.body; //id del admin
+    console.log(id);
     try {
-      const user = await Users.findOne({ where: { localId: id } });
+      const user = await Users.findOne({ where: { id } });
       const userDeleted = user;
       await user.destroy();
       return res.send(userDeleted);
@@ -56,19 +68,6 @@ const users_controllers = {
       next(err);
     }
   },
-  // addNewAdmin: async (req, res, next) => {
-  //   const { id } = req.params; //Usuario new admin
-  //   const { localId } = req.body; //id del admin
-  //   try {
-  //     const [r, user] = await Users.update(
-  //       { admin: true },
-  //       { where: { localId: id }, returning: true }
-  //     );
-  //     return res.status(202).send(user[0]);
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // },
   removeAdmin: async (req, res, next) => {
     const { id } = req.params; //Usuario new admin
     const { localId } = req.body; //id del admin
@@ -82,27 +81,23 @@ const users_controllers = {
       next(err);
     }
   },
-  // removeAdmin: async (req, res, next) => {
-  //   const { id } = req.params; //Usuario new admin
-  //   const { localId } = req.body; //id del admin
+  // getAllUsers: async (req, res, next) => {
+  //   const { localId } = req.params;
+  //   console.log("localId", localId);
   //   try {
-  //     const [r, user] = await Users.update(
-  //       { admin: false },
-  //       { where: { localId: id }, returning: true }
-  //     );
-  //     return res.status(202).send(user[0]);
+  //     const users = await Users.findAll({
+  //       where: { localId: { [Op.ne]: localId } },
+  //     });
+  //     return res.send(users);
   //   } catch (err) {
   //     next(err);
   //   }
   // },
-
   getAllUsers: async (req, res, next) => {
-    const { localId } = req.params;
+    // const { localId } = req.params;
     // console.log("localId", localId);
     try {
-      const users = await Users.findAll({
-        where: { localId: { [Op.ne]: localId } },
-      });
+      const users = await Users.findAll();
       return res.send(users);
     } catch (err) {
       next(err);

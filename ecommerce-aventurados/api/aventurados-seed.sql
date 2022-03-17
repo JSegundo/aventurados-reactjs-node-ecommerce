@@ -28,7 +28,7 @@ insert into products values(default,'Bariloche','7 dias y 6 noches en Bariloche'
 insert into products values(default,'El Calafate','7 dias y 6 noches en El Calafate','https://denomades.imgix.net/destinos/el-calafate/383/mirador-glaciar-perito-moreno.jpg?w=719&h=391&fit=crop&q=100&auto=format',5000,2,now(),now(),1,5);
 insert into products values(default,'Cataratas del Iguazu','7 dias y 6 noches en El Iguazu','https://media.traveler.es/photos/613768f03decec3303bab7da/master/pass/158835.jpg',5000,1,now(),now(),1,5);
 
-insert into users values(default,'admin','admin@gmail.com','admin123','salt',true,now(),now());
+insert into users values(default,'admin','admin','admin@gmail.com','U57wwxdhxWQXgp9VjDZ7WH2nEdi1',true,now(),now());
 
 insert into carts values(1,4,123,now(),now(),1,3,1);
 insert into carts values(1,4,123,now(),now(),1,3,1);

@@ -13,8 +13,8 @@ const useStyles = makeStyles((props) => ({
   root: {
     textAlign: "center",
     backgroundColor: props.color,
-    border: "4px solid blue",
-    borderRadius: 12,
+    // border: "4px solid blue",
+    // borderRadius: 12,
   },
   texto: {
     fontSize: 18,
