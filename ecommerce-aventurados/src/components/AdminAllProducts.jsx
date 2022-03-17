@@ -101,7 +101,7 @@ const AdminAllProducts = () => {
 
                 <TableCell align="center">
                   <Link
-                    onClick={() => handleClickEdit(product.id)}
+                    onClick={() => handleClickEdit(product)}
                     to={`/admin/edit/products/${product.id}`}
                   >
                     <IconButton color="inherit">

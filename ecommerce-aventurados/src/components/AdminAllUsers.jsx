@@ -1,5 +1,3 @@
-import React, { useEffect } from "react";
-
 import {
   Typography,
   Table,
@@ -20,6 +18,8 @@ import {
   revokeAdmin,
   deleteUser,
 } from "../state/userlist.js";
+
+import React, { useEffect, useReducer, useState } from "react";
 import { useAuth } from "../contexts/AuthContext.js";
 
 const useStyles = makeStyles(() => ({

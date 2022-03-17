@@ -1,35 +1,35 @@
-import * as React from "react"
-import { useState } from "react"
-import Card from "@mui/material/Card"
-import CardActions from "@mui/material/CardActions"
-import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import Button from "@mui/material/Button"
-import Typography from "@mui/material/Typography"
-import Rating from "@mui/material/Rating"
-import Stack from "@mui/material/Stack"
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
-import FavoriteIcon from "@mui/icons-material/Favorite"
-import { Grid } from "@mui/material"
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
-import { setCard } from "../state/dataCard"
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import * as React from "react";
+import { useState } from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Grid } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { setCard } from "../state/dataCard";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Card2 = ({ data }) => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const dataFavorite = useSelector((state) => state.dataFavorites)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const dataFavorite = useSelector((state) => state.dataFavorites);
 
   const favorites = dataFavorite.filter(
     (favorite) => favorite.product.id == data.id
-  )
+  );
 
   const handleClick = () => {
-    dispatch(setCard(data))
+    dispatch(setCard(data));
     // console.log(data)
-    navigate(`/single/${data.id}`)
-  }
+    navigate(`/single/${data.id}`);
+  };
 
   return (
     <Card
@@ -85,7 +85,7 @@ const Card2 = ({ data }) => {
         </Grid>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default Card2
+export default Card2;
