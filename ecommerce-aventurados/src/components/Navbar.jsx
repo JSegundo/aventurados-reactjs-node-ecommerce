@@ -227,6 +227,9 @@ const Navbar = () => {
                 <h1>Hola</h1>
               )}
             </Menu>
+            <Link style={{ textDecoration: "none" }} to="/AllProducts">
+              <Button sx={{ color: "black" }}>Productos</Button>
+            </Link>
           </Box>
           <form onSubmit={handleSubmit}>
             <Search
@@ -290,10 +293,13 @@ const Navbar = () => {
                 onClose={handleCloseUserMenu}
                 s
               >
-                <Link style={{textDecoration: 'none', color:'black'}} to='/miperfil'>
-                <MenuItem>
-                  <Typography textAlign="center">Mi Perfil</Typography>
-                </MenuItem>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/miperfil"
+                >
+                  <MenuItem>
+                    <Typography textAlign="center">Mi Perfil</Typography>
+                  </MenuItem>
                 </Link>
                 <MenuItem onClick={handleLogOut}>
                   <Typography textAlign="center">Salir</Typography>
