@@ -6,6 +6,7 @@ import { Typography } from "@mui/material";
 import axios from "axios";
 import "../App.css";
 
+
 const Home = () => {
   const [bestSeller, setBestSeller] = useState([]);
 

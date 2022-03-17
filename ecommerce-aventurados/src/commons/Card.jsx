@@ -19,21 +19,7 @@ import { useNavigate } from "react-router-dom";
 const Card2 = ({ data }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const dataFavorite = useSelector((state) => state.dataFavorites);
-
-  // const favorites = [];
-
-  // React.useEffect(() => {
-  //   if (dataFavorite !== null) {
-  //     if (dataFavorite[0]) {
-  //       favorites = dataFavorite.filter(
-  //         (favorite) => favorite.product.id == data.id
-  //       );
-  //     } else {
-  //       favorites = null;
-  //     }
-  //   }
-  // }, [dataFavorite]);
+  const dataFavorite = useSelector((state) => state.dataFavorites);
 
   const handleClick = () => {
     dispatch(setCard(data));
@@ -89,18 +75,9 @@ const Card2 = ({ data }) => {
             variant="h6"
             component="div"
           >
-            {data.price}
+            ${data.price}
           </Typography>
-          {/* {favorites ? <FavoriteIcon /> : <FavoriteBorderIcon />} */}
-        </Grid>
-        <Grid container sx={{ justifyContent: "center" }}>
-          <Button
-            sx={{ bgcolor: "#DBF227", color: "black", borderRadius: "20px" }}
-            endIcon={<ShoppingCartIcon sx={{ color: "black" }} />}
-            variant="contained"
-          >
-            Comprar
-          </Button>
+          {favorites ? <FavoriteIcon /> : <FavoriteBorderIcon />}
         </Grid>
       </CardContent>
     </Card>

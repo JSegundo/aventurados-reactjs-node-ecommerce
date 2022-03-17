@@ -4,6 +4,8 @@ const app = express();
 const router = require("./routes");
 const volleyball = require("volleyball");
 const cors = require("cors");
+//const mail = require('./config/mail/mail');
+
 
 app.use(cors());
 app.use(express.json());

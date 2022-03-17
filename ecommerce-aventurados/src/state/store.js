@@ -13,7 +13,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   reducer: {
     dataCard: cardReducer,
-    dataFavourites: favouriteReducer,
+    dataFavorites: favouriteReducer,
     dataCarrito: carritoReducer,
     dataUser: userReducer,
     userlist: userlistReducer,
