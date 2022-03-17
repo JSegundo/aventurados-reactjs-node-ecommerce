@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import {
   Button,
@@ -15,8 +14,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
-import { editProduct } from "../state/products";
-import { getClickedProduct } from "../state/selectedProduct";
+import { addProduct } from "../state/products";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -70,37 +68,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AdminEditProduct = () => {
+const AdminAddNewProduct = () => {
+  const classes = useStyles();
   // const navigate = useNavigate();
 
-  const classes = useStyles();
-  const { id } = useParams(); // id del producto seleccionado
   const dispatch = useDispatch();
-  const [edition, setEdition] = useState("");
+  const [newProduct, setNewProduct] = useState({});
   const [saved, setSaved] = useState(false);
-
-  useEffect(() => {
-    dispatch(getClickedProduct(id));
-  }, []);
-
-  const product = useSelector((store) => store.selectedProduct);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setEdition({ ...edition, [name]: value });
+    setNewProduct({ ...newProduct, [name]: value });
   };
 
   const handleSelect = (e) => {
-    setEdition({ ...edition, categoryId: e.target.value });
+    setNewProduct({ ...newProduct, categoryId: e.target.value });
   };
 
   const handleSubmitChanges = (e) => {
     e.preventDefault();
-    console.log(id);
-    console.log(edition);
-    dispatch(editProduct({ id, edition }));
-    // .then(() => navigate("/admin"));
+    dispatch(addProduct(newProduct));
+
     setSaved(true);
   };
 
@@ -108,36 +96,17 @@ const AdminEditProduct = () => {
     <>
       <div className={classes.otherMargin}>
         <Container>
-          <Grid className={classes.imagenContainer}>
-            <img
-              src={product.image}
-              alt={product.name}
-              style={{
-                width: "50%",
-                heigth: "100%",
-              }}
-            />
-            <Container>
-              <Typography variant="h6" gutterBottom>
-                {product.name}
-              </Typography>
-              <Typography>Descripcion: {product.description}</Typography>
-              <Typography>Rating: {product.rating}</Typography>
-              <Typography>Price: ${product.price}</Typography>
-              <Typography> Category: {product.categoryId}</Typography>
-            </Container>
-          </Grid>
           <Grid className={classes.mainContainer}>
             <Grid className={classes.textoContainer}>
               <Typography variant="h4" gutterBottom>
-                Editar producto
+                Create new product
               </Typography>
               <Grid>
                 <form onSubmit={handleSubmitChanges}>
                   <Grid container spacing={5}>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        value={edition.name || ""}
+                        value={newProduct.name || ""}
                         onChange={handleChange}
                         name="name"
                         label="Name"
@@ -146,7 +115,7 @@ const AdminEditProduct = () => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        value={edition.description || ""}
+                        value={newProduct.description || ""}
                         onChange={handleChange}
                         name="description"
                         label="Descripcion"
@@ -156,7 +125,7 @@ const AdminEditProduct = () => {
                     <Grid item xs={12} sm={6}>
                       <TextField
                         type={"number"}
-                        value={edition.rating || ""}
+                        value={newProduct.rating || ""}
                         onChange={handleChange}
                         name="rating"
                         label="Rating"
@@ -165,7 +134,7 @@ const AdminEditProduct = () => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        value={edition.image || ""}
+                        value={newProduct.image || ""}
                         onChange={handleChange}
                         name="image"
                         label="Image url"
@@ -175,7 +144,7 @@ const AdminEditProduct = () => {
                     <Grid item xs={12} sm={6}>
                       <TextField
                         type={"number"}
-                        value={edition.price || ""}
+                        value={newProduct.price || ""}
                         onChange={handleChange}
                         name="price"
                         label="Price"
@@ -183,7 +152,7 @@ const AdminEditProduct = () => {
                       />
                     </Grid>
 
-                    {/* probando container para categorias y btn guardar*/}
+                    {/*  container para categorias y btn guardar*/}
                     <Grid className={classes.wrapperChanges}>
                       <Grid className={classes.wrapDropdown}>
                         <Box className={classes.verticalAlignFLex}>
@@ -195,7 +164,7 @@ const AdminEditProduct = () => {
                           className={classes.dropSelect}
                           onChange={handleSelect}
                           name="categoryId"
-                          value={edition.categoryId || ""}
+                          value={newProduct.categoryId || ""}
                         >
                           <MenuItem value={"1"}>Aventura</MenuItem>
                           <MenuItem value={"2"}>Gourmet</MenuItem>
@@ -227,7 +196,7 @@ const AdminEditProduct = () => {
                         </Button>
                       )}
                     </Grid>
-                    {/* probando container para categorias y btn guardar*/}
+                    {/*  container para categorias y btn guardar*/}
                   </Grid>
                 </form>
               </Grid>
@@ -239,4 +208,4 @@ const AdminEditProduct = () => {
   );
 };
 
-export default AdminEditProduct;
+export default AdminAddNewProduct;

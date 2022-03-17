@@ -219,6 +219,7 @@ const Navbar = () => {
                   <Link
                     style={{ textDecoration: "none", color: "black" }}
                     to={`/category/${cat.name}/${cat.id}`}
+                    key={i}
                   >
                     <MenuItem onClick={handleClose}>{cat.name}</MenuItem>
                   </Link>

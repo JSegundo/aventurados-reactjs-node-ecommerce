@@ -25,7 +25,6 @@ import { useAuth } from "../contexts/AuthContext.js";
 const useStyles = makeStyles(() => ({
   containerContent: {
     margin: "50px 0 0 0",
-    // // border: "6px solid black",
   },
 }));
 
@@ -36,23 +35,32 @@ const AdminAllUsers = () => {
 
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
+  console.log(currentUser.uid);
   const allUsers = useSelector((state) => state.userlist);
 
   useEffect(() => {
     dispatch(getAllUsers(currentUser.uid));
-  }, []); // no se que dependencia pasarle
+  }, []);
+  console.log(currentUser);
 
-  const handlePromoteAdmin = ({ id }) => {
-    console.log(id);
-    dispatch(promoteAdmin(id, currentUser.uid));
+  //
+
+  const handlePromoteAdmin = (user) => {
+    const id = user.id;
+    const currentuserId = currentUser.uid;
+    dispatch(promoteAdmin({ id, currentuserId }));
   };
 
   const handleRevokeAdmin = ({ id }) => {
-    dispatch(revokeAdmin(id));
+    const currentuserId = currentUser.uid;
+    dispatch(revokeAdmin({ id, currentuserId }));
   };
 
+  //
+
   const handleDeleteUser = ({ id }) => {
-    dispatch(deleteUser(id));
+    const currentuserId = currentUser.uid;
+    dispatch(deleteUser({ id, currentuserId }));
   };
 
   return (
@@ -70,35 +78,33 @@ const AdminAllUsers = () => {
         </TableHead>
         <TableBody>
           {allUsers?.map((user) => (
-            <>
-              <TableRow key={user.id}>
-                <TableCell>
-                  {<Typography component="text">{user.name}</Typography>}
-                </TableCell>
-                <TableCell align="center">{`${user.email}`}</TableCell>
-                <TableCell align="center">{`${user.name}`}</TableCell>
-                <TableCell align="center">{`${user.lastName}`}</TableCell>
-                {user.admin ? (
-                  <TableCell align="center">
-                    <IconButton color="inherit">
-                      <Grade onClick={() => handleRevokeAdmin(user)} />
-                    </IconButton>
-                  </TableCell>
-                ) : (
-                  <TableCell align="center">
-                    <IconButton color="inherit">
-                      <GradeOutlined onClick={() => handlePromoteAdmin(user)} />
-                    </IconButton>
-                  </TableCell>
-                )}
-
+            <TableRow key={user.id}>
+              <TableCell>
+                {<Typography component="text">{user.name}</Typography>}
+              </TableCell>
+              <TableCell align="center">{`${user.email}`}</TableCell>
+              <TableCell align="center">{`${user.name}`}</TableCell>
+              <TableCell align="center">{`${user.lastName}`}</TableCell>
+              {user.admin ? (
                 <TableCell align="center">
-                  <IconButton edge="end" color="inherit">
-                    <Delete onClick={() => handleDeleteUser(user)} />
+                  <IconButton color="inherit">
+                    <Grade onClick={() => handleRevokeAdmin(user)} />
                   </IconButton>
                 </TableCell>
-              </TableRow>
-            </>
+              ) : (
+                <TableCell align="center">
+                  <IconButton color="inherit">
+                    <GradeOutlined onClick={() => handlePromoteAdmin(user)} />
+                  </IconButton>
+                </TableCell>
+              )}
+
+              <TableCell align="center">
+                <IconButton edge="end" color="inherit">
+                  <Delete onClick={() => handleDeleteUser(user)} />
+                </IconButton>
+              </TableCell>
+            </TableRow>
           ))}
         </TableBody>
       </Table>
