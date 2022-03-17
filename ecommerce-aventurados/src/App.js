@@ -18,6 +18,7 @@ import Ciclismo from "./commons/Ciclismo";
 import Spa from "./commons/Spa";
 import SingleView from "./components/SingleView";
 
+import AdminEditProduct from "./commons/AdminEditProduct";
 function App() {
   return (
     <>
@@ -34,6 +35,21 @@ function App() {
 
           <Route path="/:category" element={<Ciclismo />} />
 
+          {/* ADMIN */}
+
+          <Route
+            path="/admin/edit/products/:id"
+            element={<AdminEditProduct />}
+          />
+          {/* 
+          <Route
+            path="/admin/edit/products/:id"
+            render={({ match }) => {
+              <ProtectedAdminRoutes>
+                <AdminEditProduct id={match.params.id} />
+              </ProtectedAdminRoutes>;
+            }}
+          /> */}
           <Route
             path="/admin"
             element={
@@ -42,6 +58,7 @@ function App() {
               </ProtectedAdminRoutes>
             }
           />
+          {/* ADMIN */}
 
           <Route
             path="/shopping"

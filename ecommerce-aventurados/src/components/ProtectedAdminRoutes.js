@@ -14,7 +14,7 @@ export function ProtectedAdminRoutes({ children }) {
       );
       //   console.log("objeto de usuario de db: ", adminOrNot.data);
       setUser(adminOrNot.data);
-      if (!user.admin) return <Navigate to="/" />;
+      // if (!user.admin) return <Navigate to="/" />;
     }
     verifyAdmin();
   }, []);

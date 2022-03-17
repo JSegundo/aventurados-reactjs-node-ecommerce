@@ -19,8 +19,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LoginIcon from "@mui/icons-material/Login";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.js";
-import { Grid } from "@mui/material";
-import Fade from '@mui/material/Fade';
+import Fade from "@mui/material/Fade";
 import axios from "axios";
 
 const categories = ["Gourmet", "Aventura", "Viaje", "En Equipo", "Relax"];
@@ -181,9 +180,9 @@ const Navbar = () => {
           >
             A2
           </Typography>
-          <Box sx={{flexGrow:1}}>
+          <Box sx={{ flexGrow: 1 }}>
             <Button
-              sx={{color: 'black'}}
+              sx={{ color: "black" }}
               id="fade-button"
               aria-controls={open ? "fade-menu" : undefined}
               aria-haspopup="true"
@@ -203,8 +202,12 @@ const Navbar = () => {
               TransitionComponent={Fade}
             >
               {categories.map((cat, i) => (
-                <Link  style={{textDecoration:'none', color:'black'}} to={`/${cat}`}>
-                <MenuItem onClick={handleClose}>{cat}</MenuItem>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to={`/${cat}`}
+                  key={i}
+                >
+                  <MenuItem onClick={handleClose}>{cat}</MenuItem>
                 </Link>
               ))}
             </Menu>

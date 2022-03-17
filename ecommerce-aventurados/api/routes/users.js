@@ -11,11 +11,14 @@ const {
   getAllUsers,
   removeAdmin,
   findUserOrCreate,
+  getUserByEmail,
 } = users_controllers;
 
 router.post("/register", register); //con problemas del lado del front
 
 router.get("/me/:localId", getUser);
+
+router.get("/login/firebase/:email", getUserByEmail);
 
 router.get("/me/orders", getOrders);
 

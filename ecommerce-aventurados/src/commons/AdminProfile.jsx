@@ -27,12 +27,21 @@ const useStyles = makeStyles(() => ({
     width: "80%",
     margin: "0 auto",
   },
-
+  buttonsContainer: {
+    maxWidth: 800,
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "center",
+  },
   iconos: {
     color: "blue",
   },
   title: {
     fontSize: 30,
+  },
+  containerContent: {
+    margin: "200px 0 0 0",
+    border: "2px solid blue",
   },
 }));
 
@@ -47,7 +56,7 @@ const AdminProfile = () => {
         Admin
       </Typography>
       {/* navigation */}
-      <Grid container spacing={4}>
+      <Grid container spacing={4} className={classes.buttonsContainer}>
         <Grid
           onClick={() => setClicked("users")}
           className={classes.gridStyle}
@@ -110,7 +119,7 @@ const AdminProfile = () => {
       </Grid>
       {/* navigation */}
 
-      <Container>
+      <Container className="containerContent">
         {clicked === "users" && <AdminAllUsers />}
         {clicked === "products" && <AdminAllProducts />}
       </Container>
