@@ -79,18 +79,9 @@ const Card2 = ({ data }) => {
             variant="h6"
             component="div"
           >
-            {data.price}
+            ${data.price}
           </Typography>
           {favorites[0] ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-        </Grid>
-        <Grid container sx={{ justifyContent: "center" }}>
-          <Button
-            sx={{ bgcolor: "#DBF227", color: "black", borderRadius: "20px" }}
-            endIcon={<ShoppingCartIcon sx={{ color: "black" }} />}
-            variant="contained"
-          >
-            Comprar
-          </Button>
         </Grid>
       </CardContent>
     </Card>
