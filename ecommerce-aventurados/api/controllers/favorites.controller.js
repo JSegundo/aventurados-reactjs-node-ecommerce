@@ -31,21 +31,12 @@ const favorites_controllers = {
   deleteOne: async (req, res, next) => {
     const { userId, productId } = req.params;
     try {
-<<<<<<< HEAD
-      const favorite = await Favorites.findOne(
-        { where: { userId, productId } }
-      );
-      const deleteFavorite = favorite
-      favorite.destroy()
-      return res.status(202).send({id: deleteFavorite.id});
-=======
       const favorite = await Favorites.findOne({
         where: { userId, productId },
       });
       const deleteFavorite = favorite;
       favorite.destroy();
       return res.status(202).send({ id: deleteFavorite.id });
->>>>>>> 46745c538399d85ecf117904d6196a97884b52d2
     } catch (err) {
       next(err);
     }
