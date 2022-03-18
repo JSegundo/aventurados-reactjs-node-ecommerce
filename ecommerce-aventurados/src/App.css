@@ -47,6 +47,14 @@
   margin: 0 auto;
 }
 
+/* boton carrusel  */
+.botonIrCategoria {
+  position: absolute !important;
+  z-index: 1000;
+  bottom: 100;
+  margin: 200px;
+}
+
 .carousel-inner {
   position: relative;
   width: 100%;

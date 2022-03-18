@@ -26,21 +26,22 @@ const CardCarrito = ({ data, user }) => {
   };
 
   const handleRemoveAmount = () => {
-    dispatch(subtractAmount({ userId: user, cartId: data.id }))
+    dispatch(subtractAmount({ userId: user, cartId: data.id }));
   };
 
   const handleAddAmount = () => {
-    dispatch(addCarrito({ productId: data.product.id, userId: user}))
+    dispatch(addCarrito({ productId: data.product.id, userId: user }));
   };
 
   return (
     <Card
       key={data.id}
       sx={{
-        height: "100%",
-        width: "100%",
+        height: "300px",
+        width: "250px",
         boxShadow: "0.1em 0.1em 0.8em grey",
         borderRadius: "10px",
+        margin: " 0 15px 0 0",
       }}
     >
       <CardMedia
@@ -51,27 +52,50 @@ const CardCarrito = ({ data, user }) => {
       ></CardMedia>
       <CardContent>
         <Typography
-          sx={{ height: "2em" }}
+          sx={{ height: "1.8em" }}
           gutterBottom
-          variant="h5"
+          variant="h3"
           component="div"
+          fontSize={"1.2rem"}
         >
           {data.product.name}
         </Typography>
-        <Grid container sx={{ alignItems: "center" }}>
-          <Grid item xs={7}>
-            <Typography gutterBottom variant="h4" component="div">
+        <Grid
+          container
+          sx={{
+            width: "100%",
+            // alignItems: "center",
+            flexDirection: "column-reverse",
+            justifyContent: "space-around",
+          }}
+        >
+          <Grid item xs={5}>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              fontSize={"1rem"}
+            >
               ${data.product.price}
             </Typography>
           </Grid>
-          <Grid item xs={5}>
+          <Grid
+            item
+            xs={7}
+            display={"flex"}
+            alignItems={"center"}
+            width={"100%"}
+            sx={{ width: "100%" }}
+          >
             <Fab
               size="small"
               color="secondary"
               aria-label="add"
               onClick={data.amount == 1 ? handleRemoveCart : handleRemoveAmount}
+              fontSize={"1rem"}
             >
-              <RemoveIcon />
+              <RemoveIcon fontSize={"1rem"} />
+              {/* <RemoveIcon fontSize={"1rem"} /> */}
             </Fab>
             <Box component="span" sx={{ p: 2 }}>
               {data.amount}
@@ -85,7 +109,7 @@ const CardCarrito = ({ data, user }) => {
               <AddIcon />
             </Fab>
             <Fab enable aria-label="like" onClick={handleRemoveCart}>
-              <DeleteIcon sx={{ color: "black" }} />
+              <DeleteIcon sx={{ color: "black", fontSize: "1rem" }} />
             </Fab>
           </Grid>
         </Grid>
