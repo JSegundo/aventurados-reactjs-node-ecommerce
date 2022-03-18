@@ -25,6 +25,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../state/user";
 import "../App.css";
+import { setCard } from "../state/dataCard.js";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -79,6 +80,7 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [query, setQuery] = React.useState("");
   const [category, setCategory] = React.useState([]);
+  const [data, setData] = React.useState();
 
   const dispatch = useDispatch();
 
@@ -112,20 +114,20 @@ const Navbar = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(setCard(data));
+    navigate(`/single/${data.id}`);
   };
   const onChange = (e) => {
-    e.preventDefault();
     setQuery(e.target.value);
     axios
-      .get(`http://localhost:3001/api/products/search?name=${query}`)
-      .then((res) => console.log(res));
+      .get(`http://localhost:3001/api/products/search?name=${query.split(' ').join('%')}`)
+      .then((res) => setData(res.data));
   };
 
   React.useEffect(() => {
     axios
       .get("http://localhost:3001/api/categories")
       .then((res) => setCategory(res.data))
-      .then(() => console.log("CATEGORYS =====> ", category));
   }, []);
 
   return (

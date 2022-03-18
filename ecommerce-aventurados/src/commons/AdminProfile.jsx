@@ -23,6 +23,7 @@ import AdminAllCategories from "../components/AdminAllCategories";
 
 import AdminAllOrders from "../components/AdminAllOrders";
 
+
 // import AdminContent from "../components/AdminContent";
 
 const useStyles = makeStyles(() => ({
@@ -56,6 +57,7 @@ const AdminProfile = () => {
   const classes = useStyles();
 
   const [clicked, setClicked] = useState("products");
+  // if (!dataUser.admin) return <h1>No sos admin</h1>;
 
   return (
     <div className={classes.root}>

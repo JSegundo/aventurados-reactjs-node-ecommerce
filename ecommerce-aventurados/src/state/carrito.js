@@ -5,6 +5,10 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
+export const setCarrito = createAction('SET_CARRITO', () => {
+  return []
+})
+
 export const getCarrito = createAsyncThunk("GET_CARRITO", ({ userId }) => {
   return axios
     .get(`http://localhost:3001/api/carts/all/${userId}`)
@@ -45,6 +49,7 @@ export const subtractAmount = createAsyncThunk(
 );
 
 const carritoReducer = createReducer([], {
+  [setCarrito]: (state, action) => action.payload,
   [getCarrito.fulfilled]: (state, action) => action.payload,
   [addCarrito.fulfilled]: (state, action) => action.payload,
   [deleteCarrito.fulfilled]: (state, action) => action.payload,
