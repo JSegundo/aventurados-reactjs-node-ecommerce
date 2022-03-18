@@ -21,7 +21,7 @@ const categories_controllers = {
     }
   },
   addCategory: async (req, res, next) => {
-    req.body.stateId = 1
+    req.body.stateId = 1;
     try {
       const category = await Categories.create(req.body);
       return res.status(202).send(category);
@@ -41,12 +41,21 @@ const categories_controllers = {
     }
   },
   editCategory: async (req, res, next) => {
+    console.log(req.body);
     try {
       const [r, category] = await Categories.update(req.body, {
         where: { id: req.params.id },
         returning: true,
       });
-      return res.status(202).send(category[0]);
+      return res.status(202).send(category);
+    } catch (err) {
+      next(err);
+    }
+  },
+  oneCategory: async (req, res, next) => {
+    try {
+      const category = await Categories.findByPk(req.params.id);
+      return res.send(category);
     } catch (err) {
       next(err);
     }

@@ -23,6 +23,10 @@ import { setUser } from "./state/user";
 import AllProducts from "./components/AllProducts";
 
 import AdminEditProduct from "./commons/AdminEditProduct";
+import AdminEditCategory from "./commons/AdminEditCategory";
+import AdminEditOrder from "./commons/AdminEditOrder";
+
+
 import AdminAddNewProduct from "./commons/AdminAddNewProduct";
 
 import { getCarrito } from "./state/carrito";
@@ -59,9 +63,32 @@ function App() {
 
         {/* ADMIN */}
 
+          {/* ADMIN */}
+
+          <Route
+            path="/admin/edit/products/:id"
+            element={<AdminEditProduct />}
+          />
+          <Route
+            path="/admin/edit/categories/:id"
+            element={<AdminEditCategory />}
+          />
+          <Route
+            path="/admin/edit/orders/:id"
+            element={<AdminEditOrder />}
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedAdminRoutes>
+                <AdminProfile />
+              </ProtectedAdminRoutes>
+            }
+          />
+          {/* ADMIN */}
         <Route path="/admin/add/product" element={<AdminAddNewProduct />} />
-        <Route path="/admin/edit/products/:id" element={<AdminEditProduct />} />
-        <Route
+      {/*   <Route path="/admin/edit/products/:id" element={<AdminEditProduct />} />
+ */}        <Route
           path="/admin"
           element={
             <ProtectedAdminRoutes>
