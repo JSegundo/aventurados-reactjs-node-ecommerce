@@ -28,6 +28,25 @@ const orders_controllers = {
       next(err);
     }
   },
+  getAdminAll:async (req, res, next) => {
+   // const { id } = req.params;
+    try {
+      const orders = await Orders.findAll({
+         include: [{
+            model: Carts, 
+             include: {
+              model:Users,
+     //         where: { id: id }
+            },
+     //         where:{userId:id}
+            }
+        ],
+       });
+      return res.send(orders);
+    } catch (err) {
+      next(err);
+    }
+  },
 
 };
 
