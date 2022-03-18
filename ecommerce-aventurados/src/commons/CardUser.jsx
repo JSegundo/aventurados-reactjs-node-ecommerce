@@ -14,13 +14,12 @@ const CardUser = () => {
   const data = useSelector((state) => state.dataUser);
 
   return (
-    <Grid container container alignItems="center" direction="column">
+    <Grid container alignItems="center" direction="column">
       <AccountCircleIcon sx={{ width: "20vw", height: "20vh" }} />
       <Div>
         {data.name} {data.lastName}
       </Div>
       <Div>{data.email}</Div>
-      <Div>Local ID: {data.localId}</Div>
     </Grid>
   );
 };

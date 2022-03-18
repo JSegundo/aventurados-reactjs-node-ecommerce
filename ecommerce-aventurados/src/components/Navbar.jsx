@@ -22,6 +22,7 @@ import { useAuth } from "../contexts/AuthContext.js";
 import { Grid } from "@mui/material";
 import Fade from "@mui/material/Fade";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -68,7 +69,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar = () => {
   const navigate = useNavigate();
-
+  const dataUser = useSelector((state) => state.dataUser);
   const { logout, currentUser } = useAuth(); // retorna el contexto
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -274,7 +275,7 @@ const Navbar = () => {
               </Link>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="Remy Sharp">{dataUser.name ? `${dataUser.name[0]}${dataUser.lastName[0]}`: `NN`}</Avatar>
                 </IconButton>
               </Tooltip>
               <Menu
