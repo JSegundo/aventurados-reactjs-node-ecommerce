@@ -42,6 +42,7 @@ const carts_controllers = {
         where: { userId },
         include: [{ model: Users }, { model: Products }],
       });
+      console.log('CARTSS =>', carts.dataValues.amount)
       const [r, updateCart] = await Carts.update(
         { amount: carts.dataValues.amount - 1 },
         { where: { id: cartId }, returning: true }
