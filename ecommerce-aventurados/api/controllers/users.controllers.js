@@ -15,7 +15,6 @@ const users_controllers = {
   },
   getUser: async (req, res, next) => {
     const { localId } = req.params;
-    // console.log("localId: ", localId);
     try {
       const user = await Users.findOne({ where: { localId } });
       return res.send(user);
@@ -44,7 +43,6 @@ const users_controllers = {
   },
   deleteUser: async (req, res, next) => {
     const { id, localId } = req.params; //Usuario a borrar
-    // const { localId } = req.body; //id del admin
     console.log(id);
     try {
       const user = await Users.findOne({ where: { id } });
@@ -81,28 +79,19 @@ const users_controllers = {
       next(err);
     }
   },
-  // getAllUsers: async (req, res, next) => {
-  //   const { localId } = req.params;
-  //   console.log("localId", localId);
-  //   try {
-  //     const users = await Users.findAll({
-  //       where: { localId: { [Op.ne]: localId } },
-  //     });
-  //     return res.send(users);
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // },
   getAllUsers: async (req, res, next) => {
-    // const { localId } = req.params;
-    // console.log("localId", localId);
+    const { localId } = req.params;
+    console.log("localId", localId);
     try {
-      const users = await Users.findAll();
+      const users = await Users.findAll({
+        where: { localId: { [Op.ne]: localId } },
+      });
       return res.send(users);
     } catch (err) {
       next(err);
     }
   },
+
   findUserOrCreate: async (req, res, next) => {
     const { name, lastName, email, localId } = req.body;
     try {
