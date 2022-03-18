@@ -20,6 +20,9 @@ import AdminHeaderCards from "../components/AdminHeaderCards";
 import AdminAllUsers from "../components/AdminAllUsers";
 import AdminAllProducts from "../components/AdminAllProducts";
 import AdminAllCategories from "../components/AdminAllCategories";
+import AdminAllOrders from "../components/AdminAllOrders";
+
+
 // import AdminContent from "../components/AdminContent";
 
 const useStyles = makeStyles(() => ({
@@ -39,6 +42,9 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center",
+    padding: 10,
   },
   containerContent: {
     margin: "200px 0 0 0",
@@ -54,7 +60,7 @@ const AdminProfile = () => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h1" color="secondary" className={classes.title}>
+      <Typography variant="h1" color="primary" className={classes.title}>
         Admin
       </Typography>
       {/* navigation */}
@@ -76,6 +82,7 @@ const AdminProfile = () => {
           />
         </Grid>
         <Grid
+        onClick={()=>setClicked("orders")}
           className={classes.gridStyle}
           item
           xs={12}
@@ -126,6 +133,8 @@ const AdminProfile = () => {
         {clicked === "users" && <AdminAllUsers />}
         {clicked === "products" && <AdminAllProducts />}
         {clicked === "categories" && <AdminAllCategories />}
+        {clicked === "orders" && <AdminAllOrders />}
+
       </Container>
     </div>
   );
