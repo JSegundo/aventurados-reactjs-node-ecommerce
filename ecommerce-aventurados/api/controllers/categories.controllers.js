@@ -4,7 +4,10 @@ const { Op } = require("sequelize");
 const categories_controllers = {
   getAll: async (req, res, next) => {
     try {
-      const categories = await Categories.findAll();
+      const categories = await Categories.findAll({
+        where: { stateId: null },
+        // where: { stateId: { [Op.ne]: 5 } },
+      });
       return res.send(categories);
     } catch (err) {
       next(err);
@@ -35,7 +38,7 @@ const categories_controllers = {
         { stateId: 5 },
         { where: { id: req.params.id }, returning: true }
       );
-      return res.send(202).send(category[0]);
+      return res.status(202).send(category[0]);
     } catch (err) {
       next(err);
     }

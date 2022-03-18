@@ -10,14 +10,11 @@ export const getAllCategories = createAsyncThunk("GET_ALL_CATEGORIES", () => {
 export const deleteCategory = createAsyncThunk(
   "DELETE_CATEGORY",
   (categoryId, thunkAPI) => {
-    const { categorylist } = thunkAPI.getState();
-    axios
+    return axios
       .delete(`http://localhost:3001/api/categories/${categoryId}`)
-      .then((res) => res.data);
-    const newList = categorylist.filter((category) => {
-      return category.id !== categoryId;
-    });
-    return newList;
+      .then(() => axios.get(`http://localhost:3001/api/categories`))
+      .then((res) => res.data)
+      .catch((err) => console.error(err));
   }
 );
 
