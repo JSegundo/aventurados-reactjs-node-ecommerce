@@ -6,24 +6,31 @@ import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import {
-  Grid,
-  Fab,
-  Box,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-} from "@mui/material";
+import { Grid, Fab, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { deleteCarrito, addCarrito, subtractAmount } from "../state/carrito";
 
-const CardCarrito = ({ data }) => {
+const CardCarrito = ({ data, user }) => {
+  const dispatch = useDispatch();
+
   const [values, setValues] = React.useState({
-    amount: "",
+    amount: data.amount,
   });
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleRemoveCart = () => {
+    dispatch(deleteCarrito({ userId: user, cartId: data.id }));
+  };
+
+  const handleRemoveAmount = () => {
+    dispatch(subtractAmount({ userId: user, cartId: data.id }))
+  };
+
+  const handleAddAmount = () => {
+    dispatch(addCarrito({ productId: data.product.id, userId: user}))
   };
 
   return (
@@ -39,7 +46,7 @@ const CardCarrito = ({ data }) => {
       <CardMedia
         component="img"
         height="120"
-        image={data.image}
+        image={data.product.image}
         alt="experiencia"
       ></CardMedia>
       <CardContent>
@@ -49,27 +56,37 @@ const CardCarrito = ({ data }) => {
           variant="h5"
           component="div"
         >
-          {data.name}
+          {data.product.name}
         </Typography>
-        <Grid container  sx={{ alignItems: "center" }}>
+        <Grid container sx={{ alignItems: "center" }}>
           <Grid item xs={7}>
             <Typography gutterBottom variant="h4" component="div">
-              ${data.price}
+              ${data.product.price}
             </Typography>
           </Grid>
           <Grid item xs={5}>
-          <Fab size="small" color="secondary" aria-label="add">
-            <RemoveIcon />
-          </Fab>
-          <Box component="span" sx={{ p: 2 }}>
-            1
-          </Box>
-          <Fab size="small" color="secondary" aria-label="add">
-            <AddIcon />
-          </Fab>
-          <Fab disabled aria-label="like">
-            <DeleteIcon sx={{ color: "black" }} />
-          </Fab>
+            <Fab
+              size="small"
+              color="secondary"
+              aria-label="add"
+              onClick={data.amount == 1 ? handleRemoveCart : handleRemoveAmount}
+            >
+              <RemoveIcon />
+            </Fab>
+            <Box component="span" sx={{ p: 2 }}>
+              {data.amount}
+            </Box>
+            <Fab
+              size="small"
+              color="secondary"
+              aria-label="add"
+              onClick={handleAddAmount}
+            >
+              <AddIcon />
+            </Fab>
+            <Fab enable aria-label="like" onClick={handleRemoveCart}>
+              <DeleteIcon sx={{ color: "black" }} />
+            </Fab>
           </Grid>
         </Grid>
       </CardContent>

@@ -1,25 +1,54 @@
-import { createAction, createReducer } from '@reduxjs/toolkit'
-import axios from 'axios'
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const getCarrito = createAction('GET_CARRITO',(userId) => {
-    axios.get('/api/carts/all', {userId})
-        .then(res => res.data)
-})
+export const getCarrito = createAsyncThunk("GET_CARRITO", ({ userId }) => {
+  return axios
+    .get(`http://localhost:3001/api/carts/all/${userId}`)
+    .then((res) => res.data);
+});
 
-export const addCarrito = createAction('ADD_CARRITO',(cardId, userId, amount) => {
-    axios.post('/api/carts/add', {cardId, userId, amount})
-        .then(res => res.data)
-})
+export const addCarrito = createAsyncThunk(
+  "ADD_CARRITO",
+  ({ productId, userId }) => {
+    return axios
+      .post(`http://localhost:3001/api/carts/add/${userId}/${productId}/`)
+      .then(() => axios.get(`http://localhost:3001/api/carts/all/${userId}`))
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  }
+);
 
-export const deleteCarrito = createAction('DELETE_CARRITO',(cardId, userId, amount) => {
-    axios.post('/api/carts/add', {cardId, userId, amount})
-        .then(res => res.data)
-})
+export const deleteCarrito = createAsyncThunk(
+  "DELETE_CARRITO",
+  ({ cartId, userId }) => {
+    return axios
+      .delete(`http://localhost:3001/api/carts/del/${userId}/${cartId}`)
+      .then(() => axios.get(`http://localhost:3001/api/carts/all/${userId}`))
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  }
+);
+
+export const subtractAmount = createAsyncThunk(
+  "SUBTRACT_CARRITO",
+  ({ cartId, userId }) => {
+    return axios
+      .put(`http://localhost:3001/api/carts/${userId}/${cartId}`)
+      .then(() => axios.get(`http://localhost:3001/api/carts/all/${userId}`))
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  }
+);
 
 const carritoReducer = createReducer([], {
-    [getCarrito.fulfilled]: (state, action) => action.payload,
-    [addCarrito.fulfilled]: (state, action) => action.payload,
-    [deleteCarrito.fulfilled]: (state, action) => action.payload,
-})
+  [getCarrito.fulfilled]: (state, action) => action.payload,
+  [addCarrito.fulfilled]: (state, action) => action.payload,
+  [deleteCarrito.fulfilled]: (state, action) => action.payload,
+  [subtractAmount.fulfilled]: (state, action) => action.payload,
+});
 
-export default carritoReducer
+export default carritoReducer;

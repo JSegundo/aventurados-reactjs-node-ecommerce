@@ -33,11 +33,11 @@ Favorites.belongsTo(Users);
 Products.belongsTo(States);
 Products.belongsTo(Categories);
 
-
+//CARTS
 Carts.belongsTo(Users);
 Carts.belongsTo(Products);
-Carts.belongsTo(States);
 
+//REVIEWS
 Reviews.belongsTo(Products);
 Reviews.belongsTo(Orders);
 
