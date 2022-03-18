@@ -1,4 +1,3 @@
-import { useSelect } from "@mui/base";
 import {
   Button,
   Grid,
@@ -11,11 +10,11 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box } from "@mui/system";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addFavorite, getFavorite, removeFavorite } from "../state/favourites";
+import { addCarrito } from "../state/carrito";
 import "../App.css";
 
 const SingleView = () => {
@@ -39,6 +38,10 @@ const SingleView = () => {
   const handleRemoveFavorite = () => {
     dispatch(removeFavorite({ userId: user.id, productId: data.id }));
     navigate(`/single/${data.id}`);
+  };
+
+  const handleCarrito = () => {
+    dispatch(addCarrito({ productId: data.id, userId: user.id, amount: 1 }));
   };
 
   const navigate = useNavigate();
@@ -169,6 +172,7 @@ const SingleView = () => {
               </Box>
               <Box>
                 <Button
+                  onClick={handleCarrito}
                   sx={{
                     bgcolor: "#94d4ffcf",
                     color: "black",
