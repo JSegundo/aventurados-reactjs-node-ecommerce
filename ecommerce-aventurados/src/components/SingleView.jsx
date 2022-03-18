@@ -1,5 +1,6 @@
 import {
   Button,
+  Dialog,
   Grid,
   ImageListItem,
   Rating,
@@ -9,6 +10,7 @@ import {
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Alert, AlertTitle} from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,10 +21,9 @@ import "../App.css";
 
 const SingleView = () => {
   const data = useSelector((state) => state.dataCard);
-
   const user = useSelector((state) => state.dataUser);
-
   const dataFavorite = useSelector((state) => state.dataFavorites);
+  const [purchase, setPurchase] = React.useState(false);
 
   const favorites = dataFavorite.filter(
     (favorite) => favorite.product.id == data.id
@@ -42,7 +43,12 @@ const SingleView = () => {
 
   const handleCarrito = () => {
     dispatch(addCarrito({ productId: data.id, userId: user.id, amount: 1 }));
+    setPurchase(!purchase)
   };
+
+  const closeDialog = () => {
+    setPurchase(!purchase)
+  }
 
   const navigate = useNavigate();
 
@@ -109,19 +115,6 @@ const SingleView = () => {
               $ {data.price}
             </Typography>
           </Grid>
-          {/* <Grid item xs={12}>
-            <Grid container>
-              <Grid item xs={12}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                ></Box>
-              </Grid>
-            </Grid>
-          </Grid> */}
-
           <Grid item xs={12}>
             <Box
               sx={{
@@ -181,8 +174,14 @@ const SingleView = () => {
                   endIcon={<ShoppingCartIcon sx={{ color: "black" }} />}
                   variant="contained"
                 >
-                  Comprar
+                  Agregar a Carrito
                 </Button>
+                <Dialog open={purchase} onClose={closeDialog} scroll='body'> 
+                  <Alert severity="success">
+                    <AlertTitle>Success</AlertTitle>
+                    Se agrego al carrito correctamente — <strong>check it out!</strong>
+                  </Alert>
+                </Dialog>
               </Box>
             </Box>
           </Grid>

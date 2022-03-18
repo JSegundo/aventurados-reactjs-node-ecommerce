@@ -8,7 +8,7 @@ import axios from "axios";
 export const getCarrito = createAsyncThunk("GET_CARRITO", ({ userId }) => {
   return axios
     .get(`http://localhost:3001/api/carts/all/${userId}`)
-    .then((res) => res.data);
+    .then((res) => res.data.sort((a, b) => a.id - b.id));
 });
 
 export const addCarrito = createAsyncThunk(
@@ -17,7 +17,7 @@ export const addCarrito = createAsyncThunk(
     return axios
       .post(`http://localhost:3001/api/carts/add/${userId}/${productId}/`)
       .then(() => axios.get(`http://localhost:3001/api/carts/all/${userId}`))
-      .then((res) => res.data)
+      .then((res) => res.data.sort((a, b) => a.id - b.id))
       .catch((err) => console.log(err));
   }
 );
@@ -28,7 +28,7 @@ export const deleteCarrito = createAsyncThunk(
     return axios
       .delete(`http://localhost:3001/api/carts/del/${userId}/${cartId}`)
       .then(() => axios.get(`http://localhost:3001/api/carts/all/${userId}`))
-      .then((res) => res.data)
+      .then((res) => res.data.sort((a, b) => a.id - b.id))
       .catch((err) => console.log(err));
   }
 );
@@ -39,7 +39,7 @@ export const subtractAmount = createAsyncThunk(
     return axios
       .put(`http://localhost:3001/api/carts/${userId}/${cartId}`)
       .then(() => axios.get(`http://localhost:3001/api/carts/all/${userId}`))
-      .then((res) => res.data)
+      .then((res) => res.data.sort((a, b) => a.id - b.id))
       .catch((err) => console.log(err));
   }
 );

@@ -11,12 +11,15 @@ import { Grid } from "@mui/material";
 import { setCard } from "../state/dataCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
+import { addFavorite, removeFavorite } from "../state/favourites";
 
 import "../App.css";
 
 const Card2 = ({ data }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.dataUser);
   const dataFavorite = useSelector((state) => state.dataFavorites);
 
   const favorites = dataFavorite.filter(
@@ -28,9 +31,16 @@ const Card2 = ({ data }) => {
     navigate(`/single/${data.id}`);
   };
 
+  const handleRemoveFavorite = () => {
+    dispatch(removeFavorite({ userId: user.id, productId: data.id }));
+  };
+
+  const handleFavorite = () => {
+    dispatch(addFavorite({ userId: user.id, productId: data.id }));
+  };
+
   return (
     <Card
-      onClick={handleClick}
       key={data.id}
       sx={{
         height: "20rem",
@@ -41,6 +51,7 @@ const Card2 = ({ data }) => {
       }}
     >
       <CardMedia
+        onClick={handleClick}
         component="img"
         height="140"
         image={data.image}
@@ -49,6 +60,8 @@ const Card2 = ({ data }) => {
       <CardContent>
         <Stack spacing={1} className="estrellitas">
           <Rating
+            onClick={handleClick}
+            I
             name="half-rating-read"
             defaultValue={data.rating}
             precision={0.5}
@@ -57,6 +70,7 @@ const Card2 = ({ data }) => {
           />
         </Stack>
         <Typography
+          onClick={handleClick}
           sx={{ height: "1.em" }}
           gutterBottom
           variant="h6"
@@ -65,6 +79,7 @@ const Card2 = ({ data }) => {
           {data.name}
         </Typography>
         <Typography
+          onClick={handleClick}
           sx={{ height: "5em" }}
           variant="body2"
           color="text.secondary"
@@ -73,6 +88,7 @@ const Card2 = ({ data }) => {
         </Typography>
         <Grid container sx={{ alignItems: "center" }}>
           <Typography
+            onClick={handleClick}
             sx={{ flexGrow: 1 }}
             gutterBottom
             variant="h6"
@@ -80,7 +96,13 @@ const Card2 = ({ data }) => {
           >
             ${data.price}
           </Typography>
-          {favorites[0] ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          <IconButton aria-label="add to favorites">
+            {favorites[0] ? (
+              <FavoriteIcon onClick={handleRemoveFavorite} />
+            ) : (
+              <FavoriteBorderIcon onClick={handleFavorite} />
+            )}
+          </IconButton>
         </Grid>
       </CardContent>
     </Card>
