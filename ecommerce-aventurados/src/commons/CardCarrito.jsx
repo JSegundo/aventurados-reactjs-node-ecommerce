@@ -81,9 +81,10 @@ const CardCarrito = ({ data, user }) => {
           </Grid>
           <Grid
             item
-            xs={7}
+            xs={12}
             display={"flex"}
             alignItems={"center"}
+            justifyContent={"space-around"}
             width={"100%"}
             sx={{ width: "100%" }}
           >
@@ -93,6 +94,8 @@ const CardCarrito = ({ data, user }) => {
               aria-label="add"
               onClick={data.amount == 1 ? handleRemoveCart : handleRemoveAmount}
               fontSize={"1rem"}
+              width={"45"}
+              height="45"
             >
               <RemoveIcon fontSize={"1rem"} />
               {/* <RemoveIcon fontSize={"1rem"} /> */}
@@ -109,7 +112,12 @@ const CardCarrito = ({ data, user }) => {
               <AddIcon />
             </Fab>
             <Fab enable aria-label="like" onClick={handleRemoveCart}>
-              <DeleteIcon sx={{ color: "black", fontSize: "1rem" }} />
+              <DeleteIcon
+                sx={{
+                  color: "black",
+                  fontSize: "1rem",
+                }}
+              />
             </Fab>
           </Grid>
         </Grid>
