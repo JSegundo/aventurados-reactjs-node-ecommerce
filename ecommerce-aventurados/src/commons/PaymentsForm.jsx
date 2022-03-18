@@ -7,19 +7,43 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Grid, Card, Typography } from "@mui/material";
+import emailjs from "emailjs-com";
+import { useNavigate } from "react-router-dom";
 
 const PaymentForm = () => {
+  const navigate = useNavigate();
   const [values, setValues] = React.useState({
     name: "",
     email: "",
     creditNumber: "",
+    numberOperation: "",
   });
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  console.log("VALUES ===>", values);
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        "service_xkgqqnr",
+        "template_9smiaf4",
+        e.target,
+        "xJPVUN02IJqFDYhoA"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    e.target.reset();
+    //navigate('/miperfil')
+    //axios.post('http://localhost:3001/api/orders/')
+  };
 
   return (
     <Card
@@ -34,7 +58,7 @@ const PaymentForm = () => {
         Finalizar Compra
       </Typography>
       <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-        <form onSubmit={}>
+        <form onSubmit={sendEmail}>
           <FormControl fullWidth sx={{ m: 1 }}>
             <InputLabel htmlFor="outlined-adornment-amount">
               Nombre del titular{" "}
@@ -44,6 +68,7 @@ const PaymentForm = () => {
               value={values.amount}
               onChange={handleChange("name")}
               label="Name"
+              name="name"
             />
           </FormControl>
           <FormControl fullWidth sx={{ m: 1 }}>
@@ -53,6 +78,7 @@ const PaymentForm = () => {
               value={values.amount}
               onChange={handleChange("email")}
               label="Email"
+              name="email"
             />
           </FormControl>
           <FormControl fullWidth sx={{ m: 1 }}>
@@ -64,61 +90,79 @@ const PaymentForm = () => {
               value={values.amount}
               onChange={handleChange("creditNumber")}
               label="Amount"
+              name="creditNumber"
             />
           </FormControl>
-        </form>
-        <div>
-          <TextField
-            label="Fecha de vencimiento"
-            id="filled-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">dd/mm/aaaa</InputAdornment>
-              ),
-            }}
-            variant="filled"
-          />
-          <TextField
-            label="Codigo de Seguridad"
-            id="filled-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">CVV</InputAdornment>
-              ),
-            }}
-            variant="filled"
-          />
-          <TextField
-            label="Documento"
-            id="filled-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">DNI</InputAdornment>
-              ),
-            }}
-            variant="filled"
-          />
-          <Box
-            sx={{
-              marginTop: 2,
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Button
-              sx={{
-                width: "30%",
-                bgcolor: "#ff94c2",
+          <div>
+            <TextField
+              label="Fecha de vencimiento"
+              id="filled-start-adornment"
+              sx={{ m: 1, width: "25ch" }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">dd/mm/aaaa</InputAdornment>
+                ),
               }}
-              variant="contained"
+              variant="filled"
+            />
+            <TextField
+              label="Codigo de Seguridad"
+              id="filled-start-adornment"
+              sx={{ m: 1, width: "25ch" }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">CVV</InputAdornment>
+                ),
+              }}
+              variant="filled"
+            />
+            <TextField
+              label="Documento"
+              id="filled-start-adornment"
+              sx={{ m: 1, width: "25ch" }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">DNI</InputAdornment>
+                ),
+              }}
+              variant="filled"
+            />
+            <TextField
+              disabled
+              name="numberOperation"
+              label="Numero de Operacion"
+              defaultValue={parseInt(
+                Math.random() * (100000 - 999000 + 1) + 999000
+              )}
+              id="filled-start-adornment"
+              sx={{ m: 1, width: "25ch" }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start"></InputAdornment>
+                ),
+              }}
+              variant="filled"
+            />
+            <Box
+              sx={{
+                marginTop: 2,
+                display: "flex",
+                justifyContent: "center",
+              }}
             >
-              Pagar
-            </Button>
-          </Box>
-        </div>
+              <Button
+                type="submit"
+                sx={{
+                  width: "30%",
+                  bgcolor: "#ff94c2",
+                }}
+                variant="contained"
+              >
+                Pagar
+              </Button>
+            </Box>
+          </div>
+        </form>
       </Box>
     </Card>
   );
