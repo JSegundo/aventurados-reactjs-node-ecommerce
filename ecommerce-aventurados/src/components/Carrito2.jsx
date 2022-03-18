@@ -45,7 +45,7 @@ const Carrito2 = ({ data }) => {
         </Grid>
         <Grid item direction="column" xs={6}>
           <Grid container rowSpacing={5} justifyContent="center">
-            <Grid item xs={11}>
+            <Grid item xs={8} spacing={0} justifyContent='center'>
               <ResumenCompra />
             </Grid>
             <Grid item xs={8}>

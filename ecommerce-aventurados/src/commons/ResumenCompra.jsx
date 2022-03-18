@@ -19,7 +19,7 @@ const ResumenCompra = () => {
   return (
 <Card
 sx={{
-  maxWidth:350,
+  maxWidth:625,
   minWidth: 275,
   boxShadow: "0.1em 0.1em 0.8em grey",
   borderRadius: 5,
