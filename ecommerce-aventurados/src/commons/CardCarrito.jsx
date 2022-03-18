@@ -113,8 +113,10 @@ const CardCarrito = ({ data, user }) => {
             >
               <AddIcon />
             </Fab>
+
             <Fab enable aria-label="like" onClick={handleRemoveCart} padding={5}>
               <DeleteIcon sx={{ color: "black", fontSize: "1rem" }} />
+
             </Fab>
           </Grid>
         </Grid>

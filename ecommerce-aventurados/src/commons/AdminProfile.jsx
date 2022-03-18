@@ -20,6 +20,7 @@ import AdminHeaderCards from "../components/AdminHeaderCards";
 import AdminAllUsers from "../components/AdminAllUsers";
 import AdminAllProducts from "../components/AdminAllProducts";
 import AdminAllCategories from "../components/AdminAllCategories";
+
 import AdminAllOrders from "../components/AdminAllOrders";
 
 
@@ -82,7 +83,7 @@ const AdminProfile = () => {
           />
         </Grid>
         <Grid
-        onClick={()=>setClicked("orders")}
+          onClick={() => setClicked("orders")}
           className={classes.gridStyle}
           item
           xs={12}
@@ -134,7 +135,6 @@ const AdminProfile = () => {
         {clicked === "products" && <AdminAllProducts />}
         {clicked === "categories" && <AdminAllCategories />}
         {clicked === "orders" && <AdminAllOrders />}
-
       </Container>
     </div>
   );

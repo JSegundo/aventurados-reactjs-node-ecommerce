@@ -4,7 +4,10 @@ const { Op } = require("sequelize");
 const categories_controllers = {
   getAll: async (req, res, next) => {
     try {
-      const categories = await Categories.findAll();
+      const categories = await Categories.findAll({
+        where: { stateId: null },
+        // where: { stateId: { [Op.ne]: 5 } },
+      });
       return res.send(categories);
     } catch (err) {
       next(err);
@@ -21,7 +24,7 @@ const categories_controllers = {
     }
   },
   addCategory: async (req, res, next) => {
-    req.body.stateId = 1
+    req.body.stateId = 1;
     try {
       const category = await Categories.create(req.body);
       return res.status(202).send(category);
@@ -35,26 +38,31 @@ const categories_controllers = {
         { stateId: 5 },
         { where: { id: req.params.id }, returning: true }
       );
-      return res.send(202).send(category[0]);
-    } catch (err) {
-      next(err);
-    }
-  },
-  editCategory: async (req, res, next) => {
-    try {
-      const [r, category] = await Categories.update(req.body, {
-        where: { id: req.params.id },
-        returning: true,
-      });
       return res.status(202).send(category[0]);
     } catch (err) {
       next(err);
     }
   },
+  editCategory: async (req, res, next) => {
+    console.log(req.body);
+    try {
+      const [r, category] = await Categories.update(req.body, {
+        where: { id: req.params.id },
+        returning: true,
+      });
+      return res.status(202).send(category);
+    } catch (err) {
+      next(err);
+    }
+  },
+  oneCategory: async (req, res, next) => {
+    try {
+      const category = await Categories.findByPk(req.params.id);
+      return res.send(category);
+    } catch (err) {
+      next(err);
+    }
+  },
 };
-
-
-
-
 
 module.exports = categories_controllers;

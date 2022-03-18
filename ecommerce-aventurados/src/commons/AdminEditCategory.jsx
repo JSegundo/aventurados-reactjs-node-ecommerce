@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getClickedCategory } from "../state/selectedCategory";
+import { editCategory } from "../state/category";
 
 import {
   Button,
@@ -74,26 +75,43 @@ const useStyles = makeStyles((theme) => ({
 
 const AdminEditCategory = () => {
   const { id } = useParams(); // id del producto seleccionado
+  console.log(id);
   const dispatch = useDispatch();
 
-  const category = useSelector((store) => store.selectedCategory);
-  console.log(category); 
+  const [edition, setEdition] = useState("");
+  const [saved, setSaved] = useState(false);
 
+  useEffect(() => {
+    dispatch(getClickedCategory(id));
+  }, []);
+
+  const category = useSelector((store) => store.selectedCategory);
+  console.log(category);
   const classes = useStyles();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEdition({ ...edition, [name]: value });
+    console.log(edition);
+  };
+
+  const handleSubmitChanges = (e) => {
+    e.preventDefault();
+
+    dispatch(editCategory({ id, edition }));
+    setSaved(true);
+  };
 
   return (
     <>
-      {/* <img src={category.image} className={classes.images} /> */}
       <div className={classes.otherMargin}>
         <Container>
           <Grid className={classes.imagenContainer}>
             <img
               src={category.image}
-              // alt={edit.name}
               style={{
                 width: "50%",
                 heigth: "100%",
-                // marginLeft: theme.spacing(20),
               }}
             />
             <Container>
@@ -108,56 +126,50 @@ const AdminEditCategory = () => {
                 Editar categoria
               </Typography>
               <Grid>
-                <form>
+                <form onSubmit={handleSubmitChanges}>
                   <Grid container spacing={5}>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        // value={edit.name}
-                        // onChange={handleChange}
-                        // id="name"
+                        value={edition.name}
+                        onChange={handleChange}
+                        name="name"
                         label="Nombre"
                         fullWidth
                       />
                     </Grid>
-                { /*   <Grid item xs={12} sm={6}>
-                      <TextField
-                        // value={edit.volume}
-                        // onChange={handleChange}
-                        // id="volume"
-                        label="Descripcion"
-                        fullWidth
-                      />
-                */}    </Grid>
-                 {/*   <Grid item xs={12} sm={6}>
-                      <TextField
-                        // value={edit.brand}
-                        // onChange={handleChange}
-                        // id="brand"
-                        // label=""
-                        fullWidth
-                      />
-                    </Grid> */}
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        // value={edit.img}
-                        // onChange={handleChange}
-                        // id="img"
-                        label="Imagen url"
-                        fullWidth
-                      />
-                    </Grid>
+                  </Grid>
 
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      value={edition.image}
+                      onChange={handleChange}
+                      name="image"
+                      label="Imagen url"
+                      fullWidth
+                    />
+                  </Grid>
+
+                  {saved ? (
+                    <>
                       <Button
-                        type="submit"
+                        href="/admin"
                         variant="contained"
-                        color="primary"
-                        className={classes.editBtn}
+                        color="green"
+                        className={classes.colorSavedBtn}
                       >
-                        Confirmar cambios
+                        Go to admin panel
                       </Button>
-                    
-                    {/* probando container para categorias y btn guardar*/}
-                  
+                    </>
+                  ) : (
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      className={classes.editBtn}
+                    >
+                      Save changes
+                    </Button>
+                  )}
                 </form>
               </Grid>
             </Grid>

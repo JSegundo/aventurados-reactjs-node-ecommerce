@@ -18,12 +18,10 @@ import { Delete } from "@material-ui/icons";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EditIcon from "@material-ui/icons/Edit";
 import { useSelector, useDispatch } from "react-redux";
-import {getClickedCategory} from "../state/selectedCategory"
+import { getClickedCategory } from "../state/selectedCategory";
 
-import {getAllCategories} from "../state/category"
-import {deleteCategory,addCategory,editCategory} from "../state/category"
-
-
+import { getAllCategories } from "../state/category";
+import { deleteCategory, addCategory, editCategory } from "../state/category";
 
 const useStyles = makeStyles(() => ({
   containerContent: {
@@ -48,121 +46,81 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-
-
 const AdminAllCategories = () => {
   const allCategories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
-    dispatch(getAllCategories())
+    dispatch(getAllCategories());
   }, []);
 
-//para EDITAR
-const handleClickEdit = ({ id }) => {
-  dispatch(getClickedCategory(id));
-};
-const handleDeleteCategory = ({ id }) => {
-  dispatch(deleteCategory(id)); //BORRA
-};
+  //para EDITAR
+  const handleClickEdit = ({ id }) => {
+    dispatch(getClickedCategory(id));
+  };
+  const handleDeleteCategory = ({ id }) => {
+    dispatch(deleteCategory(id)); //BORRA
+  };
 
-const handleAddCategory = ({ id }) => {
-  dispatch(addCategory(id)); //agrega
-};
-
-
-
-
-
+  const handleAddCategory = ({ id }) => {
+    dispatch(addCategory(id)); //agrega
+  };
 
   const classes = useStyles();
-return (
-  <>
-  <IconButton color="inherit" className={classes.containerAddBtn}>
-    <AddCircleOutlineIcon className={classes.AddBtn} />
-  </IconButton>
-  <Table size="big" className={classes.containerContent}>
-    <TableHead>
-      <TableRow>
-        <TableCell>Categories</TableCell>
-        <TableCell align="center">Img</TableCell>
-        <TableCell align="center">name</TableCell>
-      {//  <TableCell align="center">stateId</TableCell>
-     //   <TableCell align="center">Price</TableCell>
-     }
-       {// <TableCell align="center">Rating</TableCell>
-       }
-        <TableCell align="center">Edit</TableCell>
-        <TableCell align="center">Delete</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {allCategories?.map((category) => (
-        <>
-          <TableRow key={category.id}>
-            <TableCell>
-              {console.log(category)}
-              <Typography component="text">{category.name}</Typography>
-            </TableCell>
-            <TableCell align="center">
-              <img src={`${category.image}`} className={classes.images} />
-            </TableCell>
-          {//  <TableCell align="center">{`${category.description.slice(
-           //   0,
-           //   50
-           // )}..`}</TableCell>
-          }
-            <TableCell align="center">{`${category.stateId}`}</TableCell>
-          {//  <TableCell align="center">{`${product.price}`}</TableCell>
-           //  <TableCell align="center">{`${product.rating}`}</TableCell>
-          }
-            <TableCell align="center">
-              <Link
-                onClick={() => handleClickEdit(category)}
-                to={`/admin/edit/categories/${category.id}`}
-              >
-                <IconButton color="inherit">
-                  <EditIcon />
-                </IconButton>
-              </Link>
-            </TableCell>
+  return (
+    <>
+      <IconButton color="inherit" className={classes.containerAddBtn}>
+        <AddCircleOutlineIcon className={classes.AddBtn} />
+      </IconButton>
+      <Table size="big" className={classes.containerContent}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Categories</TableCell>
+            <TableCell align="center">Img</TableCell>
 
-            <TableCell align="center">
-              <IconButton
-                edge="end"
-                color="inherit"
-                onClick={() => handleDeleteCategory(category)}
-              >
-                <Delete />
-              </IconButton>
-            </TableCell>
+            <TableCell align="center">Edit</TableCell>
+            <TableCell align="center">Delete</TableCell>
           </TableRow>
-        </>
-      ))}
-    </TableBody>
-  </Table>
-</>
-  
-  
-  
-  ////
-    /*
-      <div>
-        <h2>todas las categories</h2>
-        <ul>
-          {allCategories.map((categoria, i) => (
-            <li key={i}>
-              <h3>{categoria.name}</h3>
-              <img src={`${categoria.image}`} />
-            </li>
+        </TableHead>
+        <TableBody>
+          {allCategories?.map((category) => (
+            <>
+              <TableRow key={category.id}>
+                <TableCell>
+                  {console.log(category)}
+                  <Typography component="text">{category.name}</Typography>
+                </TableCell>
+                <TableCell align="center">
+                  <img src={`${category.image}`} className={classes.images} />
+                </TableCell>
+
+                <TableCell align="center">
+                  <Link
+                    onClick={() => handleClickEdit(category)}
+                    to={`/admin/edit/categories/${category.id}`}
+                  >
+                    <IconButton color="inherit">
+                      <EditIcon />
+                    </IconButton>
+                  </Link>
+                </TableCell>
+
+                <TableCell align="center">
+                  <IconButton
+                    edge="end"
+                    color="inherit"
+                    onClick={() => handleDeleteCategory(category)}
+                  >
+                    <Delete />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            </>
           ))}
-        </ul>
-      </div>
-      */
-          
+        </TableBody>
+      </Table>
+    </>
   );
 };
-
 
 export default AdminAllCategories;
