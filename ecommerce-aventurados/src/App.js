@@ -24,6 +24,10 @@ import { getFavorite } from "./state/favourites"
 import { setUser } from "./state/user"
 
 import AdminEditProduct from "./commons/AdminEditProduct";
+import AdminEditCategory from "./commons/AdminEditCategory";
+import AdminEditOrder from "./commons/AdminEditOrder";
+
+
 function App() {
   const { currentUser } = useAuth()
 
@@ -65,6 +69,14 @@ function App() {
           <Route
             path="/admin/edit/products/:id"
             element={<AdminEditProduct />}
+          />
+          <Route
+            path="/admin/edit/categories/:id"
+            element={<AdminEditCategory />}
+          />
+          <Route
+            path="/admin/edit/orders/:id"
+            element={<AdminEditOrder />}
           />
           <Route
             path="/admin"
