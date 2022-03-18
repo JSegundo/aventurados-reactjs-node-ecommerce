@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import Carrousel1 from "../commons/Carrousel1";
 import Card from "../commons/Card";
 import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
+import { Container, Typography, Button } from "@mui/material";
 import axios from "axios";
 import "../App.css";
-
 
 const Home = () => {
   const [bestSeller, setBestSeller] = useState([]);
@@ -18,16 +17,27 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <>
+      {/* <h1 className="mainTitle">
+        Some People Excel At AVENTURADOS And Some Don't - Which One Are You?
+      </h1> */}
+
       <div className="slide">
         <Carrousel1 />
+        {/* <Button>IR A CATEGORIA</Button> */}
       </div>
+      <h1 className="mainTitle">AVENTURADOS</h1>
       <div className="container">
         <div className="back-img">
           <Typography
             variant="h4"
             component="div"
-            sx={{ display: "flex", justifyContent: "center", margin: "0.5em", color: 'white' }}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "0.5em",
+              color: "white",
+            }}
           >
             Mas Vendidos
           </Typography>
@@ -45,7 +55,7 @@ const Home = () => {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </>
   );
 };
 

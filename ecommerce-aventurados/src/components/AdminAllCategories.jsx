@@ -21,7 +21,9 @@ import { useSelector, useDispatch } from "react-redux";
 import {getClickedCategory} from "../state/selectedCategory"
 
 import {getAllCategories} from "../state/category"
-import {deleteCategory} from "../state/category"
+import {deleteCategory,addCategory,editCategory} from "../state/category"
+
+
 
 const useStyles = makeStyles(() => ({
   containerContent: {
@@ -63,6 +65,10 @@ const handleClickEdit = ({ id }) => {
 };
 const handleDeleteCategory = ({ id }) => {
   dispatch(deleteCategory(id)); //BORRA
+};
+
+const handleAddCategory = ({ id }) => {
+  dispatch(addCategory(id)); //agrega
 };
 
 

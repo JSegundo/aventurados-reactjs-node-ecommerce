@@ -55,12 +55,14 @@ const products_controllers = {
         { stateId: 5 },
         { where: { id: req.params.id }, returning: true }
       );
-      return res.send(202).send(product[0]);
+      return res.status(202).send(product[0]);
     } catch (err) {
       next(err);
     }
   },
   editProduct: async (req, res, next) => {
+    console.log(req.params.id);
+    console.log(req.body);
     try {
       const [r, product] = await Products.update(req.body, {
         where: { id: req.params.id },

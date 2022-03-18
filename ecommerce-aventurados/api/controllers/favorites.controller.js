@@ -18,7 +18,11 @@ const favorites_controllers = {
     const { userId, productId } = req.params;
     try {
       const newFavorite = await Favorites.create({ userId, productId });
-      return res.status(202).send(newFavorite);
+      const favoriteToReturn = await Favorites.findAll({
+        where: { id: newFavorite.id },
+        include: [{ model: Users }, { model: Products }],
+      });
+      return res.status(202).send(favoriteToReturn[0]);
     } catch (err) {
       next(err);
     }
@@ -27,12 +31,12 @@ const favorites_controllers = {
   deleteOne: async (req, res, next) => {
     const { userId, productId } = req.params;
     try {
-      const favorite = await Favorites.findOne(
-        { where: { userId, productId } }
-      );
-      const deleteFavorite = favorite
-      favorite.destroy()
-      return res.send(202).send(deleteFavorite);
+      const favorite = await Favorites.findOne({
+        where: { userId, productId },
+      });
+      const deleteFavorite = favorite;
+      favorite.destroy();
+      return res.status(202).send({ id: deleteFavorite.id });
     } catch (err) {
       next(err);
     }

@@ -1,8 +1,6 @@
 import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const setFavorite = createAction('SET_FAVOTIRE')
-
 export const getFavorite = createAsyncThunk('GET_FAVORITE',(userId) => {
     return axios.get(`http://localhost:3001/api/favorites/${userId}`)
                 .then(res => res.data)
@@ -19,10 +17,9 @@ export const removeFavorite = createAsyncThunk('REMOVE_FAVORITE',({userId, produ
 })
 
 const favoriteReducer = createReducer([], {
-    [setFavorite]: (state, action) => action.payload,
     [getFavorite.fulfilled]: (state, action) => action.payload,
     [addFavorite.fulfilled]: (state, action) => [...state, action.payload],
-    [removeFavorite.fulfilled]: (state, action) => state.filter(fav => fav.id !== action.payload),
+    [removeFavorite.fulfilled]: (state, action) => state.filter(fav => fav.id !== action.payload.id),
 })
 
 export default favoriteReducer

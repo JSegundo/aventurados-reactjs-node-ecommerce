@@ -18,8 +18,8 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EditIcon from "@material-ui/icons/Edit";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getAllOrders, deleteOrder } from "../state/products";
-import { getClickedOrder } from "../state/selectedProduct";
+import { getAllOrders, deleteOrder } from "../state/orders";
+import { getClickedOrder } from "../state/selectedOrder";
 
 const useStyles = makeStyles(() => ({
   containerContent: {
@@ -77,8 +77,8 @@ const AdminAllOrders = () => {
             <TableCell align="center">Amount</TableCell>
             <TableCell align="center">transaction</TableCell>
 {/*             <TableCell align="center">Rating</TableCell>
- */}            <TableCell align="center">Edit</TableCell>
-            <TableCell align="center">Delete</TableCell>
+             <TableCell align="center">Edit</TableCell>
+ */} {/*           <TableCell align="center">Delete</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -86,7 +86,7 @@ const AdminAllOrders = () => {
             <>
               <TableRow key={order.id}>
                 <TableCell>
-                  {<Typography component="text">{order.name}</Typography>}
+                  {<Typography component="text">{order.id}</Typography>}
                 </TableCell>
 {/*                 <TableCell align="center">
                   <img src={`${product.image}`} className={classes.images} />
@@ -96,9 +96,9 @@ const AdminAllOrders = () => {
                 <TableCell align="center">{`${order.transaction}`}</TableCell>
 {/*                 <TableCell align="center">{`${order.rating}`}</TableCell>
  */}
-                <TableCell align="center">
+    {/*             <TableCell align="center">
                   <Link
-                    onClick={() => handleClickEdit(product)}
+                    onClick={() => handleClickEdit(order)}
                     to={`/admin/edit/orders/${order.id}`}
                   >
                     <IconButton color="inherit">
@@ -106,7 +106,7 @@ const AdminAllOrders = () => {
                     </IconButton>
                   </Link>
                 </TableCell>
-
+ */}{/* 
                 <TableCell align="center">
                   <IconButton
                     edge="end"
@@ -116,7 +116,7 @@ const AdminAllOrders = () => {
                     <Delete />
                   </IconButton>
                 </TableCell>
-              </TableRow>
+ */}              </TableRow>
             </>
           ))}
         </TableBody>

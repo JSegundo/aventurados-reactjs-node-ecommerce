@@ -65,9 +65,11 @@ const AdminAllProducts = () => {
 
   return (
     <>
-      <IconButton color="inherit" className={classes.containerAddBtn}>
-        <AddCircleOutlineIcon className={classes.AddBtn} />
-      </IconButton>
+      <Link to={"/admin/add/product"}>
+        <IconButton color="inherit" className={classes.containerAddBtn}>
+          <AddCircleOutlineIcon className={classes.AddBtn} />
+        </IconButton>
+      </Link>
       <Table size="big" className={classes.containerContent}>
         <TableHead>
           <TableRow>

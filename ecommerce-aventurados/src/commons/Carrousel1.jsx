@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import '../App.css'
+import "../App.css";
+import { Container, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Carrousel1 = () => {
   const [categories, setCategories] = useState([]);
@@ -17,28 +19,31 @@ const Carrousel1 = () => {
       className="carousel slide carr1"
       data-bs-ride="carousel"
     >
-      <div className="carousel-inner">
-        {categories.map(
-          (categorie, i) =>
-            (i == 0 ? (
-              <div  position= 'relative'className="carousel-item active">
+      <div className="carousel-inner carousa">
+        {categories.map((categorie, i) =>
+          i == 0 ? (
+            <div position="relative" className="carousel-item active">
+              <Link to={`/category/${categorie.name}/${categorie.id}`}>
                 <img
                   src={categorie.image}
                   className="d-block w-100 carr1"
                   alt="imagen"
-                  
+                  position="relative"
                 />
-              </div>
-            ) : (
-              <div className="carousel-item">
+              </Link>
+            </div>
+          ) : (
+            <div className="carousel-item">
+              <Link to={`/category/${categorie.name}/${categorie.id}`}>
                 <img
                   src={categorie.image}
                   className="d-block w-100 carr1"
                   alt="imagen"
-                  position= 'relative'
+                  position="relative"
                 />
-              </div>
-            ))
+              </Link>
+            </div>
+          )
         )}
       </div>
       <button

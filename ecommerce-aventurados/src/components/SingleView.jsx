@@ -1,6 +1,6 @@
-import { useSelect } from "@mui/base";
 import {
   Button,
+  Dialog,
   Grid,
   ImageListItem,
   Rating,
@@ -10,18 +10,20 @@ import {
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Alert, AlertTitle} from "@mui/material";
 import { Box } from "@mui/system";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addFavorite, getFavorite, removeFavorite } from "../state/favourites";
+import { addCarrito } from "../state/carrito";
+import "../App.css";
 
 const SingleView = () => {
   const data = useSelector((state) => state.dataCard);
   const user = useSelector((state) => state.dataUser);
-
   const dataFavorite = useSelector((state) => state.dataFavorites);
+  const [purchase, setPurchase] = React.useState(false);
 
   const favorites = dataFavorite.filter(
     (favorite) => favorite.product.id == data.id
@@ -38,6 +40,15 @@ const SingleView = () => {
     dispatch(removeFavorite({ userId: user.id, productId: data.id }));
     navigate(`/single/${data.id}`);
   };
+
+  const handleCarrito = () => {
+    dispatch(addCarrito({ productId: data.id, userId: user.id, amount: 1 }));
+    setPurchase(!purchase)
+  };
+
+  const closeDialog = () => {
+    setPurchase(!purchase)
+  }
 
   const navigate = useNavigate();
 
@@ -56,33 +67,20 @@ const SingleView = () => {
       sx={{ height: "77vh" }}
     >
       <Grid item xs={6}>
-        <Grid content>
-          <Grid item xs={12}>
-            <ImageListItem>
-              <img src={`${data.image}`} />
-            </ImageListItem>
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container paddingTop={2}>
-              <Grid item xs={6}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                ></Box>
-              </Grid>
-            </Grid>
-          </Grid>
+        <Grid item xs={12} className="imageContainer-singleView">
+          <ImageListItem className="imagelistitem">
+            <img src={`${data.image}`} />
+          </ImageListItem>
         </Grid>
       </Grid>
+
       <Grid item xs={6}>
         <Grid content>
           <Grid item xs={12}>
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "start",
               }}
             >
               <h1>{data.name}</h1>
@@ -111,33 +109,20 @@ const SingleView = () => {
             <Typography
               sx={{ flexGrow: 1 }}
               gutterBottom
-              variant="h4"
-              component="div"
+              variant="h6"
+              // component="div"
             >
-              ${data.price}
+              $ {data.price}
             </Typography>
           </Grid>
-          <Grid item xs={12}>
-            <Grid container>
-              <Grid item xs={12}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                ></Box>
-              </Grid>
-            </Grid>
-          </Grid>
-
           <Grid item xs={12}>
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "start",
               }}
             >
-              <h3>{data.description}</h3>
+              <p>{data.description}</p>
             </Box>
           </Grid>
           <Grid item xs={12} paddingTop={2}>
@@ -145,6 +130,7 @@ const SingleView = () => {
               sx={{
                 display: "flex",
                 justifyContent: "space-around",
+                width: 350,
               }}
             >
               <Box>
@@ -152,11 +138,12 @@ const SingleView = () => {
                   <Button
                     onClick={handleRemoveFavorite}
                     sx={{
-                      bgcolor: "#DBF227",
+                      bgcolor: "#94d4ffcf",
+                      // bgcolor: "#DBF227",
                       color: "black",
-                      borderRadius: "20px",
+                      borderRadius: "8px",
                     }}
-                    endIcon={<FavoriteIcon sx={{ color: "black" }} />}
+                    endIcon={<FavoriteIcon sx={{ color: "#004c97" }} />}
                     variant="contained"
                   >
                     quitar
@@ -165,11 +152,11 @@ const SingleView = () => {
                   <Button
                     onClick={handleFavorite}
                     sx={{
-                      bgcolor: "#DBF227",
+                      bgcolor: "#94d4ffcf",
                       color: "black",
-                      borderRadius: "20px",
+                      borderRadius: "8px",
                     }}
-                    endIcon={<FavoriteBorderIcon sx={{ color: "black" }} />}
+                    endIcon={<FavoriteBorderIcon sx={{ color: "#004c97" }} />}
                     variant="contained"
                   >
                     favoritos
@@ -178,16 +165,23 @@ const SingleView = () => {
               </Box>
               <Box>
                 <Button
+                  onClick={handleCarrito}
                   sx={{
-                    bgcolor: "#DBF227",
+                    bgcolor: "#94d4ffcf",
                     color: "black",
-                    borderRadius: "20px",
+                    borderRadius: "8px",
                   }}
                   endIcon={<ShoppingCartIcon sx={{ color: "black" }} />}
                   variant="contained"
                 >
-                  Comprar
+                  Agregar a Carrito
                 </Button>
+                <Dialog open={purchase} onClose={closeDialog} scroll='body'> 
+                  <Alert severity="success">
+                    <AlertTitle>Success</AlertTitle>
+                    Se agrego al carrito correctamente — <strong>check it out!</strong>
+                  </Alert>
+                </Dialog>
               </Box>
             </Box>
           </Grid>
