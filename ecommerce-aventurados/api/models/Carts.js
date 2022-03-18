@@ -10,10 +10,7 @@ Carts.init(
   {
     amount: {
       type: DataTypes.INTEGER,
-    },
-    transaction: {
-      type: DataTypes.INTEGER,
-      //allowNull: false,
+      defaultValue: 1
     },
   },
   {

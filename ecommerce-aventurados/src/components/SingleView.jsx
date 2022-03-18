@@ -1,4 +1,3 @@
-import { useSelect } from "@mui/base";
 import {
   Button,
   Grid,
@@ -6,16 +5,17 @@ import {
   Rating,
   Stack,
   Typography,
-} from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Box } from "@mui/system";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addFavorite, getFavorite, removeFavorite } from "../state/favourites";
+} from "@mui/material"
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
+import { Box } from "@mui/system"
+import React, { useEffect, useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { addFavorite, getFavorite, removeFavorite } from "../state/favourites"
+import { addCarrito } from '../state/carrito'
+
 
 const SingleView = () => {
   const data = useSelector((state) => state.dataCard);
@@ -41,7 +41,11 @@ const SingleView = () => {
     navigate(`/single/${data.id}`);
   };
 
-  const navigate = useNavigate();
+  const handleCarrito = () => {
+    dispatch(addCarrito({  productId: data.id, userId: user.id, amount: 1 }))
+  }
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!data.id) {
@@ -180,6 +184,7 @@ const SingleView = () => {
               </Box>
               <Box>
                 <Button
+                    onClick={handleCarrito}
                   sx={{
                     bgcolor: "#DBF227",
                     color: "black",

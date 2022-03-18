@@ -13,22 +13,19 @@ import Carrito2 from "./components/Carrito2";
 import Fav from "./components/Fav";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
 import { ProtectedAdminRoutes } from "./components/ProtectedAdminRoutes";
-import Campestre from "./commons/Campestre";
-import Ciclismo from "./commons/Ciclismo";
-import Spa from "./commons/Spa";
 import SingleView from "./components/SingleView";
 
-import AdminProfile from "./commons/AdminProfile"
-import CategoriesView from "./components/CategoriesView"
-import { useDispatch, useSelector } from "react-redux"
-import { getFavorite } from "./state/favourites"
-import { setUser } from "./state/user"
-import AllProducts from "./components/AllProducts"
-
+import AdminProfile from "./commons/AdminProfile";
+import CategoriesView from "./components/CategoriesView";
+import { useDispatch, useSelector } from "react-redux";
+import { getFavorite } from "./state/favourites";
+import { setUser } from "./state/user";
+import AllProducts from "./components/AllProducts";
 
 import AdminEditProduct from "./commons/AdminEditProduct";
 import AdminAddNewProduct from "./commons/AdminAddNewProduct";
 
+import { getCarrito } from "./state/carrito";
 function App() {
   const { currentUser } = useAuth();
 
@@ -46,9 +43,8 @@ function App() {
     if (!dataUser) return;
     if (!dataUser.email) return;
     dispatch(getFavorite(dataUser.id));
+    dispatch(getCarrito({ userId: dataUser.id }));
   }, [dataUser, dispatch]);
-
-  // console.log( 'DATAUSER',dataUser);
 
   return (
     <>
@@ -58,9 +54,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/single/:id" element={<SingleView />} />
-        <Route path="/spa" element={<Spa />} />
-        <Route path="/campestre" element={<Campestre />} />
-        <Route path="/ciclismo" element={<Ciclismo />} />
         <Route path="/category/:cat/:id" element={<CategoriesView />} />
         <Route path="/allproducts" element={<AllProducts />} />
 
