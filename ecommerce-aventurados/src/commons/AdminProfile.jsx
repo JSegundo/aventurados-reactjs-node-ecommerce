@@ -19,7 +19,7 @@ import AdminHeaderCards from "../components/AdminHeaderCards";
 
 import AdminAllUsers from "../components/AdminAllUsers";
 import AdminAllProducts from "../components/AdminAllProducts";
-import AdminAllCategories from '../components/AdminAllCategories';
+import AdminAllCategories from "../components/AdminAllCategories";
 // import AdminContent from "../components/AdminContent";
 
 const useStyles = makeStyles(() => ({
@@ -39,6 +39,9 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center",
+    padding: 10,
   },
   containerContent: {
     margin: "200px 0 0 0",
@@ -53,7 +56,7 @@ const AdminProfile = () => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h1" color="secondary" className={classes.title}>
+      <Typography variant="h1" color="primary" className={classes.title}>
         Admin
       </Typography>
       {/* navigation */}
@@ -89,7 +92,7 @@ const AdminProfile = () => {
           />
         </Grid>
         <Grid
-          onClick={()=>setClicked("categories")}
+          onClick={() => setClicked("categories")}
           className={classes.gridStyle}
           item
           xs={12}
@@ -99,7 +102,6 @@ const AdminProfile = () => {
           xl={3}
         >
           <AdminHeaderCards
-            
             icono={<CategorySharpIcon className={classes.iconos} />}
             titulo={"Categorys"}
           />
