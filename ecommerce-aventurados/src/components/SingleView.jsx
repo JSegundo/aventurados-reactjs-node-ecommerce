@@ -5,21 +5,20 @@ import {
   Rating,
   Stack,
   Typography,
-} from "@mui/material"
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
-import { Box } from "@mui/system"
-import React, { useEffect, useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import { addFavorite, getFavorite, removeFavorite } from "../state/favourites"
-import { addCarrito } from '../state/carrito'
-
+} from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Box } from "@mui/system";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addFavorite, getFavorite, removeFavorite } from "../state/favourites";
+import { addCarrito } from "../state/carrito";
+import "../App.css";
 
 const SingleView = () => {
   const data = useSelector((state) => state.dataCard);
-
 
   const user = useSelector((state) => state.dataUser);
 
@@ -42,10 +41,10 @@ const SingleView = () => {
   };
 
   const handleCarrito = () => {
-    dispatch(addCarrito({  productId: data.id, userId: user.id, amount: 1 }))
-  }
+    dispatch(addCarrito({ productId: data.id, userId: user.id, amount: 1 }));
+  };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!data.id) {
@@ -62,33 +61,20 @@ const SingleView = () => {
       sx={{ height: "77vh" }}
     >
       <Grid item xs={6}>
-        <Grid content>
-          <Grid item xs={12}>
-            <ImageListItem>
-              <img src={`${data.image}`} />
-            </ImageListItem>
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container paddingTop={2}>
-              <Grid item xs={6}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                ></Box>
-              </Grid>
-            </Grid>
-          </Grid>
+        <Grid item xs={12} className="imageContainer-singleView">
+          <ImageListItem className="imagelistitem">
+            <img src={`${data.image}`} />
+          </ImageListItem>
         </Grid>
       </Grid>
+
       <Grid item xs={6}>
         <Grid content>
           <Grid item xs={12}>
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "start",
               }}
             >
               <h1>{data.name}</h1>
@@ -117,13 +103,13 @@ const SingleView = () => {
             <Typography
               sx={{ flexGrow: 1 }}
               gutterBottom
-              variant="h4"
-              component="div"
+              variant="h6"
+              // component="div"
             >
-              ${data.price}
+              $ {data.price}
             </Typography>
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Grid container>
               <Grid item xs={12}>
                 <Box
@@ -134,16 +120,16 @@ const SingleView = () => {
                 ></Box>
               </Grid>
             </Grid>
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={12}>
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "start",
               }}
             >
-              <h3>{data.description}</h3>
+              <p>{data.description}</p>
             </Box>
           </Grid>
           <Grid item xs={12} paddingTop={2}>
@@ -151,6 +137,7 @@ const SingleView = () => {
               sx={{
                 display: "flex",
                 justifyContent: "space-around",
+                width: 350,
               }}
             >
               <Box>
@@ -158,11 +145,12 @@ const SingleView = () => {
                   <Button
                     onClick={handleRemoveFavorite}
                     sx={{
-                      bgcolor: "#DBF227",
+                      bgcolor: "#94d4ffcf",
+                      // bgcolor: "#DBF227",
                       color: "black",
-                      borderRadius: "20px",
+                      borderRadius: "8px",
                     }}
-                    endIcon={<FavoriteIcon sx={{ color: "black" }} />}
+                    endIcon={<FavoriteIcon sx={{ color: "#004c97" }} />}
                     variant="contained"
                   >
                     quitar
@@ -171,11 +159,11 @@ const SingleView = () => {
                   <Button
                     onClick={handleFavorite}
                     sx={{
-                      bgcolor: "#DBF227",
+                      bgcolor: "#94d4ffcf",
                       color: "black",
-                      borderRadius: "20px",
+                      borderRadius: "8px",
                     }}
-                    endIcon={<FavoriteBorderIcon sx={{ color: "black" }} />}
+                    endIcon={<FavoriteBorderIcon sx={{ color: "#004c97" }} />}
                     variant="contained"
                   >
                     favoritos
@@ -184,11 +172,11 @@ const SingleView = () => {
               </Box>
               <Box>
                 <Button
-                    onClick={handleCarrito}
+                  onClick={handleCarrito}
                   sx={{
-                    bgcolor: "#DBF227",
+                    bgcolor: "#94d4ffcf",
                     color: "black",
-                    borderRadius: "20px",
+                    borderRadius: "8px",
                   }}
                   endIcon={<ShoppingCartIcon sx={{ color: "black" }} />}
                   variant="contained"
