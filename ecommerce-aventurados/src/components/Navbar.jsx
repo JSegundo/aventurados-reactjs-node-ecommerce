@@ -22,6 +22,9 @@ import { useAuth } from "../contexts/AuthContext.js";
 import { Grid } from "@mui/material";
 import Fade from "@mui/material/Fade";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../state/user";
+import "../App.css";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -77,12 +80,19 @@ const Navbar = () => {
   const [query, setQuery] = React.useState("");
   const [category, setCategory] = React.useState([]);
 
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(setUser(currentUser.uid));
+  }, []);
+
+  const dataUser = useSelector((store) => store.dataUser);
+
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -92,24 +102,19 @@ const Navbar = () => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
   const handleLogOut = async () => {
     await logout();
     navigate("/login");
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
   const onChange = (e) => {
     e.preventDefault();
     setQuery(e.target.value);
@@ -139,7 +144,7 @@ const Navbar = () => {
             <Typography
               variant="h6"
               noWrap
-              component="div"
+              // component="div"
               sx={{
                 color: "black",
                 mr: 2,
@@ -228,13 +233,16 @@ const Navbar = () => {
                 <h1>Hola</h1>
               )}
             </Menu>
+            <Link style={{ textDecoration: "none" }} to="/AllProducts">
+              <Button sx={{ color: "black" }}>Productos</Button>
+            </Link>
           </Box>
           <form onSubmit={handleSubmit}>
             <Search
               sx={{
-                bgcolor: "#DAFDBA",
+                // bgcolor: "#DAFDBA",
                 border: "1px solid black",
-                borderRadius: "20px",
+                borderRadius: "16px",
               }}
             >
               <SearchIconWrapper>
@@ -251,7 +259,7 @@ const Navbar = () => {
           </form>
 
           {currentUser?.email ? (
-            <Box sx={{ flexGrow: 0 }}>
+            <Box sx={{ flexGrow: 0 }} className="containerNavIcons">
               <Link to="/shopping">
                 <Tooltip title="Open cart">
                   <IconButton
@@ -290,15 +298,29 @@ const Navbar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
                 s
+                className="optionsMenuNav"
               >
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  to="/miperfil"
-                >
-                  <MenuItem>
-                    <Typography textAlign="center">Mi Perfil</Typography>
-                  </MenuItem>
-                </Link>
+                {/* si es admin nos da la opcion de ir al panel */}
+                {!dataUser.admin ? (
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    to="/miperfil"
+                  >
+                    <MenuItem>
+                      <Typography textAlign="center">Mi Perfil</Typography>
+                    </MenuItem>
+                  </Link>
+                ) : (
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    to="/admin"
+                  >
+                    <MenuItem>
+                      <Typography textAlign="center">Admin panel</Typography>
+                    </MenuItem>
+                  </Link>
+                )}
+
                 <MenuItem onClick={handleLogOut}>
                   <Typography textAlign="center">Salir</Typography>
                 </MenuItem>

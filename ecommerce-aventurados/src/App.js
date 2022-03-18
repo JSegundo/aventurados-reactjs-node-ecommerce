@@ -22,6 +22,7 @@ import CategoriesView from "./components/CategoriesView";
 import { useDispatch, useSelector } from "react-redux";
 import { getFavorite } from "./state/favourites";
 import { setUser } from "./state/user";
+import AllProducts from "./components/AllProducts";
 
 import AdminEditProduct from "./commons/AdminEditProduct";
 import AdminAddNewProduct from "./commons/AdminAddNewProduct";
@@ -59,6 +60,7 @@ function App() {
         <Route path="/campestre" element={<Campestre />} />
         <Route path="/ciclismo" element={<Ciclismo />} />
         <Route path="/category/:cat/:id" element={<CategoriesView />} />
+        <Route path="/allproducts" element={<AllProducts />} />
 
         {/* ADMIN */}
 
