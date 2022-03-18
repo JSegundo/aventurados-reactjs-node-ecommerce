@@ -19,7 +19,7 @@ import AdminHeaderCards from "../components/AdminHeaderCards";
 
 import AdminAllUsers from "../components/AdminAllUsers";
 import AdminAllProducts from "../components/AdminAllProducts";
-import AdminAllCategories from '../components/AdminAllCategories';
+import AdminAllCategories from "../components/AdminAllCategories";
 // import AdminContent from "../components/AdminContent";
 
 const useStyles = makeStyles(() => ({
@@ -50,6 +50,7 @@ const AdminProfile = () => {
   const classes = useStyles();
 
   const [clicked, setClicked] = useState("products");
+  // if (!dataUser.admin) return <h1>No sos admin</h1>;
 
   return (
     <div className={classes.root}>
@@ -89,7 +90,7 @@ const AdminProfile = () => {
           />
         </Grid>
         <Grid
-          onClick={()=>setClicked("categories")}
+          onClick={() => setClicked("categories")}
           className={classes.gridStyle}
           item
           xs={12}
@@ -99,7 +100,6 @@ const AdminProfile = () => {
           xl={3}
         >
           <AdminHeaderCards
-            
             icono={<CategorySharpIcon className={classes.iconos} />}
             titulo={"Categorys"}
           />

@@ -9,9 +9,14 @@ import Button from "@mui/material/Button";
 import { Grid, Card, Typography } from "@mui/material";
 import emailjs from "emailjs-com";
 import { useNavigate } from "react-router-dom";
+import { deleteCarrito } from "../state/carrito";
+import { useDispatch, useSelector } from "react-redux";
 
 const PaymentForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dataCarrito = useSelector((state) => state.dataCarrito);
+  const dataUser = useSelector((state) => state.dataUser);
   const [values, setValues] = React.useState({
     name: "",
     email: "",
@@ -41,9 +46,12 @@ const PaymentForm = () => {
         }
       );
     e.target.reset();
-    //navigate('/miperfil')
-    //axios.post('http://localhost:3001/api/orders/')
+    dataCarrito.map( (cart) => {
+      dispatch(deleteCarrito({cartId: cart.id, userId: dataUser.id}))
+    })
   };
+
+  
 
   return (
     <Card

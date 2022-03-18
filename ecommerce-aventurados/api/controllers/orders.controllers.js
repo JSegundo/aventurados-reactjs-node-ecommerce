@@ -1,4 +1,4 @@
-const { Orders, Carts, Users } = require("../models");
+const { Orders, Carts, Users, Products } = require("../models");
 
 const orders_controllers = {
   getAll: async (req, res, next) => {
@@ -9,6 +9,7 @@ const orders_controllers = {
             model: Carts, 
              include: {
               model:Users,
+              model: Products,
               where: { id: id }
             },
               where:{userId:id}

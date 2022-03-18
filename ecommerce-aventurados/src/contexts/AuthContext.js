@@ -59,7 +59,6 @@ const AuthProvider = ({ children }) => {
     // recibe el usuario, y lo seteamos a nuestro state con setCurrentUser.
     // lo usamos dentro de useEffect xq queremos que se ejectute SOLO cuando el usuario es creado.
     const unsuscribe = auth.onAuthStateChanged((user) => {
-      console.log("user", user);
       setCurrentUser(user);
       setLoading(false);
     });

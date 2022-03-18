@@ -20,7 +20,7 @@ const ResumenCompra = () => {
   const dataUser = useSelector((state) => state.dataUser);
 
   React.useEffect(() => {
-    if (!dataCarrito[0]) return;
+    if (!dataCarrito[0]) return setTotal(0)
     dataCarrito.map((cart) => {
       preTotal += cart.product.price * cart.amount;
     });
