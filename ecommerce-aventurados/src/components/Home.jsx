@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Carrousel1 from "../commons/Carrousel1";
 import Card from "../commons/Card";
 import Grid from "@mui/material/Grid";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Button } from "@mui/material";
 import axios from "axios";
 import "../App.css";
 
@@ -24,6 +24,7 @@ const Home = () => {
 
       <div className="slide">
         <Carrousel1 />
+        {/* <Button>IR A CATEGORIA</Button> */}
       </div>
       <h1 className="mainTitle">AVENTURADOS</h1>
       <div className="container">

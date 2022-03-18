@@ -5,6 +5,7 @@ import ResumenCompra from "../commons/ResumenCompra";
 import PaymentForm from "../commons/PaymentsForm";
 import { useDispatch, useSelector } from "react-redux";
 import { getCarrito } from "../state/carrito";
+import { Container } from "@mui/material";
 
 const Carrito2 = ({ data }) => {
   const dataCarrito = useSelector((state) => state.dataCarrito);
@@ -21,7 +22,7 @@ const Carrito2 = ({ data }) => {
   return (
     <>
       <Typography
-        sx={{ padding: 5, fontSize: 50 }}
+        sx={{ padding: 2, fontSize: 28 }}
         align="center"
         variant="h5"
         color="black"
@@ -35,7 +36,9 @@ const Carrito2 = ({ data }) => {
             {dataCarrito[0] ? (
               dataCarrito.map((cart, i) => (
                 <Grid item key={cart.id}>
-                  <CardCarrito data={cart} user={dataUser.id} />
+                  <Container>
+                    <CardCarrito data={cart} user={dataUser.id} />
+                  </Container>
                 </Grid>
               ))
             ) : (
@@ -43,9 +46,10 @@ const Carrito2 = ({ data }) => {
             )}
           </Grid>
         </Grid>
+
         <Grid item direction="column" xs={6}>
           <Grid container rowSpacing={5} justifyContent="center">
-            <Grid item xs={8} spacing={0} justifyContent='center'>
+            <Grid item xs={8} spacing={0} justifyContent="center">
               <ResumenCompra />
             </Grid>
             <Grid item xs={8}>

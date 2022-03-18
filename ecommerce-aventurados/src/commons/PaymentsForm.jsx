@@ -47,7 +47,13 @@ const PaymentForm = () => {
 
   return (
     <Card
-      sx={{ boxShadow: "0.1em 0.1em 0.8em grey", borderRadius: 5, padding: 3 }}
+      sx={{
+        boxShadow: "0.1em 0.1em 0.8em grey",
+        borderRadius: 4,
+        padding: 3,
+        borderBottom: "6px solid #131313",
+        maxWidth: 450,
+      }}
     >
       <Typography
         sx={{ justifyContent: "center", fontSize: 30 }}
