@@ -9,17 +9,6 @@ Orders.init(
   {
     voucher: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    amount: {
-      type: DataTypes.INTEGER,
-    },
-    state: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: States,
-        key: "id",
-      },
     },
     transaction: {
       type: DataTypes.INTEGER,
@@ -33,5 +22,9 @@ Orders.init(
     modelName: "orders",
   }
 );
+
+Orders.addHook('afterCreate', (order) => {
+  order.voucher = Math.random() * (10000000 - 999999999 + 1) + 999999999
+})
 
 module.exports = Orders;

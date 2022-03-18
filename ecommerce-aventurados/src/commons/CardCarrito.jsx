@@ -65,11 +65,11 @@ const CardCarrito = ({ data, user }) => {
           sx={{
             width: "100%",
             // alignItems: "center",
-            flexDirection: "column-reverse",
+            flexDirection: "column",
             justifyContent: "space-around",
           }}
         >
-          <Grid item xs={5}>
+          <Grid item xs={6}>
             <Typography
               gutterBottom
               variant="h5"
@@ -87,6 +87,8 @@ const CardCarrito = ({ data, user }) => {
             justifyContent={"space-around"}
             width={"100%"}
             sx={{ width: "100%" }}
+            justifyContent={'space-between'}
+            
           >
             <Fab
               size="small"
@@ -111,13 +113,8 @@ const CardCarrito = ({ data, user }) => {
             >
               <AddIcon />
             </Fab>
-            <Fab enable aria-label="like" onClick={handleRemoveCart}>
-              <DeleteIcon
-                sx={{
-                  color: "black",
-                  fontSize: "1rem",
-                }}
-              />
+            <Fab enable aria-label="like" onClick={handleRemoveCart} padding={5}>
+              <DeleteIcon sx={{ color: "black", fontSize: "1rem" }} />
             </Fab>
           </Grid>
         </Grid>
