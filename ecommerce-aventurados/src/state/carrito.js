@@ -5,9 +5,9 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const setCarrito = createAction('SET_CARRITO', () => {
-  return []
-})
+export const setCarrito = createAction("SET_CARRITO", () => {
+  return [];
+});
 
 export const getCarrito = createAsyncThunk("GET_CARRITO", ({ userId }) => {
   return axios

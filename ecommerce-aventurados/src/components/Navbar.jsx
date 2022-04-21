@@ -85,6 +85,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    if(!currentUser) return
+    if(!currentUser.uid) return
     dispatch(setUser(currentUser.uid));
   }, []);
 
