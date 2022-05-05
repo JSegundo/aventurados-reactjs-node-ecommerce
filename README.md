@@ -1,5 +1,4 @@
-# aventurados
-🛒️
+# 🛒️ Aventurados 
 <h1>Ecommerce realizado de forma grupal</h1>
 
 En un lapso de 2 semanas y en un equipo con 5 developers,realizamos toda la lógica de un ecommerce funcional. Dandole al usuario la posibilidad de autenticarse, agregar productos al carrito y finalizar la compra.
